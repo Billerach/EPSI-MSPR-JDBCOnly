@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" data-th-href="@{/img/epsi.png}" sizes="32x32"/>
+        <link rel="stylesheet" data-th-href="@{/css/layout.css}"/>
+        <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
+        <link rel="stylesheet" data-th-href="@{/css/demo-form.css}"/>
+
+        <title>Démo : Liste des fournisseurs</title>
+    </head>
+    <body>
+        <header>
+            <h1 id="nav-title">
+                <a href="/">Démo : Home - E-Commerce</a>
+            </h1>
+            <nav>
+                <ul>
+                    <li><a href="/fournisseurs">Fournisseurs</a></li>
+                    <li><a href="/articles">Articles</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>Création d'un nouveau fournisseur</h1>
+            <form data-th-action="@{/fournisseurs/creer}"
+                  data-th-object="${fournisseur}" method="post">
+                <ul class="flex-outer">
+                    <li>
+                        <label for="inputRaisonSociale">Raison sociale : </label>
+                        <input type="text" id="inputRaisonSociale" required data-th-field="*{raisonSociale}"/>
+                    </li>
+                    <li>
+                        <button type="submit">Enregistrer</button>
+                    </li>
+                </ul>
+            </form>
+        </main>
+        <footer>
+            <p>&copy; EPSI POEC - Tous droits réservés</p>
+        </footer>
+    </body>
+</html>

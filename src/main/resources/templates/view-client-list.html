@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" data-th-href="@{/img/epsi.png}" sizes="32x32"/>
+    <link rel="stylesheet" data-th-href="@{/css/layout.css}"/>
+    <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
+    <link rel="stylesheet" data-th-href="@{/css/demo-table.css}"/>
+
+    <title>Liste des clients</title>
+</head>
+<body>
+<header>
+    <h1 id="nav-title">
+        <a href="/">Home - ACME</a>
+    </h1>
+    <nav>
+        <ul>
+            <li><a href="/clients">Clients</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>La liste des clients</h1>
+    <section>
+        <a class="action" href="clients/creer">Ajouter un clients</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="item : ${clients}">
+                <td data-th-text="${item.id}"></td>
+                <td data-th-text="${item.nom}"></td>
+                <td data-th-text="${item.prenom}"></td>
+                <td>
+                    <a data-th-href="@{/clients/{id}/edition(id=${item.id})}">Modifier</a>
+                    <a data-th-href="@{/clients/{id}/suppression(id=${item.id})}">Supprimer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; EPSI POEC - Tous droits réservés</p>
+</footer>
+</body>
+</html>
