@@ -1,6 +1,6 @@
-package fr.epsi.poec24.mspr.epsimspr.dao;
+package fr.epsi.msprsansjdbc.dao;
 
-import fr.epsi.poec24.mspr.epsimspr.entities.Produit;
+import fr.epsi.msprsansjdbc.entities.Produit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;

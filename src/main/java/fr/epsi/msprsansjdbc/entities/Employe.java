@@ -1,4 +1,4 @@
-package fr.epsi.poec24.mspr.epsimspr.entities;
+package fr.epsi.msprsansjdbc.entities;
 
 public class Employe extends Personne {
     public Employe (String nom, String prenom){

@@ -1,4 +1,4 @@
-package fr.epsi.poec24.mspr.epsimspr.entities;
+package fr.epsi.msprsansjdbc.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

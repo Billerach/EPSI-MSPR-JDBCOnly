@@ -1,7 +1,7 @@
-package fr.epsi.poec24.mspr.epsimspr.service;
+package fr.epsi.msprsansjdbc.service;
 
-import fr.epsi.poec24.mspr.epsimspr.dao.ClientDAO;
-import fr.epsi.poec24.mspr.epsimspr.entities.Client;
+import fr.epsi.msprsansjdbc.entities.Client;
+import fr.epsi.msprsansjdbc.dao.ClientDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

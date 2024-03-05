@@ -1,7 +1,7 @@
-package fr.epsi.poec24.mspr.epsimspr;
+package fr.epsi.msprsansjdbc;
 
-import fr.epsi.poec24.mspr.epsimspr.dao.ProduitDAO;
-import fr.epsi.poec24.mspr.epsimspr.entities.Produit;
+import fr.epsi.msprsansjdbc.dao.ProduitDAO;
+import fr.epsi.msprsansjdbc.entities.Produit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

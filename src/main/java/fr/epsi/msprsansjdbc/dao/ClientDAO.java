@@ -1,6 +1,6 @@
-package fr.epsi.poec24.mspr.epsimspr.dao;
+package fr.epsi.msprsansjdbc.dao;
 
-import fr.epsi.poec24.mspr.epsimspr.entities.Client;
+import fr.epsi.msprsansjdbc.entities.Client;
 
 import java.util.List;
 

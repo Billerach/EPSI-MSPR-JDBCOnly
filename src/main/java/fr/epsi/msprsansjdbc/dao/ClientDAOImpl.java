@@ -1,7 +1,6 @@
-package fr.epsi.poec24.mspr.epsimspr.dao;
+package fr.epsi.msprsansjdbc.dao;
 
-import fr.epsi.poec24.mspr.epsimspr.entities.Client;
-import fr.epsi.poec24.mspr.epsimspr.entities.Personne;
+import fr.epsi.msprsansjdbc.entities.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository

@@ -1,6 +1,6 @@
-package fr.epsi.poec24.mspr.epsimspr.repository;
+package fr.epsi.msprsansjdbc.repository;
 
-import fr.epsi.poec24.mspr.epsimspr.entities.Produit;
+import fr.epsi.msprsansjdbc.entities.Produit;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

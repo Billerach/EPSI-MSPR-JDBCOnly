@@ -1,7 +1,7 @@
-package fr.epsi.poec24.mspr.epsimspr.controller;
+package fr.epsi.msprsansjdbc.controller;
 
-import fr.epsi.poec24.mspr.epsimspr.entities.Client;
-import fr.epsi.poec24.mspr.epsimspr.service.ClientService;
+import fr.epsi.msprsansjdbc.entities.Client;
+import fr.epsi.msprsansjdbc.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

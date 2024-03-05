@@ -1,6 +1,6 @@
-package fr.epsi.poec24.mspr.epsimspr;
+package fr.epsi.msprsansjdbc;
 
-import fr.epsi.poec24.mspr.epsimspr.controller.ClientController;
+import fr.epsi.msprsansjdbc.controller.ClientController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
