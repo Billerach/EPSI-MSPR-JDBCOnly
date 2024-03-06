@@ -1,25 +1,12 @@
 package fr.epsi.msprsansjdbc.entities;
 
-import jakarta.persistence.*;
-
-// Classe Produit. Cette classe est une entité JPA.
-// Elle est mappée à la table "produits" dans la base de données.
-@Entity
-@Table(name = "produits")
 public class Produit {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // Attributs
     private int id;
-
-    @Column(name = "nom", nullable = false, length = 50)
     private String nom;
-
-    @Column(name = "departement", nullable = false, length = 50)
     private String departement;
-
-    @Column(name = "lait", nullable = false, length = 50)
     private String lait;
+    private Object prix;
 
     // Constructeur par défaut
     public Produit() {
@@ -43,6 +30,15 @@ public class Produit {
         this.lait = lait;
     }
 
+    // Constructeur avec quatre paramètres
+    public Produit(int id, String nom, String departement, String lait) {
+        this.id = id;
+        this.nom = nom;
+        this.departement = departement;
+        this.lait = lait;
+    }
+
+    // Getters et Setters
     public int getId() {
         return id;
     }
@@ -76,13 +72,13 @@ public class Produit {
     }
 
     public Object getPrix() {
-        return null;
+        return prix;
+    }
+
+    public void setPrix(Object prix) {
+        this.prix = prix;
     }
 }
-
-
-
-
 
 // Autre version de la classe Produit.java
 
