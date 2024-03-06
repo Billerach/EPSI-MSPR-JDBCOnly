@@ -2,33 +2,33 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" data-th-href="@{/img/epsi.png}" sizes="32x32"/>
+        <link rel="icon" data-th-href="@{/img/fromage.png}" sizes="32x32"/>
         <link rel="stylesheet" data-th-href="@{/css/layout.css}"/>
         <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
         <link rel="stylesheet" data-th-href="@{/css/demo-form.css}"/>
 
-        <title>Démo : Liste des fournisseurs</title>
+        <title>Démo : Edition d'un client</title>
     </head>
     <body>
         <header>
             <h1 id="nav-title">
-                <a href="/">Démo : Home - E-Commerce</a>
+                <a href="/">Home - ACME</a>
             </h1>
             <nav>
                 <ul>
-                    <li><a href="/fournisseurs">Fournisseurs</a></li>
-                    <li><a href="/articles">Articles</a></li>
+                    <li><a href="/clients">CLients</a></li>
+                    <li><a href="/produits">Produits</a></li>
                 </ul>
             </nav>
         </header>
         <main>
-            <h1>Création d'un nouveau fournisseur</h1>
-            <form data-th-action="@{/fournisseurs/{id}/edition(id=${fournisseur.id})}"
-                  data-th-object="${fournisseur}" method="post">
+            <h1>Modification d'un client</h1>
+            <form data-th-action="@{/clients/{id}/edition(id=${personne.id})}"
+                  data-th-object="${client}" method="post">
                 <ul class="flex-outer">
                     <li>
-                        <label for="inputRaisonSociale">Raison sociale : </label>
-                        <input type="text" id="inputRaisonSociale" required data-th-field="*{raisonSociale}"/>
+                        <label for="nom">Nom : </label>
+                        <input type="text" id="nom" required data-th-field="*{nom}"/>
                     </li>
                     <li>
                         <button type="submit">Enregistrer</button>
@@ -38,6 +38,11 @@
         </main>
         <footer>
             <p>&copy; EPSI POEC - Tous droits réservés</p>
+            <small>
+                <a href="https://www.flaticon.com/fr/icones-gratuites/fromage" title="fromage icônes">
+                    favicon de fromage par Smashicons - Flaticon
+                </a>
+            </small>
         </footer>
     </body>
 </html>

@@ -23,6 +23,10 @@ footer {
 	height: auto;
 }
 
+footer a{
+	color: white;
+}
+
 nav li {	
 	font-size: 1.5em;
 }
