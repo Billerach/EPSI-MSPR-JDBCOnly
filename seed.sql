@@ -4,17 +4,17 @@ DROP TABLE IF EXISTS commandes;
 DROP TABLE IF EXISTS personnes;
 
 CREATE TABLE IF NOT EXISTS produits (
-                                        `id_produit` bigint NOT NULL AUTO_INCREMENT,
-                                        `nom` varchar(100) DEFAULT NULL,
-                                        `departement` varchar(50) DEFAULT NULL,
-                                        `lait` varchar(50) DEFAULT NULL,
-                                        `prix` float(4,2) DEFAULT NULL,
-                                        `date_de_fin` date DEFAULT NULL,
-                                        PRIMARY KEY (`id_produit`)
+  `id_produit` int NOT NULL AUTO_INCREMENT,
+  `nom` varchar(100) DEFAULT NULL,
+  `departement` varchar(50) DEFAULT NULL,
+  `lait` varchar(50) DEFAULT NULL,
+  `prix` float(4,2) DEFAULT NULL,
+  `date_de_fin` date DEFAULT NULL,
+  PRIMARY KEY (`id_produit`)
 );
 
 CREATE TABLE IF NOT EXISTS personnes (
-    `id` INT NOT NULL AUTO_INCREMENT,
+    `id_personne` INT NOT NULL AUTO_INCREMENT,
     `login` VARCHAR(50) NOT NULL UNIQUE,
     `mot_de_passe` VARCHAR(255) NOT NULL,
     `nom` varchar(50) DEFAULT NULL,
@@ -28,27 +28,27 @@ CREATE TABLE IF NOT EXISTS personnes (
     `telephone` varchar(30) DEFAULT NULL,
     `est_client` BOOLEAN DEFAULT FALSE,
     `est_employe` BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id_personne`)
 );
 
 -- Table des commandes
 CREATE TABLE IF NOT EXISTS commandes (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id_commande` int NOT NULL AUTO_INCREMENT,
   `id_personne` int NOT NULL,
   `date_commande` date DEFAULT NULL,
   `montant_total` decimal(10, 2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_personne`) REFERENCES personnes(`id`)
+  PRIMARY KEY (`id_commande`),
+  FOREIGN KEY (`id_personne`) REFERENCES personnes(`id_personne`)
 );
 
 CREATE TABLE IF NOT EXISTS contenu_commande (
-                                                `id_contenu_commande` bigint NOT NULL AUTO_INCREMENT,
-                                                `id_commande` bigint NOT NULL,
-                                                `id_produit` bigint NOT NULL,
-                                                `quantite` int DEFAULT NULL,
-                                                PRIMARY KEY (`id_contenu_commande`),
-                                                FOREIGN KEY (`id_commande`) REFERENCES commandes(`id_commande`),
-                                                FOREIGN KEY (`id_produit`) REFERENCES produits(`id_produit`)
+  `id_contenu_commande` int NOT NULL AUTO_INCREMENT,
+  `id_commande` int NOT NULL,
+  `id_produit` int NOT NULL,
+  `quantite` int DEFAULT NULL,
+  PRIMARY KEY (`id_contenu_commande`),
+  FOREIGN KEY (`id_commande`) REFERENCES commandes(`id_commande`),
+  FOREIGN KEY (`id_produit`) REFERENCES produits(`id_produit`)
 );
 
 -- Ajout de données de test
@@ -68,7 +68,7 @@ VALUES
 
 -- Ajout de données de test pour la table des utilisateurs
 INSERT INTO personnes (
-  id,
+  id_personne,
   login,
   mot_de_passe,
   nom, prenom,
@@ -97,7 +97,7 @@ VALUES
   (9, 'amelie', 'motdepasseAmelie',     'Brisebois', 'Amélie',   '76',  'rue',    'Bonnet',              'YERRES',   '91330', 'AmelieBrisebois@gustr.com',       '01.54.31.99.22', FALSE, TRUE);
 
 -- Ajout de données de test pour la table des commandes
-INSERT INTO commandes (id, id_personne, date_commande, montant_total)
+INSERT INTO commandes (id_commande, id_personne, date_commande, montant_total)
 VALUES
   (1, 1, '2024-02-22', 150.00),
   (2, 2, '2024-02-23', 75.50),
@@ -108,7 +108,7 @@ ON DUPLICATE KEY UPDATE
   montant_total = VALUES(montant_total);
 
 -- Ajout de données de test pour la table du contenu des commandes
-INSERT INTO contenu_commande (id, id_commande, id_produit, quantite)
+INSERT INTO contenu_commande (id_contenu_commande, id_commande, id_produit, quantite)
 VALUES
   (1, 1, 1, 2),
   (2, 1, 2, 1),
