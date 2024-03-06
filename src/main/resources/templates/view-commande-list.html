@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" data-th-href="@{/img/fromage.png}" sizes="32x32"/>
+        <link rel="stylesheet" data-th-href="@{/css/layout.css}"/>
+        <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
+        <link rel="stylesheet" data-th-href="@{/css/demo-table.css}"/>
+
+        <title>Démo : Liste des commandes</title>
+    </head>
+    <body>
+        <header>
+            <h1 id="nav-title">
+                <a href="/">Home - ACME</a>
+            </h1>
+            <nav>
+                <ul>
+                    <li><a href="/commandes">Commandes</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>La liste des commandes</h1>
+            <section>
+                <a class="action" href="commandes/creer">Ajouter une commande</a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Produit</th>
+                            <th>Client</th>
+                            <th>Quantité</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-th-each="item : ${commandes}">
+                            <td data-th-text="${item.id}"></td>
+                            <td data-th-text="${item.produit}"></td>
+                            <td data-th-text="${item.client}"></td>
+                            <td data-th-text="${item.quantite}"></td>
+                            <td data-th-text="${item.total}"></td>
+                            <td>
+                                <a data-th-href="@{/commandes/{id}/edition(id=${item.id})}">Modifier</a>
+                                <a data-th-href="@{/commandes/{id}/suppression(id=${item.id})}">Supprimer</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; EPSI POEC - Tous droits réservés</p>
+            <small>
+                <a href="https://www.flaticon.com/fr/icones-gratuites/fromage" title="fromage icônes">
+                    favicon de fromage par Smashicons - Flaticon
+                </a>
+            </small>
+        </footer>
+    </body>
+</html>

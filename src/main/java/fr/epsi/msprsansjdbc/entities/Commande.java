@@ -1,12 +1,15 @@
 package fr.epsi.msprsansjdbc.entities;
 
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.KeyHolder;
+
 import java.util.Date;
 
 public class Commande {
 
     // Attributs
     private int id_commande;
-    private int id_client;
+    private int id_personne;
     private Date date_commande;
     private float montant_total;
 
@@ -21,22 +24,22 @@ public class Commande {
     }
 
     // Constructeur avec deux paramètres
-    public Commande(int id_commande, int id_client) {
+    public Commande(int id_commande, int id_personne) {
         this.id_commande = id_commande;
-        this.id_client = id_client;
+        this.id_personne = id_personne;
     }
 
     // Constructeur avec trois paramètres
-    public Commande(int id_commande, int id_client, Date date_commande) {
+    public Commande(int id_commande, int id_personne, Date date_commande) {
         this.id_commande = id_commande;
-        this.id_client = id_client;
+        this.id_personne = id_personne;
         this.date_commande = date_commande;
     }
 
     // Constructeur avec quatre paramètres
-    public Commande(int id_commande, int id_client, Date date_commande, float montant_total) {
+    public Commande(int id_commande, int id_personne, Date date_commande, float montant_total) {
         this.id_commande = id_commande;
-        this.id_client = id_client;
+        this.id_personne = id_personne;
         this.date_commande = date_commande;
         this.montant_total = montant_total;
     }
@@ -50,16 +53,11 @@ public class Commande {
         this.id_commande = id_commande;
     }
 
-    public int getId_client() {
-        return id_client;
+    public void setId_personne(int id_personne) {
+        this.id_personne = id_personne;
     }
-
-    public void setId_client(int id_client) {
-        this.id_client = id_client;
-    }
-
-    public Date getDate_commande() {
-        return date_commande;
+    public int getId_personne() {
+        return id_personne;
     }
 
     public void setDate_commande(Date date_commande) {
@@ -73,4 +71,5 @@ public class Commande {
     public void setMontant_total(float montant_total) {
         this.montant_total = montant_total;
     }
+
 }
