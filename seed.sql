@@ -1,4 +1,8 @@
--- Table des produits
+DROP TABLE IF EXISTS contenu_commande;
+DROP TABLE IF EXISTS produits;
+DROP TABLE IF EXISTS commandes;
+DROP TABLE IF EXISTS personnes;
+
 CREATE TABLE IF NOT EXISTS produits (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(100) DEFAULT NULL,
@@ -8,54 +12,32 @@ CREATE TABLE IF NOT EXISTS produits (
   PRIMARY KEY (`id`)
 );
 
--- Table des utilisateurs (clients et employés)
-CREATE TABLE IF NOT EXISTS utilisateurs (
+CREATE TABLE IF NOT EXISTS personnes (
     `id` INT NOT NULL AUTO_INCREMENT,
     `login` VARCHAR(50) NOT NULL UNIQUE,
     `mot_de_passe` VARCHAR(255) NOT NULL,
+    `nom` varchar(50) DEFAULT NULL,
+    `prenom` varchar(50) DEFAULT NULL,
+    `numero_voie` varchar(10) DEFAULT NULL,
+    `type_voie` varchar(255) DEFAULT NULL,
+    `libelle_voie` varchar(255) DEFAULT NULL,
+    `commune` varchar(50) DEFAULT NULL,
+    `code_postal` varchar(10) DEFAULT NULL,
+    `email` varchar(255) DEFAULT NULL,
+    `telephone` varchar(30) DEFAULT NULL,
     `est_client` BOOLEAN DEFAULT FALSE,
     `est_employe` BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (`id`)
 );
 
--- Table des clients
-CREATE TABLE IF NOT EXISTS clients (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `Prenom` varchar(50) DEFAULT NULL,
-  `Nom` varchar(50) DEFAULT NULL,
-  `Numero_rue` varchar(10) DEFAULT NULL,
-  `Rue` varchar(255) DEFAULT NULL,
-  `Ville` varchar(50) DEFAULT NULL,
-  `CodePostal` varchar(10) DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL,
-  `Telephone` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`id`) REFERENCES utilisateurs(`id`)
-);
-
--- Table des employés
-CREATE TABLE IF NOT EXISTS liste_employes (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `Prenom` varchar(50) DEFAULT NULL,
-  `Nom` varchar(50) DEFAULT NULL,
-  `Numero_rue` varchar(10) DEFAULT NULL,
-  `Rue` varchar(255) DEFAULT NULL,
-  `Ville` varchar(50) DEFAULT NULL,
-  `CodePostal` varchar(10) DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL,
-  `Telephone` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`id`) REFERENCES utilisateurs(`id`)
-);
-
 -- Table des commandes
 CREATE TABLE IF NOT EXISTS commandes (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_client` int NOT NULL,
+  `id_personne` int NOT NULL,
   `date_commande` date DEFAULT NULL,
   `montant_total` decimal(10, 2) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_client`) REFERENCES clients(`id`)
+  FOREIGN KEY (`id_personne`) REFERENCES personnes(`id`)
 );
 
 -- Table du contenu des commandes
@@ -107,61 +89,42 @@ VALUES
 
 
 -- Ajout de données de test pour la table des utilisateurs
-INSERT INTO utilisateurs (login, mot_de_passe, est_client, est_employe)
+INSERT INTO personnes (
+  id,
+  login,
+  mot_de_passe,
+  nom, prenom,
+  numero_voie,
+  type_voie,
+  libelle_voie,
+  commune,
+  code_postal,
+  email,
+  telephone,
+  est_client,
+  est_employe
+  )
 VALUES
-  ('alice', 'motdepasseAlice', TRUE, FALSE),
-  ('bob', 'motdepasseBob', TRUE, FALSE),
-  ('claire', 'motdepasseClaire', TRUE, FALSE),
-  ('timothee', 'motdepasseTimothee', FALSE, TRUE),
-  ('cheney', 'motdepasseCheney', FALSE, TRUE),
-  ('damiane', 'motdepasseDamiane', FALSE, TRUE),
-  ('michele', 'motdepasseMichele', FALSE, TRUE),
-  ('manville', 'motdepasseManville', FALSE, TRUE),
-  ('amelie', 'motdepasseAmelie', FALSE, TRUE);
+  #login  mot_de_passe  nom  prenom  numero_voie  type_voie  libelle_voie  commune  code_postal  email  telephone  est_client  est_employe
 
--- Ajout de données de test pour la table des clients
-INSERT INTO clients (id, Prenom, Nom, Numero_rue, Rue, Ville, CodePostal, Email, Telephone)
-VALUES
-  (1, 'Alice', 'Dupont', '123', 'Rue de la République', 'Paris', '75001', 'alice@email.com', '0123456789'),
-  (2, 'Bob', 'Martin', '456', 'Avenue des Fleurs', 'Lyon', '69002', 'bob@email.com', '0987654321'),
-  (3, 'Claire', 'Leroux', '789', 'Rue de la Liberté', 'Marseille', '13003', 'claire@email.com', '0123456789')
-ON DUPLICATE KEY UPDATE
-  Prenom = VALUES(Prenom),
-  Nom = VALUES(Nom),
-  Numero_rue = VALUES(Numero_rue),
-  Rue = VALUES(Rue),
-  Ville = VALUES(Ville),
-  CodePostal = VALUES(CodePostal),
-  Email = VALUES(Email),
-  Telephone = VALUES(Telephone);
-
--- Ajout de données de test pour la table des employés
-INSERT INTO liste_employes (id, Prenom, Nom, Numero_rue, Rue, Ville, CodePostal, Email, Telephone)
-VALUES
-  (4, 'Timothée', 'Thibault', '46', 'Avenue Millies Lacroix', 'DZAOUDZI', '97610', 'TimotheeThibault@gustr.com', '02.83.06.29.55'),
-  (5, 'Cheney', 'Bernard', '31', 'rue du Général Ailleret', 'LE TAMPON', '97430', 'CheneyBernard@rhyta.com', '02.58.34.19.11'),
-  (6, 'Damiane', 'Thivierge', '30', 'Place de la Gare', 'COLMAR', '68000', 'DamianeThivierge@jourrapide.com', '03.72.27.10.08'),
-  (7, 'Michèle', 'Favreau', '14', 'quai Saint-Nicolas', 'TOULOUSE', '31500', 'MicheleFavreau@rhyta.com', '05.79.45.52.03'),
-  (8, 'Manville', 'Brunelle', '27', 'cours Jean Jaures', 'BORDEAUX', '33100', 'ManvilleBrunelle@einrot.com', '05.27.50.25.11'),
-  (9, 'Amélie', 'Brisebois', '76', 'Rue Bonnet', 'YERRES', '91330', 'AmelieBrisebois@gustr.com', '01.54.31.99.22')
-ON DUPLICATE KEY UPDATE
-  Prenom = VALUES(Prenom),
-  Nom = VALUES(Nom),
-  Numero_rue = VALUES(Numero_rue),
-  Rue = VALUES(Rue),
-  Ville = VALUES(Ville),
-  CodePostal = VALUES(CodePostal),
-  Email = VALUES(Email),
-  Telephone = VALUES(Telephone);
+  (1, 'alice', 'motdepasseAlice',       'Dupont',    'Alice',    '123', 'rue',    'de la République',    'Paris',    '75001', 'alice@email.com',                 '01.23.45.67.89', TRUE, FALSE),
+  (2, 'bob', 'motdepasseBob',           'Martin',    'Bob',      '456', 'avenue', 'des Fleurs',          'Lyon',     '69002', 'bob@email.com',                   '09.87.65.43.21', TRUE, FALSE),
+  (3, 'claire', 'motdepasseClaire',     'Leroux',    'Claire',   '789', 'rue',    'de la Liberté',       'Marseille','13003', 'claire@email.com',                '01.23.45.67.89', TRUE, FALSE),
+  (4, 'timothee', 'motdepasseTimothee', 'Thibault',  'Timothée', '46',  'avenue', 'Millies Lacroix',     'DZAOUDZI', '97610', 'TimotheeThibault@gustr.com',      '02.83.06.29.55', FALSE, TRUE),
+  (5, 'cheney', 'motdepasseCheney',     'Bernard',   'Cheney',   '31',  'rue',    'du Général Ailleret', 'LE TAMPON','97430', 'CheneyBernard@rhyta.com',         '02.58.34.19.11', FALSE, TRUE),
+  (6, 'damiane', 'motdepasseDamiane',   'Thivierge', 'Damiane',  '30',  'place',  'de la Gare',          'COLMAR',   '68000', 'DamianeThivierge@jourrapide.com', '03.72.27.10.08', FALSE, TRUE),
+  (7, 'michele', 'motdepasseMichele',   'Favreau',   'Michèle',  '14',  'quai',   'Saint-Nicolas',       'TOULOUSE', '31500', 'MicheleFavreau@rhyta.com',        '05.79.45.52.03', FALSE, TRUE),
+  (8, 'manville', 'motdepasseManville', 'Brunelle',  'Manville', '27',  'cours',  'Jean Jaures',         'BORDEAUX', '33100', 'ManvilleBrunelle@einrot.com',     '05.27.50.25.11', FALSE, TRUE),
+  (9, 'amelie', 'motdepasseAmelie',     'Brisebois', 'Amélie',   '76',  'rue',    'Bonnet',              'YERRES',   '91330', 'AmelieBrisebois@gustr.com',       '01.54.31.99.22', FALSE, TRUE);
 
 -- Ajout de données de test pour la table des commandes
-INSERT INTO commandes (id, id_client, date_commande, montant_total)
+INSERT INTO commandes (id, id_personne, date_commande, montant_total)
 VALUES
   (1, 1, '2024-02-22', 150.00),
   (2, 2, '2024-02-23', 75.50),
   (3, 3, '2024-02-24', 200.00)
 ON DUPLICATE KEY UPDATE
-  id_client = VALUES(id_client),
+  id_personne = VALUES(id_personne),
   date_commande = VALUES(date_commande),
   montant_total = VALUES(montant_total);
 
