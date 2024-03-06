@@ -1,9 +1,6 @@
 package fr.epsi.msprsansjdbc.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 // Classe Produit. Cette classe est une entité JPA.
 // Elle est mappée à la table "produits" dans la base de données.
@@ -12,7 +9,8 @@ import jakarta.persistence.Table;
 public class Produit {
 
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "nom", nullable = false, length = 50)
     private String nom;
@@ -45,11 +43,11 @@ public class Produit {
         this.lait = lait;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -75,6 +73,10 @@ public class Produit {
 
     public void setLait(String lait) {
         this.lait = lait;
+    }
+
+    public Object getPrix() {
+        return null;
     }
 }
 
