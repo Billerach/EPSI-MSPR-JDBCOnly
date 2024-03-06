@@ -18,9 +18,9 @@ public class ClientDAOImpl implements ClientDAO{
     private NamedParameterJdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleJdbcInsert;
     private static final String FIND_ALL_QUERY = "SELECT * FROM personnes WHERE est_client = TRUE";
-    private static final String FIND_BY_ID_QUERY = "SELECT ID, NOM FROM personnes WHERE ID = :id";
-    private static final String DELETE_BY_ID_QUERY = "UPDATE personnes SET EST_CLIENT = FALSE WHERE ID = :id";
-    private static final String UPDATE_QUERY = "UPDATE personnes SET NOM = :nom WHERE ID = :id";
+    private static final String FIND_BY_ID_QUERY = "SELECT id_personne, NOM FROM personnes WHERE id_personne = :id";
+    private static final String DELETE_BY_ID_QUERY = "UPDATE personnes SET EST_CLIENT = FALSE WHERE id_personne = :id";
+    private static final String UPDATE_QUERY = "UPDATE personnes SET NOM = :nom WHERE id_personne = :id";
     private static final String INSERT_QUERY = "INSERT INTO clients (NOM) VALUES (:nom)";
 
     @Autowired
