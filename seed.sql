@@ -4,12 +4,13 @@ DROP TABLE IF EXISTS commandes;
 DROP TABLE IF EXISTS personnes;
 
 CREATE TABLE IF NOT EXISTS produits (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(100) DEFAULT NULL,
-  `département` varchar(50) DEFAULT NULL,
-  `lait` varchar(50) DEFAULT NULL,
-  `date_de_fin` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                                        `id_produit` bigint NOT NULL AUTO_INCREMENT,
+                                        `nom` varchar(100) DEFAULT NULL,
+                                        `departement` varchar(50) DEFAULT NULL,
+                                        `lait` varchar(50) DEFAULT NULL,
+                                        `prix` float(4,2) DEFAULT NULL,
+                                        `date_de_fin` date DEFAULT NULL,
+                                        PRIMARY KEY (`id_produit`)
 );
 
 CREATE TABLE IF NOT EXISTS personnes (
@@ -40,53 +41,30 @@ CREATE TABLE IF NOT EXISTS commandes (
   FOREIGN KEY (`id_personne`) REFERENCES personnes(`id`)
 );
 
--- Table du contenu des commandes
 CREATE TABLE IF NOT EXISTS contenu_commande (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_commande` int NOT NULL,
-  `id_produit` int NOT NULL,
-  `quantite` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_commande`) REFERENCES commandes(`id`),
-  FOREIGN KEY (`id_produit`) REFERENCES produits(`id`)
+                                                `id_contenu_commande` bigint NOT NULL AUTO_INCREMENT,
+                                                `id_commande` bigint NOT NULL,
+                                                `id_produit` bigint NOT NULL,
+                                                `quantite` int DEFAULT NULL,
+                                                PRIMARY KEY (`id_contenu_commande`),
+                                                FOREIGN KEY (`id_commande`) REFERENCES commandes(`id_commande`),
+                                                FOREIGN KEY (`id_produit`) REFERENCES produits(`id_produit`)
 );
 
--- -- Table de l'historique des commandes
--- CREATE TABLE IF NOT EXISTS historique_commandes (
---   `id` int NOT NULL AUTO_INCREMENT,
---   `id_client` int NOT NULL,
---   `date_commande` date DEFAULT NULL,
---   `montant_total` decimal(10, 2) DEFAULT NULL,
---   PRIMARY KEY (`id`),
---   FOREIGN KEY (`id_client`) REFERENCES liste_employes(`id`)
--- );
---
--- -- Table de l'historique des produits
--- CREATE TABLE IF NOT EXISTS historique_produits (
---   `id` int NOT NULL AUTO_INCREMENT,
---   `id_commande` int NOT NULL,
---   `id_produit` int NOT NULL,
---   `quantite` int DEFAULT NULL,
---   PRIMARY KEY (`id`),
---   FOREIGN KEY (`id_commande`) REFERENCES historique_commandes(`id`),
---   FOREIGN KEY (`id_produit`) REFERENCES produits(`id`)
--- );
-
--- Création des données tests
+-- Ajout de données de test
 -- Données de test pour la table des produits
-INSERT INTO produits (nom, département, lait, date_de_fin)
+INSERT INTO produits (nom, departement, lait, prix, date_de_fin)
 VALUES
-  ('Santranges-sancerre', 'Cher', 'Chèvre', '2024-02-22'),
-  ('Truffe de Ventadour', 'Corrèze', 'Chèvre', '2024-02-23'),
-  ('Pétafine', 'Drôme', 'Chèvre', '2024-02-24'),
-  ('Bleu du Dévoluy', 'Hautes-Alpes', 'Vache', '2024-02-25'),
-  ('Tome de Cambrai', 'Nord', 'Vache', '2024-02-26'),
-  ('Vieux Boulogne', 'Pas-de-Calais', 'Vache', '2024-02-27'),
-  ('Piton des Neiges', 'Réunion', 'Vache', '2024-02-28'),
-  ('Bleu de Sainte-Foy', 'Savoie', 'Vache', '2024-02-29'),
-  ('Neufchâtel', 'Oise', 'Vache', '2024-03-01'),
-  ('Ardi-Gasna', 'Pyrénées-Atlantiques', 'Brebis', '2024-03-02');
-
+    ('Santranges-sancerre', 'Cher', 'Chèvre', 10.50, '2024-02-22'),
+    ('Truffe de Ventadour', 'Corrèze', 'Chèvre', 8.75, '2024-02-23'),
+    ('Pétafine', 'Drôme', 'Chèvre', 12.25, '2024-02-24'),
+    ('Bleu du Dévoluy', 'Hautes-Alpes', 'Vache', 15.80, '2024-02-25'),
+    ('Tome de Cambrai', 'Nord', 'Vache', 13.45, '2024-02-26'),
+    ('Vieux Boulogne', 'Pas-de-Calais', 'Vache', 18.20, '2024-02-27'),
+    ('Piton des Neiges', 'Réunion', 'Vache', 20.30, '2024-02-28'),
+    ('Bleu de Sainte-Foy', 'Savoie', 'Vache', 17.90, '2024-02-29'),
+    ('Neufchâtel', 'Oise', 'Vache', 9.99, '2024-03-01'),
+    ('Ardi-Gasna', 'Pyrénées-Atlantiques', 'Brebis', 14.50, '2024-03-02');
 
 -- Ajout de données de test pour la table des utilisateurs
 INSERT INTO personnes (
@@ -104,6 +82,7 @@ INSERT INTO personnes (
   est_client,
   est_employe
   )
+  
 VALUES
   #login  mot_de_passe  nom  prenom  numero_voie  type_voie  libelle_voie  commune  code_postal  email  telephone  est_client  est_employe
 
