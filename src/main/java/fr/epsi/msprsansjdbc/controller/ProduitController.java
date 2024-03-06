@@ -2,6 +2,7 @@ package fr.epsi.msprsansjdbc.controller;
 
 import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Produit;
+import fr.epsi.msprsansjdbc.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ public class ProduitController {
     // Injection du service via l'annotation @Autowired lors de la création du contrôleur.
     @Autowired
     public ProduitController(ProduitService service) {
-        this.produitService = service;
+        this.service = service;
     }
 
     @GetMapping()
@@ -45,18 +46,23 @@ public class ProduitController {
     }
 
     @GetMapping("/{id}/edition")
-    public String modifierCLient(@PathVariable int id, Model model) {
-        //Ici, on récupère l'id dans l'URL et on l'injecte dans la variable id de type "int"
-        //On envoie ensuite à la vue l'objet client dont l'id est passé à modifier depuis le formulaire
-        model.addAttribute("client", service.findById(id));
-        return "view-client-form-edition";
+    public String modifierProduit(@PathVariable int id, Model model) {
+    model.addAttribute("produit", service.findById(id));
+        return "view-produit-form-edition";
     }
     @PostMapping("/{id}/edition")
-    public String modifierCLient(@PathVariable int id, @ModelAttribute Client client) {
+    public String modifierProduit(@PathVariable int id, @ModelAttribute Produit produit) {
         //Comme sur la validation du formulaire de création, ici on fait à peu près la même chose
-        client.setId(id);
-        service.update(client);
-        return "redirect:/clients";
+        produit.setId(id);
+        service.update(produit);
+        return "redirect:/produits";
     }
 
+
+    @GetMapping("/{id}/suppression")
+    public String Produit(@PathVariable int id) {
+        //TODO il faut faire toutes les vérifications nécessaires ici
+        service.deleteById(id);
+        return "redirect:/produits";
+    }
 }

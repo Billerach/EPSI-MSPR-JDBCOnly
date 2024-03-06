@@ -1,6 +1,6 @@
 package fr.epsi.msprsansjdbc;
 
-import fr.epsi.msprsansjdbc.dao.ProduitDAO;
+import fr.epsi.msprsansjdbc.dao.ProduitDAOImpl;
 import fr.epsi.msprsansjdbc.entities.Produit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ApplicationTests {
 
     @Autowired
-    private ProduitDAO produitDAO;
+    private ProduitDAOImpl produitDAO;
 
     @Test
     void contextLoads() {
@@ -24,7 +24,7 @@ class ApplicationTests {
     @Test
     public void testGetAllProduits() {
         // Test sur la récupération de tous les produits depuis la base de données
-        List<Produit> produits = produitDAO.getAllProduits();
+        List<Produit> produits = produitDAO.findAll();
         assertNotNull(produits, "La liste des produits ne doit pas être nulle.");
         assertFalse(produits.isEmpty(), "La liste des produits ne doit pas être vide.");
     }
@@ -34,15 +34,15 @@ class ApplicationTests {
         // Test sur l'ajout et la suppression d'un produit
         Produit nouveauProduit = new Produit("NouveauNom", "NouveauDépartement", "NouveauLait");
 
-        Produit produitAjoute = produitDAO.addProduit(nouveauProduit);
+        Produit produitAjoute = produitDAO.create(nouveauProduit);
         assertNotNull(produitAjoute, "Le produit ajouté ne doit pas être nul.");
 
-        List<Produit> produits = produitDAO.getAllProduits();
+        List<Produit> produits = produitDAO.findAll();
         assertFalse(produits.contains(produitAjoute), "Le produit ajouté doit être présent dans la liste.");
 
-        produitDAO.deleteProduit(produitAjoute);
+        produitDAO.deleteById(produitAjoute.getId());
 
-        produits = produitDAO.getAllProduits();
+        produits = produitDAO.findAll();
         assertFalse(produits.contains(produitAjoute), "Le produit supprimé ne doit plus être dans la liste.");
     }
 }
