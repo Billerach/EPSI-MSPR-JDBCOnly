@@ -24,11 +24,11 @@
         <main>
             <h1>Modification d'un client</h1>
             <form data-th-action="@{/clients/{id}/edition(id=${client.id})}"
-                  data-th-object="${client}" method="post">
+                  th:object="${client}" method="post">
                 <ul class="flex-outer">
                     <li>
                         <label for="nom">Nom : </label>
-                        <input type="text" id="nom" required data-th-field="*{nom}"/>
+                        <input type="text" id="nom" required data-th-field="*{client.nom}"/>
                     </li>
                     <li>
                         <button type="submit">Enregistrer</button>

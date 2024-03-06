@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Client {
 
-    private int id;
+    private int id_personne;
     private String nom;
     private String prenom;
     private String numeroVoie;
@@ -21,17 +21,17 @@ public class Client {
     }
 
     public Client(String prenom, String nom, int id) {
-        this.id = id;
+        this.id_personne = id;
         this.prenom = prenom;
         this.nom = nom;
     }
 
     public int getId() {
-        return id;
+        return id_personne;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_personne = id;
     }
 
     public String getNom() {
@@ -125,7 +125,7 @@ public class Client {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Client{");
-        sb.append("id=").append(id);
+        sb.append("id=").append(id_personne);
         sb.append(", nom='").append(nom).append('\'');
         sb.append(", prenom='").append(prenom).append('\'');
         sb.append('}');
@@ -136,11 +136,11 @@ public class Client {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Client that)) return false;
-        return id == that.id;
+        return id_personne == that.id_personne;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id_personne);
     }
     }
