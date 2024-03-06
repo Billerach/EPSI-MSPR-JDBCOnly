@@ -34,6 +34,94 @@ public class Client {
         this.id = id;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getNumeroVoie() {
+        return numeroVoie;
+    }
+
+    public void setNumeroVoie(String numeroVoie) {
+        this.numeroVoie = numeroVoie;
+    }
+
+    public String getTypeVoie() {
+        return typeVoie;
+    }
+
+    public void setTypeVoie(String typeVoie) {
+        this.typeVoie = typeVoie;
+    }
+
+    public String getLibelleVoie() {
+        return libelleVoie;
+    }
+
+    public void setLibelleVoie(String libelleVoie) {
+        this.libelleVoie = libelleVoie;
+    }
+
+    public String getCommune() {
+        return commune;
+    }
+
+    public void setCommune(String commune) {
+        this.commune = commune;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public boolean isEstClient() {
+        return estClient;
+    }
+
+    public void setEstClient(boolean estClient) {
+        this.estClient = estClient;
+    }
+
+    public boolean isEstEmploye() {
+        return estEmploye;
+    }
+
+    public void setEstEmploye(boolean estEmploye) {
+        this.estEmploye = estEmploye;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Client{");
