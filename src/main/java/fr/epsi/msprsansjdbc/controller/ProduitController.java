@@ -1,6 +1,5 @@
 package fr.epsi.msprsansjdbc.controller;
 
-import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Produit;
 import fr.epsi.msprsansjdbc.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class ProduitController {
     @GetMapping()
     public String afficherListeProduits(Model model) {
 
-        //On charge la liste des CLIENTS pour affichage dans la vue
+        //On charge la liste des PRODUITS pour affichage dans la vue
         List<Produit> mesProduits = service.findAll();
         //On envoie la liste à la vue à travers le modèle du MVC
         model.addAttribute("produits", mesProduits);
