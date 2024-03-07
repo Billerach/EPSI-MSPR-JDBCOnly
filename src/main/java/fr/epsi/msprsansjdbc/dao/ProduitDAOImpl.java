@@ -26,7 +26,9 @@ public class ProduitDAOImpl implements ProduitDAO {
     @Autowired
     public ProduitDAOImpl(NamedParameterJdbcTemplate jdbcTemplate, DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
-        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource).withTableName("produits").usingGeneratedKeyColumns("id");
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource).
+                withTableName("produits")
+                .usingGeneratedKeyColumns("id_produit");
     }
 
     // Logger pour la journalisation

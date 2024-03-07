@@ -24,4 +24,16 @@ public class CommandeService {
     public Commande create(Commande commande) {
         return dao.create(commande);
     }
+
+    public Object findById(int id) {
+        return dao.findById(id);
+    }
+
+    public void update(Commande commande) {
+        dao.update(commande);
+    }
+
+    public String getNomProduit(int idCommande) {
+        return dao.getNomProduit(idCommande);
+    }
 }

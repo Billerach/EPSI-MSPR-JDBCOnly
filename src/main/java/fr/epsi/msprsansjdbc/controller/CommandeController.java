@@ -25,11 +25,12 @@ public class CommandeController {
     @GetMapping()
     public String afficherListeCommande(Model model) {
 
-        //On charge la liste des COMMANDES pour affichage dans la vue
-        List<Commande> mesCommandes = service.findAll();
-        //On envoie la liste à la vue à travers le modèle du MVC
-        model.addAttribute("commandes", mesCommandes);
-        System.out.println(mesCommandes);
+        // Récupérez toutes les informations nécessaires dans le service (CommandeService)
+        List<Commande> commandes = service.findAll();
+
+        // Ajoutez les informations au modèle
+        model.addAttribute("commandes", commandes);
+
         return "view-commande-list";
     }
 
@@ -39,9 +40,24 @@ public class CommandeController {
         model.addAttribute("commande", new Commande());
         return "view-commande-form-creation";
     }
+
     @PostMapping("/creer")
     public String creerCommande(@ModelAttribute Commande commande) {
         service.create(commande);
+        return "redirect:/commandes";
+    }
+
+    @GetMapping("/{id}/edition")
+    public String modifierCommande(@PathVariable int id_commande, Model model) {
+        model.addAttribute("commande", service.findById(id_commande));
+        return "view-commande-form-edition";
+    }
+
+    @PostMapping("/{id}/edition")
+    public String modifierCommande(@PathVariable int id_commande, @ModelAttribute Commande commande) {
+        //Comme sur la validation du formulaire de création, ici on fait à peu près la même chose
+        commande.setId_commande(id_commande);
+        service.update(commande);
         return "redirect:/commandes";
     }
 }
