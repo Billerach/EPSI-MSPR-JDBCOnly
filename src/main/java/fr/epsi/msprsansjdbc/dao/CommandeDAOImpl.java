@@ -105,4 +105,5 @@ public class CommandeDAOImpl implements CommandeDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource("idCommande", idCommande);
         return jdbcTemplate.queryForObject(sql, parameterSource, Float.class);
     }
+
 }
