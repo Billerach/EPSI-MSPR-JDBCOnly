@@ -7,7 +7,7 @@
         <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
         <link rel="stylesheet" data-th-href="@{/css/demo-table.css}"/>
 
-        <title>Démo : Liste des commandes</title>
+        <title>Démo : Liste des produits</title>
     </head>
     <body>
         <header>
@@ -16,34 +16,35 @@
             </h1>
             <nav>
                 <ul>
-                    <li><a href="/commandes">Commandes</a></li>
+                    <li><a href="/produits">Produits</a></li>
                 </ul>
             </nav>
         </header>
         <main>
-            <h1>La liste des commandes</h1>
+            <h1>La liste des produits</h1>
             <section>
-                <a class="action" href="commandes/creer">Ajouter une commande</a>
+                <a class="action" href="produits/creer">Ajouter un produit</a>
                 <table>
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Produit</th>
-                            <th>Client</th>
-                            <th>Quantité</th>
-                            <th>Total</th>
+                            <th>Nom</th>
+                            <th>Département</th>
+                            <th>Lait</th>
+                            <th>Prix</th>
+                            <th>Date de fin</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-th-each="item : ${commandes}">
-                            <td data-th-text="${item.id_commande}"></td>
-                            <td data-th-text="${item.produit}"></td>
-                            <td data-th-text="${item.client}"></td>
-                            <td data-th-text="${item.quantite}"></td>
-                            <td data-th-text="${item.total}"></td>
+                        <tr data-th-each="item : ${produits}">
+                            <td data-th-text="${item.id_produit}"></td>
+                            <td data-th-text="${item.nom}"></td>
+                            <td data-th-text="${item.departement}"></td>
+                            <td data-th-text="${item.lait}"></td>
+                            <td data-th-text="${item.prix}"></td>
                             <td>
-                                <a data-th-href="@{/commandes/{id_commande}/edition(id=${id_commande})}">Modifier</a>
-                                <a data-th-href="@{/commandes/{id_commande}/suppression(id=${id_commande})}">Supprimer</a>
+                                <a data-th-href="@{/produits/{id_produit}/edition(id=${item.id_produit})}">Modifier</a>
+                                <a data-th-href="@{/produits/{id_produit}/suppression(id=${item.id_produit})}">Supprimer</a>
                             </td>
                         </tr>
                     </tbody>

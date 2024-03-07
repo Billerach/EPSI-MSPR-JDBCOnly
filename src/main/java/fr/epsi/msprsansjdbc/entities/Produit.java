@@ -2,11 +2,11 @@ package fr.epsi.msprsansjdbc.entities;
 
 public class Produit {
     // Attributs
-    private int id;
+    private int id_produit;
     private String nom;
     private String departement;
     private String lait;
-    private Object prix;
+    private float prix;
 
     // Constructeur par défaut
     public Produit() {
@@ -31,20 +31,29 @@ public class Produit {
     }
 
     // Constructeur avec quatre paramètres
-    public Produit(int id, String nom, String departement, String lait) {
-        this.id = id;
+    public Produit(int id_produit, String nom, String departement, String lait) {
+        this.id_produit = id_produit;
         this.nom = nom;
         this.departement = departement;
         this.lait = lait;
     }
 
-    // Getters et Setters
-    public int getId() {
-        return id;
+    // Constructeur avec cinq paramètres
+    public Produit(int id_produit, String nom, String departement, String lait, float prix) {
+        this.id_produit = id_produit;
+        this.nom = nom;
+        this.departement = departement;
+        this.lait = lait;
+        this.prix = prix;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    // Getters et Setters
+    public int getId_produit() {
+        return id_produit;
+    }
+
+    public void setId_produit(int id_produit) {
+        this.id_produit = id_produit;
     }
 
     public String getNom() {
@@ -71,11 +80,11 @@ public class Produit {
         this.lait = lait;
     }
 
-    public Object getPrix() {
+    public float getPrix() {
         return prix;
     }
 
-    public void setPrix(Object prix) {
+    public void setPrix(float prix) {
         this.prix = prix;
     }
 }

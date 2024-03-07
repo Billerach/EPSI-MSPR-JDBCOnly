@@ -29,6 +29,7 @@ public class ProduitController {
         List<Produit> mesProduits = service.findAll();
         //On envoie la liste à la vue à travers le modèle du MVC
         model.addAttribute("produits", mesProduits);
+        System.out.println(mesProduits);
         return "view-produit-list";
     }
 
@@ -52,14 +53,14 @@ public class ProduitController {
     @PostMapping("/{id}/edition")
     public String modifierProduit(@PathVariable int id, @ModelAttribute Produit produit) {
         //Comme sur la validation du formulaire de création, ici on fait à peu près la même chose
-        produit.setId(id);
+        produit.setId_produit(id);
         service.update(produit);
         return "redirect:/produits";
     }
 
 
     @GetMapping("/{id}/suppression")
-    public String Produit(@PathVariable int id) {
+    public String supprimerProduit(@PathVariable int id) {
         //TODO il faut faire toutes les vérifications nécessaires ici
         service.deleteById(id);
         return "redirect:/produits";

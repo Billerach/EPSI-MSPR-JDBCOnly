@@ -29,6 +29,7 @@ public class CommandeController {
         List<Commande> mesCommandes = service.findAll();
         //On envoie la liste à la vue à travers le modèle du MVC
         model.addAttribute("commandes", mesCommandes);
+        System.out.println(mesCommandes);
         return "view-commande-list";
     }
 

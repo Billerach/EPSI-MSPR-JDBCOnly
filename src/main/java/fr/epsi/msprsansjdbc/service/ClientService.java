@@ -17,20 +17,20 @@ public class ClientService {
         this.dao = dao;
     }
 
-    public List<Client> findAll() {
-        return dao.findAll();
+    public List<Client> findAllClients() {
+        return dao.findAllClients();
     }
 
     public Client create(Client Client) {
         return dao.create(Client);
     }
 
-    public void deleteById(int id) {
-        dao.deleteById(id);
+    public void deleteById(int id_personne){
+        dao.deleteById(id_personne);
     }
 
-    public Object findById(int id) {
-        return dao.findById(id);
+    public Object findById(int id_personne) {
+        return dao.findById(id_personne);
     }
 
     public void update(Client Client) {

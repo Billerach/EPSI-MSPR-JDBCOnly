@@ -40,7 +40,7 @@ class ApplicationTests {
         List<Produit> produits = produitDAO.findAll();
         assertFalse(produits.contains(produitAjoute), "Le produit ajouté doit être présent dans la liste.");
 
-        produitDAO.deleteById(produitAjoute.getId());
+        produitDAO.deleteById(produitAjoute.getId_produit());
 
         produits = produitDAO.findAll();
         assertFalse(produits.contains(produitAjoute), "Le produit supprimé ne doit plus être dans la liste.");
