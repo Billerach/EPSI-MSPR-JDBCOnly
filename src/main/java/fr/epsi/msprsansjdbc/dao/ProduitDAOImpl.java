@@ -17,10 +17,10 @@ import java.util.List;
 public class ProduitDAOImpl implements ProduitDAO {
     private NamedParameterJdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleJdbcInsert;
-    private static final String FIND_ALL_QUERY = "SELECT * FROM produits";
-    private static final String FIND_BY_ID_QUERY = "SELECT id_produit, nom, departement, lait FROM produits WHERE id_produit = :id";
-    private static final String DELETE_BY_ID_QUERY = "DELETE FROM produits WHERE id_produit = :id";
-    private static final String UPDATE_QUERY = "UPDATE produits SET nom = :nom WHERE id_produit = :id";
+    static final String FIND_ALL_QUERY = "SELECT * FROM produits";
+    private static final String FIND_BY_ID_QUERY = "SELECT id_produit, nom, departement, lait FROM produits WHERE id_produit = :id_produit";
+    private static final String DELETE_BY_ID_QUERY = "DELETE FROM produits WHERE id_produit = :id_produit";
+    private static final String UPDATE_QUERY = "UPDATE produits SET nom = :nom WHERE id_produit = :id_produit";
     private static final String INSERT_QUERY = "INSERT INTO produits (nom, departement, lait) VALUES (:nom, :departement, :lait)";
 
     @Autowired
@@ -44,30 +44,30 @@ public class ProduitDAOImpl implements ProduitDAO {
         parameterSource.addValue("nom", produit.getNom());
         parameterSource.addValue("departement", produit.getDepartement());
         parameterSource.addValue("lait", produit.getLait());
-        produit.setId(simpleJdbcInsert.executeAndReturnKey(parameterSource).intValue());
+        produit.setId_produit(simpleJdbcInsert.executeAndReturnKey(parameterSource).intValue());
         return produit;
     }
 
     @Override
-    public Produit findById(int id) {
+    public Produit findById(int id_produit) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id", id);
+        parameterSource.addValue("id", id_produit);
         return jdbcTemplate.queryForObject(FIND_BY_ID_QUERY, parameterSource, new BeanPropertyRowMapper<>(Produit.class));
     }
 
     @Override
     public Produit update(Produit produit) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id", produit.getId());
+        parameterSource.addValue("id", produit.getId_produit());
         parameterSource.addValue("nom", produit.getNom());
         jdbcTemplate.update(UPDATE_QUERY, parameterSource);
         return produit;
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(int id_produit) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id", id);
+        parameterSource.addValue("id", id_produit);
         jdbcTemplate.update(DELETE_BY_ID_QUERY, parameterSource);
     }
 }

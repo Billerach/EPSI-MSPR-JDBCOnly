@@ -23,7 +23,7 @@
 <main>
     <h1>La liste des clients</h1>
     <section>
-        <a class="action" href="clients/creer">Ajouter un clients</a>
+        <a class="action" href="clients/creer">Ajouter un client</a>
         <table>
             <thead>
             <tr>
@@ -33,13 +33,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-th-each="item : ${clients}">
-                <td data-th-text="${item.id}"></td>
-                <td data-th-text="${item.nom}"></td>
-                <td data-th-text="${item.prenom}"></td>
+            <tr data-th-each="client : ${clients}">
+                <td data-th-text="${client.id_personne}"></td>
+                <td data-th-text="${client.nom}"></td>
+                <td data-th-text="${client.prenom}"></td>
                 <td>
-                    <a data-th-href="@{/clients/{id}/edition(id=${item.id})}">Modifier</a>
-                    <a data-th-href="@{/clients/{id}/suppression(id=${item.id})}">Supprimer</a>
+                    <a data-th-href="@{/clients/{id}/edition(id=${client.id_personne})}">Modifier</a>
+                    <a data-th-href="@{/clients/{id}/suppression(id=${client.id_personne})}">Supprimer</a>
                 </td>
             </tr>
             </tbody>

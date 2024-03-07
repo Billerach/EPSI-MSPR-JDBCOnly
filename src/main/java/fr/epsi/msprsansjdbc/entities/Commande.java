@@ -1,8 +1,5 @@
 package fr.epsi.msprsansjdbc.entities;
 
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.support.KeyHolder;
-
 import java.util.Date;
 
 public class Commande {
@@ -12,9 +9,9 @@ public class Commande {
     private int id_personne;
     private Date date_commande;
     private float montant_total;
+    private Produit produit;
 
     // Constructeur par défaut
-
     public Commande() {
     }
 
@@ -53,11 +50,16 @@ public class Commande {
         this.id_commande = id_commande;
     }
 
+    public int getId_personne() {
+        return id_personne;
+    }
+
     public void setId_personne(int id_personne) {
         this.id_personne = id_personne;
     }
-    public int getId_personne() {
-        return id_personne;
+
+    public Date getDate_commande() {
+        return date_commande;
     }
 
     public void setDate_commande(Date date_commande) {
@@ -72,4 +74,41 @@ public class Commande {
         this.montant_total = montant_total;
     }
 
+    // Getter pour le nom du client
+    public String getClient() {
+        // Implémentez la logique pour récupérer le nom du client
+        return "Nom du client";
+    }
+
+    // Getter pour la quantité
+    public int getQuantite() {
+        // Implémentez la logique pour récupérer la quantité
+        return 0;
+    }
+
+    // Getter pour le total
+    public float getTotal() {
+        // Implémentez la logique pour récupérer le total
+        return 0.0f;
+    }
+
+    // Getter pour le nom du produit
+    public String getProduit() {
+        if (produit != null) {
+            return produit.getNom();
+        } else {
+            return "Produit non spécifié";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Commande{" +
+                "id_commande=" + id_commande +
+                ", id_personne=" + id_personne +
+                ", date_commande=" + date_commande +
+                ", montant_total=" + montant_total +
+                '}';
+    }
 }
+

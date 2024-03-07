@@ -9,13 +9,14 @@ public interface ClientDAO {
     //C -> CRUD
     Client create(Client client);
     //R -> CRUD
-    List<Client> findAll();
+    List<Client> findAllClients();
     //R -> CRUD
-    Client findById(int id);
+    Client findById(int id_personne);
 
     //U -> CRUD
     Client update(Client client);
 
     //D -> Crud
-    void deleteById(int id);
+    void deleteById(int id_personne);
+
 }

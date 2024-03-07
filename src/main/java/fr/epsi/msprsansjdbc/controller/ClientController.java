@@ -28,9 +28,10 @@ public class ClientController {
     public String afficherListeClients(Model model) {
 
         //On charge la liste des CLIENTS pour affichage dans la vue
-        List<Client> mesClients = service.findAll();
+        List<Client> mesClients = service.findAllClients();
         //On envoie la liste à la vue à travers le modèle du MVC
         model.addAttribute("clients", mesClients);
+        System.out.println(mesClients);
         return "view-client-list";
     }
 
@@ -42,32 +43,32 @@ public class ClientController {
     }
     @PostMapping("/creer")
     public String creerClient(@ModelAttribute Client client) {
-        //A la validation du formulaire sur l'action "/formateurs/creer" c'est cette méthode qui est activée!
+        //À la validation du formulaire sur l'action "/formateurs/creer" c'est cette méthode qui est activée !
         //Elle permet grâce, là encore, à l'injection de récupérer l'objet inutilisé dans le formulaire "view-client-form-creation"
         //Il ne reste plus qu'à essayer de sauvegarder cet objet en s'appuyant sur le service Client
         service.create(client);
         return "redirect:/clients";
     }
 
-    @GetMapping("/{id}/edition")
-    public String modifierClient(@PathVariable int id, Model model) {
+    @GetMapping("/{id_personne}/edition")
+    public String modifierClient(@PathVariable int id_personne, Model model) {
         //Ici, on récupère l'id dans l'URL et on l'injecte dans la variable id de type "int"
         //On envoie ensuite à la vue l'objet client dont l'id est passé à modifier depuis le formulaire
-        model.addAttribute("client", service.findById(id));
+        model.addAttribute("client", service.findById(id_personne));
         return "view-client-form-edition";
     }
-    @PostMapping("/{id}/edition")
-    public String modifierClient(@PathVariable int id, @ModelAttribute Client client) {
-        //Comme sur la validation du formulaire de création, ici on fait à peu près la même chose
-        client.setId(id);
+    @PostMapping("/{id_personne}/edition")
+    public String modifierClient(@PathVariable int id_personne, @ModelAttribute Client client) {
+        //Comme sur la validation du formulaire de création, ici, on fait à peu près la même chose
+        client.setId_personne(id_personne);
         service.update(client);
         return "redirect:/clients";
     }
 
-    @GetMapping("/{id}/suppression")
-    public String Client(@PathVariable int id) {
+    @GetMapping("/{id_personne}/suppression")
+    public String Client(@PathVariable int id_personne) {
         //TODO il faut faire toutes les vérifications nécessaires ici
-        service.deleteById(id);
+        service.deleteById(id_personne);
         return "redirect:/clients";
     }
 }

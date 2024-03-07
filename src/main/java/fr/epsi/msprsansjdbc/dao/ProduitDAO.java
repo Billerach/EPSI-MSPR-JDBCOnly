@@ -10,11 +10,9 @@ public interface ProduitDAO {
 
     Produit create(Produit produit);
 
-    Produit findById(int id);
+    Produit findById(int id_produit);
 
     Produit update(Produit produit);
 
-
-
-    void deleteById(int id);
+    void deleteById(int id_produit);
 }

@@ -20,18 +20,18 @@ public class Client {
     public Client() {
     }
 
-    public Client(String prenom, String nom, int id) {
-        this.id_personne = id;
+    public Client(String prenom, String nom, int id_personne) {
+        this.id_personne = id_personne;
         this.prenom = prenom;
         this.nom = nom;
     }
 
-    public int getId() {
+    public int getId_personne() {
         return id_personne;
     }
 
-    public void setId(int id) {
-        this.id_personne = id;
+    public void setId_personne(int id_personne) {
+        this.id_personne = id_personne;
     }
 
     public String getNom() {
@@ -143,4 +143,5 @@ public class Client {
     public int hashCode() {
         return Objects.hash(id_personne);
     }
-    }
+
+}
