@@ -24,28 +24,33 @@ public class CommandeController {
 
     @GetMapping()
     public String afficherListeCommande(Model model) {
-
-        // Récupérez toutes les informations nécessaires dans le service (CommandeService)
-        List<Commande> commandes = service.findAll();
-
-        // Ajoutez les informations au modèle
-        model.addAttribute("commandes", commandes);
-
+        List<Commande> commandesDetailsList = service.findAll();
+        model.addAttribute("commande", commandesDetailsList);
         return "view-commande-list";
     }
 
     @GetMapping("/creer")
     public String creerCommande(Model model) {
-        //On envoie à la vue l'objet vide à remplir depuis le formulaire
-        model.addAttribute("commande", new Commande());
+        Commande nouvelleCommande = new Commande();
+        service.create(nouvelleCommande);
+        model.addAttribute("commande", nouvelleCommande);
         return "view-commande-form-creation";
     }
 
+
     @PostMapping("/creer")
-    public String creerCommande(@ModelAttribute Commande commande) {
+    public String creerCommande(@ModelAttribute Commande commande, @RequestParam("id_personne") int id_personne, Model model) {
+        // Assurez-vous que la propriété id_personne est correctement définie
+        commande.setId_personne(id_personne);
+
+        // Ajoutez la commande au modèle pour qu'elle soit disponible dans la vue
+        model.addAttribute("commande", commande);
+
+        // Appel du service pour créer la commande
         service.create(commande);
         return "redirect:/commandes";
     }
+
 
     @GetMapping("/{id}/edition")
     public String modifierCommande(@PathVariable int id_commande, Model model) {
