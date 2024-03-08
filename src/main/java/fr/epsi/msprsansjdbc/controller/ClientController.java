@@ -18,20 +18,16 @@ public class ClientController {
     // dont la création est déléguée à Spring Core
     private final ClientService service;
 
+    // Injection du service via l'annotation @Autowired lors de la création du contrôleur.
     @Autowired
     public ClientController(ClientService service) {
         this.service = service;
     }
 
-    //@RequestMapping(method = RequestMethod.GET, path = "/clients")
     @GetMapping()
     public String afficherListeClients(Model model) {
-
-        //On charge la liste des CLIENTS pour affichage dans la vue
         List<Client> mesClients = service.findAllClients();
-        //On envoie la liste à la vue à travers le modèle du MVC
         model.addAttribute("clients", mesClients);
-        System.out.println(mesClients);
         return "view-client-list";
     }
 

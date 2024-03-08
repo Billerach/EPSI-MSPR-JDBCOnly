@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
@@ -24,20 +25,21 @@ public class CommandeDAOImpl implements CommandeDAO {
     private final SimpleJdbcInsert simpleJdbcInsert;
 
     @Autowired
-    public CommandeDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
+    public CommandeDAOImpl(NamedParameterJdbcTemplate jdbcTemplate, DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
-        this.simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate.getJdbcTemplate())
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName("commandes")
                 .usingGeneratedKeyColumns("id_commande");
     }
 
+    private static final String FIND_ALL_QUERY = "SELECT ID_PERSONNE, NOM, PRENOM FROM personnes WHERE EST_CLIENT = TRUE";
+
     @Override
     public List<Commande> getAllCommandesWithPersonne() {
-        String sql = "SELECT c.id_commande, c.id_personne, c.date_commande, c.montant_total, p.nom " +
-                "FROM commandes c " +
-                "JOIN personnes p ON c.id_personne = p.id_personne";
+//        String sql = "SELECT c.id_commande, c.id_personne, c.date_commande, c.montant_total, p.nom " +
+//                "FROM commandes c JOIN personnes p ON c.id_personne = p.id_personne";
 
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Commande.class));
+        return jdbcTemplate.query("SELECT * FROM commandes", new BeanPropertyRowMapper<>(Commande.class));
     }
 
     @Override
