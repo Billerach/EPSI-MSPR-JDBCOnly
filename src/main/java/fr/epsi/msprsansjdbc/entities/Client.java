@@ -3,7 +3,6 @@ package fr.epsi.msprsansjdbc.entities;
 import java.util.Objects;
 
 public class Client {
-
     private int id_personne;
     private String nom;
     private String prenom;

@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS produits (
 
 CREATE TABLE IF NOT EXISTS personnes (
     `id_personne` INT NOT NULL AUTO_INCREMENT,
-    `login` VARCHAR(50) NOT NULL UNIQUE,
-    `mot_de_passe` VARCHAR(255) NOT NULL,
+    `login` VARCHAR(50) UNIQUE,
+    `mot_de_passe` VARCHAR(255),
     `nom` varchar(50) DEFAULT NULL,
     `prenom` varchar(50) DEFAULT NULL,
     `numero_voie` varchar(10) DEFAULT NULL,
