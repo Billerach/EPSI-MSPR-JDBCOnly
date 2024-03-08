@@ -1,5 +1,7 @@
 package fr.epsi.msprsansjdbc.entities;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.Objects;
 
 public class Client {

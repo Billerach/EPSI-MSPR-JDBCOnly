@@ -1,16 +1,12 @@
-DROP TABLE IF EXISTS contenu_commande;
-DROP TABLE IF EXISTS produits;
-DROP TABLE IF EXISTS commandes;
-DROP TABLE IF EXISTS personnes;
-
+-- Création des tables
 CREATE TABLE IF NOT EXISTS produits (
-  `id_produit` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(100) DEFAULT NULL,
-  `departement` varchar(50) DEFAULT NULL,
-  `lait` varchar(50) DEFAULT NULL,
-  `prix` float(4,2) DEFAULT NULL,
-  `date_de_fin` date DEFAULT NULL,
-  PRIMARY KEY (`id_produit`)
+                                        `id_produit` int NOT NULL AUTO_INCREMENT,
+                                        `nom` varchar(100) DEFAULT NULL,
+                                        `departement` varchar(50) DEFAULT NULL,
+                                        `lait` varchar(50) DEFAULT NULL,
+                                        `prix` float(4,2) DEFAULT NULL,
+                                        `date_de_fin` date DEFAULT NULL,
+                                        PRIMARY KEY (`id_produit`)
 );
 
 CREATE TABLE IF NOT EXISTS personnes (
@@ -33,22 +29,22 @@ CREATE TABLE IF NOT EXISTS personnes (
 
 -- Table des commandes
 CREATE TABLE IF NOT EXISTS commandes (
-  `id_commande` int NOT NULL AUTO_INCREMENT,
-  `id_personne` int NOT NULL,
-  `date_commande` date DEFAULT NULL,
-  `montant_total` decimal(10, 2) DEFAULT NULL,
-  PRIMARY KEY (`id_commande`),
-  FOREIGN KEY (`id_personne`) REFERENCES personnes(`id_personne`)
+                                         `id_commande` int NOT NULL AUTO_INCREMENT,
+                                         `id_personne` int NOT NULL,
+                                         `date_commande` date DEFAULT NULL,
+                                         `montant_total` decimal(10, 2) DEFAULT NULL,
+                                         PRIMARY KEY (`id_commande`),
+                                         FOREIGN KEY (`id_personne`) REFERENCES personnes(`id_personne`)
 );
 
 CREATE TABLE IF NOT EXISTS contenu_commande (
-  `id_contenu_commande` int NOT NULL AUTO_INCREMENT,
-  `id_commande` int NOT NULL,
-  `id_produit` int NOT NULL,
-  `quantite` int DEFAULT NULL,
-  PRIMARY KEY (`id_contenu_commande`),
-  FOREIGN KEY (`id_commande`) REFERENCES commandes(`id_commande`),
-  FOREIGN KEY (`id_produit`) REFERENCES produits(`id_produit`)
+                                                `id_contenu_commande` int NOT NULL AUTO_INCREMENT,
+                                                `id_commande` int NOT NULL,
+                                                `id_produit` int NOT NULL,
+                                                `quantite` int DEFAULT NULL,
+                                                PRIMARY KEY (`id_contenu_commande`),
+                                                FOREIGN KEY (`id_commande`) REFERENCES commandes(`id_commande`),
+                                                FOREIGN KEY (`id_produit`) REFERENCES produits(`id_produit`)
 );
 
 -- Ajout de données de test
@@ -68,55 +64,53 @@ VALUES
 
 -- Ajout de données de test pour la table des utilisateurs
 INSERT INTO personnes (
-  id_personne,
-  login,
-  mot_de_passe,
-  nom, prenom,
-  numero_voie,
-  type_voie,
-  libelle_voie,
-  commune,
-  code_postal,
-  email,
-  telephone,
-  est_client,
-  est_employe
-  )
-  
+    id_personne,
+    login,
+    mot_de_passe,
+    nom, prenom,
+    numero_voie,
+    type_voie,
+    libelle_voie,
+    commune,
+    code_postal,
+    email,
+    telephone,
+    est_client,
+    est_employe
+)
 VALUES
-  #login  mot_de_passe  nom  prenom  numero_voie  type_voie  libelle_voie  commune  code_postal  email  telephone  est_client  est_employe
-
-  (1, 'alice', 'motdepasseAlice',       'Dupont',    'Alice',    '123', 'rue',    'de la République',    'Paris',    '75001', 'alice@email.com',                 '01.23.45.67.89', TRUE, FALSE),
-  (2, 'bob', 'motdepasseBob',           'Martin',    'Bob',      '456', 'avenue', 'des Fleurs',          'Lyon',     '69002', 'bob@email.com',                   '09.87.65.43.21', TRUE, FALSE),
-  (3, 'claire', 'motdepasseClaire',     'Leroux',    'Claire',   '789', 'rue',    'de la Liberté',       'Marseille','13003', 'claire@email.com',                '01.23.45.67.89', TRUE, FALSE),
-  (4, 'timothee', 'motdepasseTimothee', 'Thibault',  'Timothée', '46',  'avenue', 'Millies Lacroix',     'DZAOUDZI', '97610', 'TimotheeThibault@gustr.com',      '02.83.06.29.55', FALSE, TRUE),
-  (5, 'cheney', 'motdepasseCheney',     'Bernard',   'Cheney',   '31',  'rue',    'du Général Ailleret', 'LE TAMPON','97430', 'CheneyBernard@rhyta.com',         '02.58.34.19.11', FALSE, TRUE),
-  (6, 'damiane', 'motdepasseDamiane',   'Thivierge', 'Damiane',  '30',  'place',  'de la Gare',          'COLMAR',   '68000', 'DamianeThivierge@jourrapide.com', '03.72.27.10.08', FALSE, TRUE),
-  (7, 'michele', 'motdepasseMichele',   'Favreau',   'Michèle',  '14',  'quai',   'Saint-Nicolas',       'TOULOUSE', '31500', 'MicheleFavreau@rhyta.com',        '05.79.45.52.03', FALSE, TRUE),
-  (8, 'manville', 'motdepasseManville', 'Brunelle',  'Manville', '27',  'cours',  'Jean Jaures',         'BORDEAUX', '33100', 'ManvilleBrunelle@einrot.com',     '05.27.50.25.11', FALSE, TRUE),
-  (9, 'amelie', 'motdepasseAmelie',     'Brisebois', 'Amélie',   '76',  'rue',    'Bonnet',              'YERRES',   '91330', 'AmelieBrisebois@gustr.com',       '01.54.31.99.22', FALSE, TRUE);
+    (1, 'alice', 'motdepasseAlice', 'Dupont', 'Alice', '123', 'rue', 'de la République', 'Paris', '75001', 'alice@email.com', '01.23.45.67.89', TRUE, FALSE),
+    (2, 'bob', 'motdepasseBob', 'Martin', 'Bob', '456', 'avenue', 'des Fleurs', 'Lyon', '69002', 'bob@email.com', '09.87.65.43.21', TRUE, FALSE),
+    (3, 'claire', 'motdepasseClaire', 'Leroux', 'Claire', '789', 'rue', 'de la Liberté', 'Marseille', '13003', 'claire@email.com', '01.23.45.67.89', TRUE, FALSE),
+    (4, 'timothee', 'motdepasseTimothee', 'Thibault', 'Timothée', '46', 'avenue', 'Millies Lacroix', 'DZAOUDZI', '97610', 'TimotheeThibault@gustr.com', '02.83.06.29.55', FALSE, TRUE),
+    (5, 'cheney', 'motdepasseCheney', 'Bernard', 'Cheney', '31', 'rue', 'du Général Ailleret', 'LE TAMPON', '97430', 'CheneyBernard@rhyta.com', '02.58.34.19.11', FALSE, TRUE),
+    (6, 'damiane', 'motdepasseDamiane', 'Thivierge', 'Damiane', '30', 'place', 'de la Gare', 'COLMAR', '68000', 'DamianeThivierge@jourrapide.com', '03.72.27.10.08', FALSE, TRUE),
+    (7, 'michele', 'motdepasseMichele', 'Favreau', 'Michèle', '14', 'quai', 'Saint-Nicolas', 'TOULOUSE', '31500', 'MicheleFavreau@rhyta.com', '05.79.45.52.03', FALSE, TRUE),
+    (8, 'manville', 'motdepasseManville', 'Brunelle', 'Manville', '27', 'cours', 'Jean Jaures', 'BORDEAUX', '33100', 'ManvilleBrunelle@einrot.com', '05.27.50.25.11', FALSE, TRUE),
+    (9, 'amelie', 'motdepasseAmelie', 'Brisebois', 'Amélie', '76', 'rue', 'Bonnet', 'YERRES', '91330', 'AmelieBrisebois@gustr.com', '01.54.31.99.22', FALSE, TRUE);
 
 -- Ajout de données de test pour la table des commandes
 INSERT INTO commandes (id_commande, id_personne, date_commande, montant_total)
 VALUES
-  (1, 1, '2024-02-22', 150.00),
-  (2, 2, '2024-02-23', 75.50),
-  (3, 3, '2024-02-24', 200.00)
+    (1, 1, '2024-02-22', 150.00),
+    (2, 2, '2024-02-23', 75.50),
+    (3, 3, '2024-02-24', 200.00)
 ON DUPLICATE KEY UPDATE
-  id_personne = VALUES(id_personne),
-  date_commande = VALUES(date_commande),
-  montant_total = VALUES(montant_total);
+                     id_personne = VALUES(id_personne),
+                     date_commande = VALUES(date_commande),
+                     montant_total = VALUES(montant_total);
 
 -- Ajout de données de test pour la table du contenu des commandes
 INSERT INTO contenu_commande (id_contenu_commande, id_commande, id_produit, quantite)
 VALUES
-  (1, 1, 1, 2),
-  (2, 1, 2, 1),
-  (3, 2, 3, 3)
+    (1, 1, 1, 2),
+    (2, 1, 2, 1),
+    (3, 2, 3, 3)
 ON DUPLICATE KEY UPDATE
-  id_commande = VALUES(id_commande),
-  id_produit = VALUES(id_produit),
-  quantite = VALUES(quantite);
+                     id_commande = VALUES(id_commande),
+                     id_produit = VALUES(id_produit),
+                     quantite = VALUES(quantite);
+
 
 # -- Ajout de données de test pour la table de l'historique des commandes
 # INSERT INTO historique_commandes (id, id_client, date_commande, montant_total)

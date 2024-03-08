@@ -31,18 +31,18 @@
                             <th>Produit</th>
                             <th>Client</th>
                             <th>Quantité</th>
-                            <th>Total</th>
+                            <th>Montant Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr data-th-each="commande : ${commandes}">
                             <td data-th-text="${commande.id_commande}"></td>
-                            <td data-th-text="${commande.id_personne}"></td>
-<!--                            <td data-th-text="${commande.date_commande}"></td>-->
-<!--                            <td data-th-text="${commande.getMontant_total()}"></td>-->
-<!--                            Ajout nom de la table personne-->
-<!--                            Ajout nom produit de la table produit-->
-<!--                            Ajout prix total-->
+                            <td data-th-text="${commande.nom_produit}"></td>
+                            <td data-th-text="${commande.nom_client}"></td>
+                            <td data-th-text="${commande.prenom_client}"></td>
+                            <td data-th-text="${commande.quantite}"></td>
+                            <td data-th-text="${commande.montant_total}"></td>
+
                             <td>
                                 <a data-th-href="@{/commandes/{id_commande}/edition(id=${commande.id_commande})}">Modifier</a>
                                 <a data-th-href="@{/commandes/{id_commande}/suppression(id=${commande.id_commande})}">Supprimer</a>

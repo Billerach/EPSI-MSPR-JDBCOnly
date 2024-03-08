@@ -9,7 +9,7 @@ public class Commande {
     private Date date_commande;
     private float montant_total;
 
-    // Constructeurs, getters et setters
+    private ContenuCommande contenuCommande;
 
     public Commande() {
     }
@@ -66,5 +66,13 @@ public class Commande {
 
     public void setMontant_total(float montant_total) {
         this.montant_total = montant_total;
+    }
+
+    public ContenuCommande getContenuCommande() {
+        return contenuCommande;
+    }
+
+    public void setContenuCommande(ContenuCommande contenuCommande) {
+        this.contenuCommande = contenuCommande;
     }
 }

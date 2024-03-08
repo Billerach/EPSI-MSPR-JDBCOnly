@@ -21,6 +21,10 @@ public class CommandeService {
         return dao.findAll();
     }
 
+    public String getNomProduit(int idCommande) {
+        return dao.getNomProduit(idCommande);
+    }
+
     public Commande create(Commande commande) {
         return dao.create(commande);
     }
@@ -31,9 +35,5 @@ public class CommandeService {
 
     public void update(Commande commande) {
         dao.update(commande);
-    }
-
-    public String getNomProduit(int idCommande) {
-        return dao.getNomProduit(idCommande);
     }
 }
