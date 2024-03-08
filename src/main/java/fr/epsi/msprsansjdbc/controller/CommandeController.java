@@ -13,7 +13,9 @@ import java.util.List;
 @RequestMapping("/commandes")
 public class CommandeController {
 
-    // Service responsable de la logique métier liée aux commandes.
+    //Dans le développement multi-couche et notamment le MVC, le controller s'appuie sur d'autres briques
+    // pour réaliser ces traitements... c'est la raison pour laquelle, nous avons besoin ici d'un objet service
+    // dont la création est déléguée à Spring Core
     private final CommandeService service;
 
     // Injection du service via l'annotation @Autowired lors de la création du contrôleur.
@@ -24,8 +26,8 @@ public class CommandeController {
 
     @GetMapping()
     public String afficherListeCommande(Model model) {
-        List<Commande> commandesDetailsList = service.findAll();
-        model.addAttribute("commande", commandesDetailsList);
+        List<Commande> commandesDetailsList = service.getAllCommandesWithPersonne();
+        model.addAttribute("commandes", commandesDetailsList);
         return "view-commande-list";
     }
 

@@ -30,7 +30,9 @@ public class ClientDAOImpl implements ClientDAO {
     @Autowired
     public ClientDAOImpl(NamedParameterJdbcTemplate jdbcTemplate, DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
-        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource).withTableName("personnes").usingGeneratedKeyColumns("ID_PERSONNE");
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+        .withTableName("personnes")
+        .usingGeneratedKeyColumns("ID_PERSONNE");
     }
 
     @Override
