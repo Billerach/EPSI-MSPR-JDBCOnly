@@ -10,21 +10,21 @@ CREATE TABLE IF NOT EXISTS produits (
 );
 
 CREATE TABLE IF NOT EXISTS personnes (
-                                         `id_personne` INT NOT NULL AUTO_INCREMENT,
-                                         `login` VARCHAR(50) NOT NULL UNIQUE,
-                                         `mot_de_passe` VARCHAR(255) NOT NULL,
-                                         `nom` varchar(50) DEFAULT NULL,
-                                         `prenom` varchar(50) DEFAULT NULL,
-                                         `numero_voie` varchar(10) DEFAULT NULL,
-                                         `type_voie` varchar(255) DEFAULT NULL,
-                                         `libelle_voie` varchar(255) DEFAULT NULL,
-                                         `commune` varchar(50) DEFAULT NULL,
-                                         `code_postal` varchar(10) DEFAULT NULL,
-                                         `email` varchar(255) DEFAULT NULL,
-                                         `telephone` varchar(30) DEFAULT NULL,
-                                         `est_client` BOOLEAN DEFAULT FALSE,
-                                         `est_employe` BOOLEAN DEFAULT FALSE,
-                                         PRIMARY KEY (`id_personne`)
+    `id_personne` INT NOT NULL AUTO_INCREMENT,
+    `login` VARCHAR(50) UNIQUE,
+    `mot_de_passe` VARCHAR(255),
+    `nom` varchar(50) DEFAULT NULL,
+    `prenom` varchar(50) DEFAULT NULL,
+    `numero_voie` varchar(10) DEFAULT NULL,
+    `type_voie` varchar(255) DEFAULT NULL,
+    `libelle_voie` varchar(255) DEFAULT NULL,
+    `commune` varchar(50) DEFAULT NULL,
+    `code_postal` varchar(10) DEFAULT NULL,
+    `email` varchar(255) DEFAULT NULL,
+    `telephone` varchar(30) DEFAULT NULL,
+    `est_client` BOOLEAN DEFAULT FALSE,
+    `est_employe` BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (`id_personne`)
 );
 
 -- Table des commandes

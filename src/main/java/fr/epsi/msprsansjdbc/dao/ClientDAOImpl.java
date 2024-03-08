@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -18,6 +17,7 @@ import java.util.List;
 public class ClientDAOImpl implements ClientDAO {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert simpleJdbcInsert;
+
 
     private static final String FIND_ALL_QUERY = "SELECT ID_PERSONNE, NOM, PRENOM FROM personnes WHERE EST_CLIENT = TRUE";
     private static final String FIND_BY_ID_QUERY = "SELECT ID_PERSONNE, NOM, PRENOM FROM personnes WHERE ID_PERSONNE = :id_personne";
@@ -41,9 +41,20 @@ public class ClientDAOImpl implements ClientDAO {
 
     @Override
     public Client create(Client client) {
-        BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(client);
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        client.setEstClient(true);
+        client.setEstEmploye(false);
+        parameterSource.addValue("nom", client.getNom());
+        parameterSource.addValue("prenom", client.getPrenom());
+        parameterSource.addValue("est_client", client.isEstClient());
+        parameterSource.addValue("est_employe", client.isEstEmploye());
+
+        // Exécutez la requête avec les valeurs définies dans parameterSource
         Number newId = simpleJdbcInsert.executeAndReturnKey(parameterSource);
+
+        // Mettez à jour l'ID du client avec la nouvelle valeur générée
         client.setId_personne(newId.intValue());
+
         return client;
     }
 

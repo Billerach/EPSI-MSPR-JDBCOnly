@@ -43,7 +43,7 @@ public class ClientController {
     }
     @PostMapping("/creer")
     public String creerClient(@ModelAttribute Client client) {
-        //À la validation du formulaire sur l'action "/formateurs/creer" c'est cette méthode qui est activée !
+        //À la validation du formulaire sur l'action "/clients/creer" c'est cette méthode qui est activée !
         //Elle permet grâce, là encore, à l'injection de récupérer l'objet inutilisé dans le formulaire "view-client-form-creation"
         //Il ne reste plus qu'à essayer de sauvegarder cet objet en s'appuyant sur le service Client
         service.create(client);
