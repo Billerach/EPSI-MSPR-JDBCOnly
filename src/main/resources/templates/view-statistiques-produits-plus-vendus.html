@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" data-th-href="@{/img/fromage.png}" sizes="32x32"/>
+        <link rel="stylesheet" data-th-href="@{/css/layout.css}"/>
+        <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
+        <link rel="stylesheet" data-th-href="@{/css/demo-table.css}"/>
+
+        <title>Produits les plus vendus</title>
+    </head>
+
+    <body>
+        <header>
+            <h1 id="nav-title">
+                <a href="/">Home - ACME</a>
+            </h1>
+            <nav>
+                <ul>
+                    <li><a href="/statistiques">Statistiques</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Produits les plus vendus</h1>
+            <section>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Nombre de ventes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="statistique : ${produitsPlusVendus}">
+                            <td th:text="${statistique.nomProduit}"></td>
+                            <td th:text="${statistique.nombreVentes}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; EPSI POEC - Tous droits réservés</p>
+            <small>
+                <a href="https://www.flaticon.com/fr/icones-gratuites/fromage" title="fromage icônes">
+                    favicon de fromage par Smashicons - Flaticon
+                </a>
+            </small>
+        </footer>
+    </body>
+</html>
+
