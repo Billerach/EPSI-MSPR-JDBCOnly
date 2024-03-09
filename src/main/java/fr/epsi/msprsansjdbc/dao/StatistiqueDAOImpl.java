@@ -1,125 +1,66 @@
 package fr.epsi.msprsansjdbc.dao;
 
+import fr.epsi.msprsansjdbc.dao.StatistiqueDAO;
 import fr.epsi.msprsansjdbc.entities.Statistique;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @Repository
-public class StatistiqueDAOImpl implements StatistiqueDAO {
-    private JdbcTemplate jdbcTemplate;
+public class StatistiqueDAOImpl extends StatistiqueDAO {
 
-    private static final String STATISTIQUE_TABLE = "statistique";
+    private final JdbcTemplate jdbcTemplate;
 
-    private Statistique mapStatistique(ResultSet resultSet, int i) throws SQLException {
-        Statistique statistique = new Statistique();
-        statistique.setId(resultSet.getInt("id"));
-
-        return statistique;
+    @Autowired
+    public StatistiqueDAOImpl(JdbcTemplate jdbcTemplate) {
+        super(jdbcTemplate);
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public List<Statistique> getClientsAvecNombreProduitsAchetes() {
-        String sql = "SELECT id_personne, nom, nombre_produits_achetes FROM " + STATISTIQUE_TABLE + " WHERE type_personne = 'Client'";
-        return jdbcTemplate.query(sql, this::mapStatistique);
+    public List<Statistique> getProduitLesPlusVendu() {
+        String sqlQuery = "SELECT produits.nom, COUNT(contenu_commande.id_contenu_commande) " +
+                "FROM produits " +
+                "LEFT JOIN contenu_commande ON produits.id_produit = contenu_commande.id_produit " +
+                "GROUP BY produits.nom " +
+                "ORDER BY COUNT(contenu_commande.id_contenu_commande) DESC LIMIT 10";
+
+        return jdbcTemplate.query(sqlQuery, new BeanPropertyRowMapper<>(Statistique.class));
     }
 
     @Override
-    public List<Statistique> getProduitsAvecNombreClientsAchetes() {
-        String sql = "SELECT id_produit, nom, nombre_clients_achetes FROM " + STATISTIQUE_TABLE + " WHERE type_personne = 'Client'";
-        return jdbcTemplate.query(sql, this::mapStatistique);
+    public List<Statistique> getProduitLesMoinsVendu() {
+        String sqlQuery = "SELECT produits.nom, COUNT(contenu_commande.id_contenu_commande) " +
+                "FROM produits " +
+                "LEFT JOIN contenu_commande ON produits.id_produit = contenu_commande.id_produit " +
+                "GROUP BY produits.nom " +
+                "ORDER BY COUNT(contenu_commande.id_contenu_commande) ASC LIMIT 10";
+
+        return jdbcTemplate.query(sqlQuery, new BeanPropertyRowMapper<>(Statistique.class));
     }
 
     @Override
-    public List<Statistique> getProduitsAvecNombreClientsAchetesAsc() {
-        String sql = "SELECT id_produit, nom, nombre_clients_achetes FROM " + STATISTIQUE_TABLE + " WHERE type_personne = 'Client' ORDER BY nombre_clients_achetes ASC";
-        return jdbcTemplate.query(sql, this::mapStatistique);
+    public List<Statistique> getChiffreAffaireParMois() {
+        String sqlQuery = "SELECT DATE_FORMAT(commandes.date_commande, '%Y-%m') AS mois, SUM(commandes.montant_total) AS chiffreAffaire " +
+                "FROM commandes " +
+                "GROUP BY DATE_FORMAT(commandes.date_commande, '%Y-%m') " +
+                "ORDER BY DATE_FORMAT(commandes.date_commande, '%Y-%m')";
+
+        return jdbcTemplate.query(sqlQuery, new BeanPropertyRowMapper<>(Statistique.class));
     }
 
     @Override
-    public List<Statistique> getClientsAvecNombreCommandes() {
-        String sql = "SELECT id_personne, nom, nombre_commandes FROM " + STATISTIQUE_TABLE + " WHERE type_personne = 'Client'";
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
+    public List<Statistique> getChiffreAffaireParAnnee() {
+        String sqlQuery = "SELECT YEAR(commandes.date_commande) AS annee, SUM(commandes.montant_total) AS chiffreAffaire " +
+                "FROM commandes " +
+                "GROUP BY YEAR(commandes.date_commande) " +
+                "ORDER BY YEAR(commandes.date_commande)";
 
-    @Override
-    public List<Statistique> getProduitsAvecNombreCommandes() {
-        String sql = "SELECT id_produit, nom, nombre_commandes FROM " + STATISTIQUE_TABLE;
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getProduitsAvecNombreCommandesAsc() {
-        String sql = "SELECT id_produit, nom, nombre_commandes FROM " + STATISTIQUE_TABLE + " ORDER BY nombre_commandes ASC";
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getClientsAvecMontantTotalDepense() {
-        String sql = "SELECT id_personne, nom, montant_total_depense FROM " + STATISTIQUE_TABLE + " WHERE type_personne = 'Client'";
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getProduitsAvecChiffreAffairesTotal() {
-        String sql = "SELECT id_produit, nom, chiffre_affaires_total FROM " + STATISTIQUE_TABLE;
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getProduitsAvecChiffreAffairesTotalAsc() {
-        String sql = "SELECT id_produit, nom, chiffre_affaires_total FROM " + STATISTIQUE_TABLE + " ORDER BY chiffre_affaires_total ASC";
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getClientsAvecMontantTotalDepenseAsc() {
-        String sql = "SELECT id_personne, nom, montant_total_depense FROM " + STATISTIQUE_TABLE + " WHERE type_personne = 'Client' ORDER BY montant_total_depense ASC";
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getProduitsAvecTypeLaitEtChiffreAffairesTotal() {
-        String sql = "SELECT id_produit, nom, type_lait, chiffre_affaires_total FROM " + STATISTIQUE_TABLE;
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getClientsAvecMontantMoyenDepenseParCommande() {
-        String sql = "SELECT id_personne, nom, montant_moyen_depense_par_commande FROM " + STATISTIQUE_TABLE + " WHERE type_personne = 'Client'";
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getProduitsAvecNombreMoyenCommandes() {
-        String sql = "SELECT id_produit, nom, nombre_moyen_commandes FROM " + STATISTIQUE_TABLE;
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getProduitsAvecTypeLaitEtNombreCommandes() {
-        String sql = "SELECT id_produit, nom, type_lait, nombre_commandes FROM " + STATISTIQUE_TABLE;
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getProduitsAvecDepartementEtNombreCommandes() {
-        String sql = "SELECT id_produit, nom, departement, nombre_commandes FROM " + STATISTIQUE_TABLE;
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getProduitsPlusVendus() {
-        String sql = "SELECT id_produit, nom, nombre_commandes FROM " + STATISTIQUE_TABLE + " ORDER BY nombre_commandes DESC";
-        return jdbcTemplate.query(sql, this::mapStatistique);
-    }
-
-    @Override
-    public List<Statistique> getProduitsMoinsVendus() {
-        String sql = "SELECT id_produit, nom, nombre_commandes FROM " + STATISTIQUE_TABLE + " ORDER BY nombre_commandes ASC";
-        return jdbcTemplate.query(sql, this::mapStatistique);
+        return jdbcTemplate.query(sqlQuery, new BeanPropertyRowMapper<>(Statistique.class));
     }
 }
+
+
