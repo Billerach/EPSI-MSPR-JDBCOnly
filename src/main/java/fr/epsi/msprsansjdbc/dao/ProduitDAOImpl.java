@@ -15,24 +15,26 @@ import java.util.List;
 
 @Repository
 public class ProduitDAOImpl implements ProduitDAO {
-    private NamedParameterJdbcTemplate jdbcTemplate;
-    private SimpleJdbcInsert simpleJdbcInsert;
+
+    private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final SimpleJdbcInsert simpleJdbcInsert;
+
     static final String FIND_ALL_QUERY = "SELECT * FROM produits";
-    private static final String FIND_BY_ID_QUERY = "SELECT id_produit, nom, departement, lait FROM produits WHERE id_produit = :id_produit";
+    private static final String FIND_BY_ID_QUERY = "SELECT id_produit, nom, departement, lait, prix, date_de_fin FROM produits WHERE id_produit = :id_produit";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM produits WHERE id_produit = :id_produit";
-    private static final String UPDATE_QUERY = "UPDATE produits SET nom = :nom WHERE id_produit = :id_produit";
-    private static final String INSERT_QUERY = "INSERT INTO produits (nom, departement, lait) VALUES (:nom, :departement, :lait)";
+    private static final String UPDATE_QUERY = "UPDATE produits SET nom = :nom, departement = :departement, lait = :lait, prix = :prix, date_de_fin = :date_fin WHERE id_produit = :id_produit";
+    private static final String INSERT_QUERY = "INSERT INTO produits (nom, departement, lait, prix, date_fin) VALUES (:nom, :departement, :lait, :prix, :date_fin)";
+
+    // Logger pour la journalisation
+    private static final Logger logger = LoggerFactory.getLogger(ProduitDAOImpl.class);
 
     @Autowired
     public ProduitDAOImpl(NamedParameterJdbcTemplate jdbcTemplate, DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
-        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource).
-                withTableName("produits")
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("produits")
                 .usingGeneratedKeyColumns("id_produit");
     }
-
-    // Logger pour la journalisation
-    private static final Logger logger = LoggerFactory.getLogger(ProduitDAOImpl.class);
 
     @Override
     public List<Produit> findAll() {
@@ -46,22 +48,33 @@ public class ProduitDAOImpl implements ProduitDAO {
         parameterSource.addValue("nom", produit.getNom());
         parameterSource.addValue("departement", produit.getDepartement());
         parameterSource.addValue("lait", produit.getLait());
-        produit.setId_produit(simpleJdbcInsert.executeAndReturnKey(parameterSource).intValue());
+        parameterSource.addValue("prix", produit.getPrix());
+        parameterSource.addValue("date_fin", produit.getDate_fin());
+        parameterSource.addValue("actif", produit.isActif()); // Ajout de la gestion de la colonne actif
+
+        Number idProduit = simpleJdbcInsert.executeAndReturnKey(parameterSource);
+        produit.setId_produit(idProduit.intValue());
+
         return produit;
     }
+
 
     @Override
     public Produit findById(int id_produit) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id", id_produit);
+        parameterSource.addValue("id_produit", id_produit);
         return jdbcTemplate.queryForObject(FIND_BY_ID_QUERY, parameterSource, new BeanPropertyRowMapper<>(Produit.class));
     }
 
     @Override
     public Produit update(Produit produit) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id", produit.getId_produit());
+        parameterSource.addValue("id_produit", produit.getId_produit());
         parameterSource.addValue("nom", produit.getNom());
+        parameterSource.addValue("departement", produit.getDepartement());
+        parameterSource.addValue("lait", produit.getLait());
+        parameterSource.addValue("prix", produit.getPrix());
+        parameterSource.addValue("date_fin", produit.getDate_fin());
         jdbcTemplate.update(UPDATE_QUERY, parameterSource);
         return produit;
     }
@@ -69,7 +82,13 @@ public class ProduitDAOImpl implements ProduitDAO {
     @Override
     public void deleteById(int id_produit) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id", id_produit);
+        parameterSource.addValue("id_produit", id_produit);
         jdbcTemplate.update(DELETE_BY_ID_QUERY, parameterSource);
     }
+
+    @Override
+    public List<Produit> findAllActifs() {
+        return null;
+    }
 }
+
