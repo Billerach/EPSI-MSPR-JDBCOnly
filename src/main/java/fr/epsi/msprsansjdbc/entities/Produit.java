@@ -1,50 +1,53 @@
 package fr.epsi.msprsansjdbc.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
+import java.util.Date;
+
 public class Produit {
     // Attributs
     private int id_produit;
     private String nom;
     private String departement;
     private String lait;
-    private float prix;
+    private Float prix;
+    private boolean actif = true;
 
-    // Constructeur par défaut
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date_fin;
+
+    // Constructeurs
     public Produit() {
     }
 
-    // Constructeur avec un paramètre
-    public Produit(String nom) {
+    public Produit(int id_produit) {
+        this.id_produit = id_produit;
+    }
+
+    public Produit(int id_produit, String nom) {
+        this.id_produit = id_produit;
         this.nom = nom;
     }
 
-    // Constructeur avec deux paramètres
-    public Produit(String nom, String departement) {
-        this.nom = nom;
+    public Produit(int id_produit, String nom, String departement) {
+        this(id_produit, nom);  // Utilisation du constructeur existant pour éviter la redondance
         this.departement = departement;
     }
 
-    // Constructeur avec trois paramètres
-    public Produit(String nom, String departement, String lait) {
-        this.nom = nom;
-        this.departement = departement;
-        this.lait = lait;
-    }
-
-    // Constructeur avec quatre paramètres
     public Produit(int id_produit, String nom, String departement, String lait) {
-        this.id_produit = id_produit;
-        this.nom = nom;
-        this.departement = departement;
+        this(id_produit, nom, departement);
         this.lait = lait;
     }
 
-    // Constructeur avec cinq paramètres
-    public Produit(int id_produit, String nom, String departement, String lait, float prix) {
-        this.id_produit = id_produit;
-        this.nom = nom;
-        this.departement = departement;
-        this.lait = lait;
+    public Produit(int id_produit, String nom, String departement, String lait, Float prix) {
+        this(id_produit, nom, departement, lait);
         this.prix = prix;
+    }
+
+    public Produit(int id_produit, String nom, String departement, String lait, Float prix, Date date_fin) {
+        this(id_produit, nom, departement, lait, prix);
+        this.date_fin = date_fin;
     }
 
     // Getters et Setters
@@ -80,11 +83,31 @@ public class Produit {
         this.lait = lait;
     }
 
-    public float getPrix() {
+    public Float getPrix() {
         return prix;
     }
 
-    public void setPrix(float prix) {
+    public void setPrix(Float prix) {
         this.prix = prix;
+    }
+
+    public Date getDate_fin() {
+        return date_fin;
+    }
+
+    public void setDate_fin(Date date_fin) {
+        this.date_fin = date_fin;
+    }
+
+    public boolean isActif() {
+        return actif;
+    }
+
+    public void setActif(boolean b) {
+        this.actif = b;
+    }
+
+    public Object getActif() {
+        return actif;
     }
 }

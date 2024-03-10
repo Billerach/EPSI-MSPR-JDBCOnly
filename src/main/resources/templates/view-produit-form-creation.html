@@ -7,7 +7,7 @@
         <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
         <link rel="stylesheet" data-th-href="@{/css/demo-form.css}"/>
 
-        <title>Démo : Édition d'un produit</title>
+        <title>Démo : Création d'un produit</title>
     </head>
     <body>
         <header>
@@ -16,15 +16,14 @@
             </h1>
             <nav>
                 <ul>
-                    <li><a href="/produits/edition">Produits</a></li>
+                    <li><a href="/produits">Produits</a></li>
                 </ul>
             </nav>
         </header>
         <main>
-            <h1>Édition d'un produit</h1>
-            <form th:action="@{/produits/edition}" th:object="${produit}" method="post">                        <label for="id_produit">ID du produit : </label>
-
-                <input type="hidden" id="id_produit" data-th-field="*{id_produit}" readonly/>                    </li>
+            <h1>Création d'un nouveau produit</h1>
+            <form data-th-action="@{/produits/creer}" data-th-object="${produit}" method="post">
+                <ul class="flex-outer">
                     <li>
                         <label for="nom">Nom : </label>
                         <input type="text" id="nom" required data-th-field="*{nom}"/>
