@@ -1,6 +1,5 @@
 package fr.epsi.msprsansjdbc.dao;
 
-import fr.epsi.msprsansjdbc.dao.StatistiqueDAO;
 import fr.epsi.msprsansjdbc.entities.Statistique;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -62,5 +61,3 @@ public class StatistiqueDAOImpl extends StatistiqueDAO {
         return jdbcTemplate.query(sqlQuery, new BeanPropertyRowMapper<>(Statistique.class));
     }
 }
-
-

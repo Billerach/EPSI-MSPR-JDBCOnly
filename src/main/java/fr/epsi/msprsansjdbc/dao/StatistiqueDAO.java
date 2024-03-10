@@ -22,7 +22,7 @@ public class StatistiqueDAO {
                 "FROM produits " +
                 "LEFT JOIN contenu_commande ON produits.id_produit = contenu_commande.id_produit " +
                 "GROUP BY produits.nom " +
-                "ORDER BY COUNT(contenu_commande.id_contenu_commande) DESC LIMIT 10";
+                "ORDER BY COUNT(contenu_commande.id_contenu_commande) DESC LIMIT 5";
 
         return jdbcTemplate.query(sqlQuery, (rs, rowNum) -> {
             Statistique statistique = new Statistique();
@@ -37,7 +37,7 @@ public class StatistiqueDAO {
                 "FROM produits " +
                 "LEFT JOIN contenu_commande ON produits.id_produit = contenu_commande.id_produit " +
                 "GROUP BY produits.nom " +
-                "ORDER BY COUNT(contenu_commande.id_contenu_commande) ASC LIMIT 10";
+                "ORDER BY COUNT(contenu_commande.id_contenu_commande) ASC LIMIT 5";
 
         return jdbcTemplate.query(sqlQuery, (rs, rowNum) -> {
             Statistique statistique = new Statistique();
