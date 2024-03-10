@@ -2,20 +2,20 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" data-th-href="@{/img/fromage.png}" sizes="32x32"/>
-        <link rel="stylesheet" data-th-href="@{/css/layout.css}"/>
-        <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
-        <link rel="stylesheet" data-th-href="@{/css/demo-table.css}"/>
+        <link rel="icon" th:href="@{/img/fromage.png}" sizes="32x32"/>
+        <link rel="stylesheet" th:href="@{/css/layout.css}"/>
+        <link rel="stylesheet" th:href="@{/css/general.css}"/>
+        <link rel="stylesheet" th:href="@{/css/demo-table.css}"/>
         <title>Statistiques - ACME</title>
     </head>
     <body>
         <header>
             <h1 id="nav-title">
-                <a href="/">Home - ACME</a>
+                <a th:href="@{/}">ACME</a>
             </h1>
             <nav>
                 <ul>
-                    <li><a href="/statistiques">Statistiques</a></li>
+                    <li><a th:href="@{/statistiques}">Statistiques</a></li>
                 </ul>
             </nav>
         </header>
@@ -23,10 +23,10 @@
             <h1>Statistiques</h1>
             <section>
                 <ul>
-                    <li><a class="stat-link" href="/statistiques/produits-plus-vendus">Produits les plus vendus</a></li>
-                    <li><a class="stat-link" href="/statistiques/produits-moins-vendus">Produits les moins vendus</a></li>
-                    <li><a class="stat-link" href="/statistiques/chiffre-affaire-par-mois">Chiffre d'affaires par mois</a></li>
-                    <li><a class="stat-link" href="/statistiques/chiffre-affaire-par-annee">Chiffre d'affaires par année</a></li>
+                    <li><a class="stat-link" th:href="@{/statistiques/produits-plus-vendus}">Produits les plus vendus</a></li>
+                    <li><a class="stat-link" th:href="@{/statistiques/produits-moins-vendus}">Produits les moins vendus</a></li>
+                    <li><a class="stat-link" th:href="@{/statistiques/chiffre-affaire-par-mois}">Chiffre d'affaires par mois</a></li>
+                    <li><a class="stat-link" th:href="@{/statistiques/chiffre-affaire-par-annee}">Chiffre d'affaires par année</a></li>
                 </ul>
             </section>
         </main>
@@ -40,5 +40,4 @@
         </footer>
     </body>
 </html>
-
 

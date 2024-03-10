@@ -5,28 +5,41 @@ body {
 	height: 100vh;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0;
+	background-color: white;
 }
 
 header {
 	padding: 5px;
+	background-color: #6e2824; /* #6E2824 - Dark Red */
 }
 
 h1 {
 	font-size: 1.8em;
+	color: #444;
 }
 
 footer {
-	background-color: #777;
-	padding: 10px;
+	background-color: #5b3302;
 	text-align: center;
-	color: white;
+	color: #dde2e7;
 	height: auto;
 }
 
-footer a{
-	color: white;
+footer a {
+	color: #dde2e7;
+	text-decoration: none;
 }
 
-nav li {	
+nav li {
 	font-size: 1.5em;
+	color: #e9c9a2; /* #E9C9A2 - Light Beige */
+}
+
+#nav-title a {
+	color: #555;
+}
+
+#nav-title a:hover {
+	color: rgb(196, 151, 95);
+	background-color: #f2f2f2;
 }

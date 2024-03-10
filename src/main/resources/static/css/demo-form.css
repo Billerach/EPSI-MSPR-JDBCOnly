@@ -6,6 +6,7 @@ form {
 
 form h1 {
 	margin: 15px;
+	color: #6e2824; /* #6E2824 - Dark Red */
 }
 
 .flex-outer li {
@@ -18,6 +19,7 @@ form h1 {
 .flex-outer>li>label {
 	flex: 1 0 120px;
 	max-width: 220px;
+	color: #444;
 }
 
 .flex-outer>li>label+* {
@@ -26,16 +28,65 @@ form h1 {
 
 .flex-outer li button {
 	margin-left: auto;
-	margin-bottom: 5px; padding : 8px 16px;
+	margin-bottom: 5px;
+	padding: 8px 16px;
 	border: none;
-	background: #333;
-	color: #f2f2f2;
+	background: #ac413d; /* #AC413D - Dark Coral */
+	color: white;
 	text-transform: uppercase;
 	letter-spacing: .09em;
 	border-radius: 2px;
-	padding: 8px 16px
+	transition: background-color 0.3s ease 0s;
+}
+
+.flex-outer li button:hover {
+	background-color: #6e2824; /* #6E2824 - Dark Red */
 }
 
 .flex-outer>li select {
 	flex: 1 0 220px;
 }
+
+
+
+/*@charset "UTF-8";*/
+
+/*form {*/
+/*	background-color: #f2f2f2;*/
+/*}*/
+
+/*form h1 {*/
+/*	margin: 15px;*/
+/*}*/
+
+/*.flex-outer li {*/
+/*	display: flex;*/
+/*	flex-wrap: wrap;*/
+/*	align-items: center;*/
+/*	margin: 5px;*/
+/*}*/
+
+/*.flex-outer>li>label {*/
+/*	flex: 1 0 120px;*/
+/*	max-width: 220px;*/
+/*}*/
+
+/*.flex-outer>li>label+* {*/
+/*	flex: 1 0 220px;*/
+/*}*/
+
+/*.flex-outer li button {*/
+/*	margin-left: auto;*/
+/*	margin-bottom: 5px; padding : 8px 16px;*/
+/*	border: none;*/
+/*	background: #333;*/
+/*	color: #f2f2f2;*/
+/*	text-transform: uppercase;*/
+/*	letter-spacing: .09em;*/
+/*	border-radius: 2px;*/
+/*	padding: 8px 16px*/
+/*}*/
+
+/*.flex-outer>li select {*/
+/*	flex: 1 0 220px;*/
+/*}*/
