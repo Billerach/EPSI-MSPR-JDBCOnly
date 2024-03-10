@@ -38,3 +38,12 @@ a.action:link, a.action:visited, table a:link, table a:visited {
 a.action:hover, a.action:active, table a:hover, table a:active {
 	background-color: #004040;
 }
+
+.stat-link {
+	background-color: #008080;
+	color: white;
+	padding: 14px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
