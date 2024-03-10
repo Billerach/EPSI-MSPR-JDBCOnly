@@ -1,13 +1,15 @@
-/* Header */
+/* General Styles (general.css) */
+
 header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px 50px;
+	padding: 0 30px;
 	box-shadow: 0 1px 8px #ddd;
 	flex-direction: row;
 	height: initial;
-	background-color: #6e2824; /* #6E2824 - Dark Red */
+	background-color: #6e2824;
+	border-radius: 0 0 10px 10px;
 }
 
 #nav-title {
@@ -16,17 +18,17 @@ header {
 
 #nav-title a {
 	text-decoration: none;
-	color: #e9c9a2; /* #E9C9A2 - Light Beige */
+	color: #e9c9a2;
 	display: inline-block;
 	padding: 10px 15px;
-	border: 1px solid #ca934f; /* #CA934F - Light Orange */
+	border: 1px solid #ca934f;
 	border-radius: 5px;
-	transition: all 0.3s ease 0s;
+	transition: all 0.3s ease;
 }
 
 #nav-title a:hover {
-	color: #ac413d; /* #AC413D - Dark Red */
-	background-color: #ca934f; /* #CA934F - Light Orange */
+	color: #ac413d;
+	background-color: #ca934f;
 }
 
 nav ul {
@@ -41,15 +43,14 @@ nav li {
 
 nav a {
 	text-decoration: none;
-	color: #e9c9a2; /* #E9C9A2 - Light Beige */
-	transition: all 0.3s ease 0s;
+	color: #e9c9a2;
+	transition: all 0.3s ease;
 }
 
 nav a:hover {
-	color: #ac413d; /* #AC413D - Dark Red */
+	color: #ac413d;
 }
 
-/* Additional styles for statistics links */
 main ul {
 	list-style: none;
 	display: flex;
@@ -64,16 +65,16 @@ main li {
 
 main a {
 	text-decoration: none;
-	color: #e9c9a2; /* #E9C9A2 - Light Beige */
+	color: #e9c9a2;
 	padding: 10px 15px;
-	border: 1px solid #ca934f; /* #CA934F - Light Orange */
+	border: 1px solid #ca934f;
 	border-radius: 5px;
-	transition: all 0.3s ease 0s;
+	transition: all 0.3s ease;
 }
 
 main a:hover {
-	color: #ac413d; /* #AC413D - Dark Red */
-	background-color: #ca934f; /* #CA934F - Light Orange */
+	color: #ac413d;
+	background-color: #ca934f;
 }
 
 .center-main {
@@ -97,4 +98,6 @@ main a:hover {
 	height: auto;
 	max-width: 1200px;
 	margin-top: 10px;
+	margin-bottom: 10px;
 }
+
