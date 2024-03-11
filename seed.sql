@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS personnes (
                                          `telephone` varchar(30) DEFAULT NULL,
                                          `est_client` BOOLEAN DEFAULT FALSE,
                                          `est_employe` BOOLEAN DEFAULT FALSE,
+                                         `est_archive` BOOLEAN DEFAULT FALSE,
                                          PRIMARY KEY (`id_personne`)
 );
 
@@ -113,18 +114,19 @@ INSERT INTO personnes (
     email,
     telephone,
     est_client,
-    est_employe
+    est_employe,
+   est_archive
 )
 VALUES
-    ('alice', 'motdepasseAlice', 'Dupont', 'Alice', '123', 'rue', 'de la République', 'Paris', '75001', 'alice@email.com', '01.23.45.67.89', TRUE, FALSE),
-    ('bob', 'motdepasseBob', 'Martin', 'Bob', '456', 'avenue', 'des Fleurs', 'Lyon', '69002', 'bob@email.com', '09.87.65.43.21', TRUE, FALSE),
-    ('claire', 'motdepasseClaire', 'Leroux', 'Claire', '789', 'rue', 'de la Liberté', 'Marseille', '13003', 'claire@email.com', '01.23.45.67.89', TRUE, FALSE),
-    ('timothee', 'motdepasseTimothee', 'Thibault', 'Timothée', '46', 'avenue', 'Millies Lacroix', 'DZAOUDZI', '97610', 'TimotheeThibault@gustr.com', '02.83.06.29.55', FALSE, TRUE),
-    ('cheney', 'motdepasseCheney', 'Bernard', 'Cheney', '31', 'rue', 'du Général Ailleret', 'LE TAMPON', '97430', 'CheneyBernard@rhyta.com', '02.58.34.19.11', FALSE, TRUE),
-    ('damiane', 'motdepasseDamiane', 'Thivierge', 'Damiane', '30', 'place', 'de la Gare', 'COLMAR', '68000', 'DamianeThivierge@jourrapide.com', '03.72.27.10.08', FALSE, TRUE),
-    ('michele', 'motdepasseMichele', 'Favreau', 'Michèle', '14', 'quai', 'Saint-Nicolas', 'TOULOUSE', '31500', 'MicheleFavreau@rhyta.com', '05.79.45.52.03', FALSE, TRUE),
-    ('manville', 'motdepasseManville', 'Brunelle', 'Manville', '27', 'cours', 'Jean Jaures', 'BORDEAUX', '33100', 'ManvilleBrunelle@einrot.com', '05.27.50.25.11', FALSE, TRUE),
-    ('amelie', 'motdepasseAmelie', 'Brisebois', 'Amélie', '76', 'rue', 'Bonnet', 'YERRES', '91330', 'AmelieBrisebois@gustr.com', '01.54.31.99.22', FALSE, TRUE);
+    (null, null, 'Dupont', 'Alice', '123', 'rue', 'de la République', 'Paris', '75001', 'alice@email.com', '01.23.45.67.89', TRUE, FALSE, FALSE),
+    (null,null, 'Martin', 'Bob', '456', 'avenue', 'des Fleurs', 'Lyon', '69002', 'bob@email.com', '09.87.65.43.21', TRUE, FALSE, FALSE),
+    (null, null, 'Leroux', 'Claire', '789', 'rue', 'de la Liberté', 'Marseille', '13003', 'claire@email.com', '01.23.45.67.89', TRUE, FALSE, FALSE),
+    ('timothee', 'motdepasseTimothee', 'Thibault', 'Timothée', '46', 'avenue', 'Millies Lacroix', 'DZAOUDZI', '97610', 'TimotheeThibault@gustr.com', '02.83.06.29.55', FALSE, TRUE, FALSE),
+    ('cheney', 'motdepasseCheney', 'Bernard', 'Cheney', '31', 'rue', 'du Général Ailleret', 'LE TAMPON', '97430', 'CheneyBernard@rhyta.com', '02.58.34.19.11', FALSE, TRUE, FALSE),
+    ('damiane', 'motdepasseDamiane', 'Thivierge', 'Damiane', '30', 'place', 'de la Gare', 'COLMAR', '68000', 'DamianeThivierge@jourrapide.com', '03.72.27.10.08', FALSE, TRUE, FALSE),
+    ('michele', 'motdepasseMichele', 'Favreau', 'Michèle', '14', 'quai', 'Saint-Nicolas', 'TOULOUSE', '31500', 'MicheleFavreau@rhyta.com', '05.79.45.52.03', FALSE, TRUE, FALSE),
+    ('manville', 'motdepasseManville', 'Brunelle', 'Manville', '27', 'cours', 'Jean Jaures', 'BORDEAUX', '33100', 'ManvilleBrunelle@einrot.com', '05.27.50.25.11', FALSE, TRUE, FALSE),
+    ('amelie', 'motdepasseAmelie', 'Brisebois', 'Amélie', '76', 'rue', 'Bonnet', 'YERRES', '91330', 'AmelieBrisebois@gustr.com', '01.54.31.99.22', FALSE, TRUE, FALSE);
 
 -- Ajout de données de test pour la table des commandes
 INSERT INTO commandes (id_commande, id_personne, date_commande, montant_total)

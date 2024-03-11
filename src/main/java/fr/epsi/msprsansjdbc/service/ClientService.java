@@ -21,19 +21,13 @@ public class ClientService {
         return dao.findAllClients();
     }
 
-    public Client create(Client Client) {
-        return dao.create(Client);
+    public Client create(Client client) {
+        return dao.create(client);
     }
 
-    public void deleteById(int id_personne){
-        dao.deleteById(id_personne);
-    }
+    public void archiveById(Client client){ dao.archiveById(client); }
 
-    public Object findById(int id_personne) {
-        return dao.findById(id_personne);
-    }
+    public Client findById(int id_personne) { return dao.findById(id_personne); }
 
-    public void update(Client Client) {
-        dao.update(Client);
-    }
+    public void update(Client Client) { dao.update(Client); }
 }

@@ -17,6 +17,7 @@ public class Client {
     private String telephone;
     private boolean estClient;
     private boolean estEmploye;
+    private boolean estArchive;
 
     public Client() {
     }
@@ -194,6 +195,10 @@ public class Client {
     public void setEstEmploye(boolean estEmploye) {
         this.estEmploye = estEmploye;
     }
+
+    public boolean isEstArchive() { return estArchive; }
+
+    public void setEstArchive(boolean estArchive) { this.estArchive = estArchive; }
 
     @Override
     public String toString() {
