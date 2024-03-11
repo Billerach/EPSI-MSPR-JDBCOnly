@@ -19,7 +19,7 @@ public class ClientDAOImpl implements ClientDAO {
     private final SimpleJdbcInsert simpleJdbcInsert;
 
 
-    private static final String FIND_ALL_QUERY = "SELECT ID_PERSONNE, NOM, PRENOM FROM personnes WHERE EST_CLIENT = TRUE";
+    private static final String FIND_ALL_QUERY = "SELECT * FROM personnes WHERE EST_CLIENT = TRUE";
     private static final String FIND_BY_ID_QUERY = "SELECT ID_PERSONNE, NOM, PRENOM FROM personnes WHERE ID_PERSONNE = :id_personne";
     private static final String INSERT_QUERY = "INSERT INTO personnes (NOM, PRENOM) VALUES (:nom, :prenom)";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM personnes WHERE ID_PERSONNE = :id_personne";
