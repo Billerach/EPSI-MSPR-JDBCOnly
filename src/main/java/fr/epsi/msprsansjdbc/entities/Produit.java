@@ -15,7 +15,7 @@ public class Produit {
     private boolean actif = true;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date_fin;
+    private Date date_de_fin;
 
     // Constructeurs
     public Produit() {
@@ -45,9 +45,9 @@ public class Produit {
         this.prix = prix;
     }
 
-    public Produit(int id_produit, String nom, String departement, String lait, Float prix, Date date_fin) {
+    public Produit(int id_produit, String nom, String departement, String lait, Float prix, Date date_de_fin) {
         this(id_produit, nom, departement, lait, prix);
-        this.date_fin = date_fin;
+        this.date_de_fin = date_de_fin;
     }
 
     // Getters et Setters
@@ -91,12 +91,12 @@ public class Produit {
         this.prix = prix;
     }
 
-    public Date getDate_fin() {
-        return date_fin;
+    public Date getDate_de_fin() {
+        return date_de_fin;
     }
 
-    public void setDate_fin(Date date_fin) {
-        this.date_fin = date_fin;
+    public void setDate_de_fin(Date date_de_fin) {
+        this.date_de_fin = date_de_fin;
     }
 
     public boolean isActif() {

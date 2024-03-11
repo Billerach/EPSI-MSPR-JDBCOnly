@@ -22,8 +22,8 @@ public class ProduitDAOImpl implements ProduitDAO {
     static final String FIND_ALL_ACTIFS_QUERY = "SELECT * FROM produits WHERE actif = true";
     private static final String FIND_BY_ID_QUERY = "SELECT id_produit, nom, departement, lait, prix, date_de_fin FROM produits WHERE id_produit = :id_produit";
     private static final String DESACTIVATE_BY_ID_QUERY = "UPDATE produits SET actif = false WHERE id_produit = :id_produit";
-    private static final String UPDATE_QUERY = "UPDATE produits SET nom = :nom, departement = :departement, lait = :lait, prix = :prix, date_de_fin = :date_fin WHERE id_produit = :id_produit";
-    private static final String INSERT_QUERY = "INSERT INTO produits (nom, departement, lait, prix, date_fin) VALUES (:nom, :departement, :lait, :prix, :date_fin)";
+    private static final String UPDATE_QUERY = "UPDATE produits SET nom = :nom, departement = :departement, lait = :lait, prix = :prix, date_de_fin = :date_de_fin WHERE id_produit = :id_produit";
+    private static final String INSERT_QUERY = "INSERT INTO produits (nom, departement, lait, prix, date_de_fin) VALUES (:nom, :departement, :lait, :prix, :date_de_fin)";
 
     // Logger pour la journalisation
     private static final Logger logger = LoggerFactory.getLogger(ProduitDAOImpl.class);
@@ -49,7 +49,7 @@ public class ProduitDAOImpl implements ProduitDAO {
         parameterSource.addValue("departement", produit.getDepartement());
         parameterSource.addValue("lait", produit.getLait());
         parameterSource.addValue("prix", produit.getPrix());
-        parameterSource.addValue("date_fin", produit.getDate_fin());
+        parameterSource.addValue("date_fin", produit.getDate_de_fin());
         parameterSource.addValue("actif", produit.isActif()); // Ajout de la gestion de la colonne actif
 
         Number idProduit = simpleJdbcInsert.executeAndReturnKey(parameterSource);
@@ -74,7 +74,7 @@ public class ProduitDAOImpl implements ProduitDAO {
         parameterSource.addValue("departement", produit.getDepartement());
         parameterSource.addValue("lait", produit.getLait());
         parameterSource.addValue("prix", produit.getPrix());
-        parameterSource.addValue("date_fin", produit.getDate_fin());
+        parameterSource.addValue("date_de_fin", produit.getDate_de_fin());
         jdbcTemplate.update(UPDATE_QUERY, parameterSource);
         return produit;
     }
