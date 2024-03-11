@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS historique_produits;
+DROP TABLE IF EXISTS contenu_commande;
+DROP TABLE IF EXISTS commandes;
+DROP TABLE IF EXISTS personnes;
+DROP TABLE IF EXISTS produits;
+
 -- Création des tables
 CREATE TABLE IF NOT EXISTS produits (
                                         `id_produit` int NOT NULL AUTO_INCREMENT,
