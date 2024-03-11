@@ -8,7 +8,6 @@ public class Commande {
     private int id_personne;
     private Date date_commande;
     private float montant_total;
-
     private ContenuCommande contenuCommande;
 
     public Commande() {

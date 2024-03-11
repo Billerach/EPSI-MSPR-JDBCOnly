@@ -1,14 +1,10 @@
 package fr.epsi.msprsansjdbc.dao;
 
-import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
-import fr.epsi.msprsansjdbc.entities.ContenuCommande;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -32,13 +28,8 @@ public class CommandeDAOImpl implements CommandeDAO {
                 .usingGeneratedKeyColumns("id_commande");
     }
 
-    private static final String FIND_ALL_QUERY = "SELECT ID_PERSONNE, NOM, PRENOM FROM personnes WHERE EST_CLIENT = TRUE";
-
     @Override
     public List<Commande> getAllCommandesWithPersonne() {
-//        String sql = "SELECT c.id_commande, c.id_personne, c.date_commande, c.montant_total, p.nom " +
-//                "FROM commandes c JOIN personnes p ON c.id_personne = p.id_personne";
-
         return jdbcTemplate.query("SELECT * FROM commandes", new BeanPropertyRowMapper<>(Commande.class));
     }
 
@@ -54,58 +45,23 @@ public class CommandeDAOImpl implements CommandeDAO {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Commande.class));
     }
 
-
     @Override
     public Commande create(Commande commande) {
-        // Exécution de l'insertion de la commande
-        BeanPropertySqlParameterSource parameterSourceCommande = new BeanPropertySqlParameterSource(commande);
-        Number newId = simpleJdbcInsert.executeAndReturnKey(parameterSourceCommande);
+        // Création du paramètre source pour l'insertion
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+                .addValue("id_personne", commande.getId_personne())
+                .addValue("date_commande", commande.getDate_commande())
+                .addValue("montant_total", commande.getMontant_total());
+
+        // Exécution de la requête d'insertion
+        Number newId = simpleJdbcInsert.executeAndReturnKey(parameterSource);
+
+        // Mise à jour de l'ID de la commande
         commande.setId_commande(newId.intValue());
 
-        // Vérifier si l'ID de personne est différent de 0
-        if (commande.getId_personne() != 0) {
-            // Recherche du client
-            List<Client> clients = jdbcTemplate.query(
-                    "SELECT id_personne, est_client FROM personnes WHERE id_personne = :id_personne AND est_client = true",
-                    new MapSqlParameterSource("id_personne", commande.getId_personne()),
-                    new BeanPropertyRowMapper<>(Client.class)
-            );
-
-            if (!clients.isEmpty()) {
-                Client client = clients.get(0);
-                logger.info("ID_personne récupéré pour la commande : {}", client.getId_personne());
-
-                // Vérification de l'existence de la personne pour chaque client
-                String checkPersonneSql = "SELECT COUNT(*) FROM personnes WHERE id_personne = :id_personne";
-                MapSqlParameterSource checkPersonneParams = new MapSqlParameterSource();
-                checkPersonneParams.addValue("id_personne", client.getId_personne());
-                int count = jdbcTemplate.queryForObject(checkPersonneSql, checkPersonneParams, Integer.class);
-
-                // Insertion du contenu de la commande pour chaque client
-                String contenuCommandeSql = "INSERT INTO crm_sansjpa.contenu_commande (id_commande, id_produit, quantite) VALUES (:id_commande, :id_produit, :quantite)";
-                MapSqlParameterSource contenuCommandeParams = new MapSqlParameterSource();
-                contenuCommandeParams.addValue("id_commande", commande.getId_commande());
-
-                // Modification pour utiliser les valeurs réelles de ContenuCommande
-                ContenuCommande contenuCommande = commande.getContenuCommande();
-                contenuCommandeParams.addValue("id_produit", contenuCommande.getId_produit());
-                contenuCommandeParams.addValue("quantite", contenuCommande.getQuantite());
-
-                jdbcTemplate.update(contenuCommandeSql, contenuCommandeParams);
-            } else {
-                // Gérer le cas où aucun client n'est trouvé
-                logger.error("Client not found for id_personne: {}", commande.getId_personne());
-                throw new IllegalArgumentException("Client not found for id_personne: " + commande.getId_personne());
-            }
-        } else {
-            // Gérer le cas où l'ID de personne est invalide (0)
-            logger.error("Invalid ID_personne (0) for creating a command.");
-            throw new IllegalArgumentException("Invalid ID_personne (0) for creating a command.");
-        }
-
+        // Retour de la commande mise à jour avec l'ID
         return commande;
     }
-
 
 
     @Override
@@ -117,7 +73,10 @@ public class CommandeDAOImpl implements CommandeDAO {
 
     @Override
     public Commande update(Commande commande) {
-        BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(commande);
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource("id_personne", commande.getId_personne())
+                .addValue("date_commande", commande.getDate_commande())
+                .addValue("montant_total", commande.getMontant_total())
+                .addValue("id_commande", commande.getId_commande());
         jdbcTemplate.update("UPDATE commandes SET id_personne = :id_personne, date_commande = :date_commande, montant_total = :montant_total WHERE id_commande = :id_commande", parameterSource);
 
         return commande;
