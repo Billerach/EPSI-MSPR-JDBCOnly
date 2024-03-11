@@ -23,9 +23,6 @@ public class ProduitService {
     @Autowired
     private HistoriqueProduitDAO historiqueProduitDAO;
 
-    public List<Produit> findAll() {
-        return dao.findAll();
-    }
     public List<Produit> findAllActifs() {
         return dao.findAllActifs();
     }
@@ -42,13 +39,13 @@ public class ProduitService {
         dao.update(Produit);
     }
 
-    public void deleteById(int id) {
-        Produit produit = dao.findById(id);
+    public void deleteById(int id_produit) {
+        Produit produit = dao.findById(id_produit);
 
         if (produit != null) {
             // Désactiver le produit au lieu de le supprimer
             produit.setActif(false);
-            dao.update(produit);
+            dao.desactiverById(id_produit);
         }
     }
 
@@ -66,5 +63,4 @@ public class ProduitService {
         // Enregistrer dans la table d'historique
         historiqueProduitDAO.create(historiqueProduit);
     }
-
 }

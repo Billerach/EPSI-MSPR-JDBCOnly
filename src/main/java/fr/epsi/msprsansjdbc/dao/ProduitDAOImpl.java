@@ -19,9 +19,9 @@ public class ProduitDAOImpl implements ProduitDAO {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert simpleJdbcInsert;
 
-    static final String FIND_ALL_QUERY = "SELECT * FROM produits";
+    static final String FIND_ALL_ACTIFS_QUERY = "SELECT * FROM produits WHERE actif = true";
     private static final String FIND_BY_ID_QUERY = "SELECT id_produit, nom, departement, lait, prix, date_de_fin FROM produits WHERE id_produit = :id_produit";
-    private static final String DELETE_BY_ID_QUERY = "DELETE FROM produits WHERE id_produit = :id_produit";
+    private static final String DESACTIVATE_BY_ID_QUERY = "UPDATE produits SET actif = false WHERE id_produit = :id_produit";
     private static final String UPDATE_QUERY = "UPDATE produits SET nom = :nom, departement = :departement, lait = :lait, prix = :prix, date_de_fin = :date_fin WHERE id_produit = :id_produit";
     private static final String INSERT_QUERY = "INSERT INTO produits (nom, departement, lait, prix, date_fin) VALUES (:nom, :departement, :lait, :prix, :date_fin)";
 
@@ -37,9 +37,9 @@ public class ProduitDAOImpl implements ProduitDAO {
     }
 
     @Override
-    public List<Produit> findAll() {
+    public List<Produit> findAllActifs() {
         logger.info("Récupération de tous les produits depuis la base de données.");
-        return jdbcTemplate.query(FIND_ALL_QUERY, new BeanPropertyRowMapper<>(Produit.class));
+        return jdbcTemplate.query(FIND_ALL_ACTIFS_QUERY, new BeanPropertyRowMapper<>(Produit.class));
     }
 
     @Override
@@ -80,15 +80,11 @@ public class ProduitDAOImpl implements ProduitDAO {
     }
 
     @Override
-    public void deleteById(int id_produit) {
+    public void desactiverById(int id_produit) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id_produit", id_produit);
-        jdbcTemplate.update(DELETE_BY_ID_QUERY, parameterSource);
+        jdbcTemplate.update(DESACTIVATE_BY_ID_QUERY, parameterSource);
     }
 
-    @Override
-    public List<Produit> findAllActifs() {
-        return null;
-    }
 }
 
