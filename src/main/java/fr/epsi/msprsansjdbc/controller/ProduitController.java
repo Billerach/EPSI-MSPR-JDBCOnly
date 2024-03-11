@@ -27,7 +27,7 @@ public class ProduitController {
 
 
         //On charge la liste des PRODUITS pour affichage dans la vue
-        List<Produit> mesProduits = service.findAll();
+        List<Produit> mesProduits = service.findAllActifs();
 
         //On envoie la liste à la vue à travers le modèle du MVC
         model.addAttribute("produits", mesProduits);

@@ -36,7 +36,7 @@
             <tr data-th-each="client : ${clients}">
                 <td data-th-text="${client.nom}"></td>
                 <td data-th-text="${client.prenom}"></td>
-                <td data-th-text="${client.codePostal} + ${client.commune}"></td>
+                <td data-th-text="${client.codePostal + ' ' + client.commune}"></td>
                 <td>
                     <a data-th-href="@{/clients/{id}/edition(id=${client.id_personne})}">Modifier</a>
                     <a data-th-href="@{/clients/{id}/suppression(id=${client.id_personne})}">Supprimer</a>
