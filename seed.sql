@@ -48,15 +48,6 @@ CREATE TABLE IF NOT EXISTS contenu_commande (
                                                 FOREIGN KEY (`id_produit`) REFERENCES produits(`id_produit`),
                                                 FOREIGN KEY (`id_personne`) REFERENCES personnes(`id_personne`)
 );
-CREATE TABLE IF NOT EXISTS historique_produits (
-                                     id_produit INT PRIMARY KEY,
-                                     nom VARCHAR(255),
-                                     departement VARCHAR(255),
-                                     lait VARCHAR(255),
-                                     prix DECIMAL(10, 2),
-                                     date_suppression TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 
 -- Ajout de données de test pour la table des produits
 INSERT INTO produits (nom, departement, lait, prix, date_de_fin, actif)
