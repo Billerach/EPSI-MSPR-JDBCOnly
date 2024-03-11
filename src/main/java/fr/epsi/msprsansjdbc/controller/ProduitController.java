@@ -24,8 +24,7 @@ public class ProduitController {
 
     @GetMapping()
     public String afficherListeProduits(Model model) {
-
-        //On charge la liste des PRODUITS pour affichage dans la vue
+        //On charge la liste des PRODUITS ACTIFS pour affichage dans la vue
         List<Produit> mesProduits = service.findAllActifs();
         //On envoie la liste à la vue à travers le modèle du MVC
         model.addAttribute("produits", mesProduits);
@@ -72,7 +71,8 @@ public class ProduitController {
         // Déplacer les données vers la table d'historique
         service.deplacerVersHistorique(produit);
 
-        // Supprimer le produit de la table principale
+        // Passer le produit en inactif
+        produit.setActif(false);
         service.deleteById(id_produit);
 
         return "redirect:/produits";
