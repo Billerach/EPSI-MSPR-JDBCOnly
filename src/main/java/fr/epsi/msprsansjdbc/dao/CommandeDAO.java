@@ -18,11 +18,11 @@ public interface CommandeDAO {
 
     void deleteById(int id_commande);
 
-    String getNomProduit(int idCommande);
+    String getNomProduit(int id_commande);
 
-    String getClient(int idPersonne);
+    String getClient(int id_personne);
 
-    int getQuantite(int idCommande);
+    int getQuantite(int id_commande);
 
-    float getTotal(int idCommande);
+    float getTotal(int id_commande);
 }
