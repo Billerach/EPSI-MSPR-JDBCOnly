@@ -68,8 +68,8 @@ public class ProduitController {
     public String supprimerProduit(@RequestParam("id_produit") int id_produit) {
         Produit produit = service.findById(id_produit);
 
-        // Déplacer les données vers la table d'historique
-        service.deplacerVersHistorique(produit);
+//        // Déplacer les données vers la table d'historique
+//        service.deplacerVersHistorique(produit);
 
         // Passer le produit en inactif
         produit.setActif(false);
