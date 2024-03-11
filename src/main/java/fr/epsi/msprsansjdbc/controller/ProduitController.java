@@ -25,8 +25,10 @@ public class ProduitController {
     @GetMapping()
     public String afficherListeProduits(Model model) {
 
+
         //On charge la liste des PRODUITS pour affichage dans la vue
         List<Produit> mesProduits = service.findAll();
+
         //On envoie la liste à la vue à travers le modèle du MVC
         model.addAttribute("produits", mesProduits);
         System.out.println(mesProduits);
@@ -69,10 +71,11 @@ public class ProduitController {
     public String supprimerProduit(@RequestParam("id_produit") int id_produit) {
         Produit produit = service.findById(id_produit);
 
-        // Déplacer les données vers la table d'historique
-        service.deplacerVersHistorique(produit);
+//        // Déplacer les données vers la table d'historique
+//        service.deplacerVersHistorique(produit);
 
-        // Supprimer le produit de la table principale
+        // Passer le produit en inactif
+        produit.setActif(false);
         service.deleteById(id_produit);
 
         return "redirect:/produits";

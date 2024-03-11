@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ProduitDAO {
 
-    // Récupère tous les produits
-    List<Produit> findAll();
+    // Récupère tous les produits actifs
+    List<Produit> findAllActifs();
 
     // Crée un nouveau produit
     Produit create(Produit produit);
@@ -19,7 +19,5 @@ public interface ProduitDAO {
     Produit update(Produit produit);
 
     // Supprime un produit par son ID
-    void deleteById(int id_produit);
-
-    List<Produit> findAllActifs();
+    void desactiverById(int id_produit);
 }

@@ -1,8 +1,8 @@
 package fr.epsi.msprsansjdbc.service;
 
-import fr.epsi.msprsansjdbc.dao.HistoriqueProduitDAO;
+//import fr.epsi.msprsansjdbc.dao.HistoriqueProduitDAO;
 import fr.epsi.msprsansjdbc.dao.ProduitDAO;
-import fr.epsi.msprsansjdbc.entities.HistoriqueProduit;
+//import fr.epsi.msprsansjdbc.entities.HistoriqueProduit;
 import fr.epsi.msprsansjdbc.entities.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +20,6 @@ public class ProduitService {
         this.dao = dao;
     }
 
-    @Autowired
-    private HistoriqueProduitDAO historiqueProduitDAO;
-
-    public List<Produit> findAll() {
-        return dao.findAll();
-    }
     public List<Produit> findAllActifs() {
         return dao.findAllActifs();
     }
@@ -42,29 +36,13 @@ public class ProduitService {
         dao.update(Produit);
     }
 
-    public void deleteById(int id) {
-        Produit produit = dao.findById(id);
+    public void deleteById(int id_produit) {
+        Produit produit = dao.findById(id_produit);
 
         if (produit != null) {
             // Désactiver le produit au lieu de le supprimer
             produit.setActif(false);
-            dao.update(produit);
+            dao.desactiverById(id_produit);
         }
     }
-
-    public void deplacerVersHistorique(Produit produit) {
-        // Créer une instance d'historique avec les mêmes données que le produit
-        HistoriqueProduit historiqueProduit = new HistoriqueProduit(
-                produit.getId_produit(),
-                produit.getNom(),
-                produit.getDepartement(),
-                produit.getLait(),
-                produit.getPrix(),
-                LocalDateTime.now()
-        );
-
-        // Enregistrer dans la table d'historique
-        historiqueProduitDAO.create(historiqueProduit);
-    }
-
 }

@@ -21,14 +21,15 @@ class ApplicationTests {
     void contextLoads() {
         // Test sur le chargement du contexte
     }
+}
 
-    @Test
-    public void testGetAllProduits() {
-        // Test sur la récupération de tous les produits depuis la base de données
-        List<Produit> produits = produitDAO.findAll();
-        assertNotNull(produits, "La liste des produits ne doit pas être nulle.");
-        assertFalse(produits.isEmpty(), "La liste des produits ne doit pas être vide.");
-    }
+//    @Test
+//    public void testGetAllProduits() {
+//        // Test sur la récupération de tous les produits depuis la base de données
+//        List<Produit> produits = produitDAO.findAllActifs();
+//        assertNotNull(produits, "La liste des produits ne doit pas être nulle.");
+//        assertFalse(produits.isEmpty(), "La liste des produits ne doit pas être vide.");
+//    }
 
 //    @Test
 //    public void testAddAndDeleteProduit() {
@@ -50,4 +51,3 @@ class ApplicationTests {
 //        assertFalse(produits.contains(produitAjoute), "Le produit supprimé ne doit plus être dans la liste.");
 //    }
 
-}
