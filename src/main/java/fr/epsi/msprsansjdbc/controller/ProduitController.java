@@ -24,8 +24,11 @@ public class ProduitController {
 
     @GetMapping()
     public String afficherListeProduits(Model model) {
-        //On charge la liste des PRODUITS ACTIFS pour affichage dans la vue
-        List<Produit> mesProduits = service.findAllActifs();
+
+
+        //On charge la liste des PRODUITS pour affichage dans la vue
+        List<Produit> mesProduits = service.findAll();
+
         //On envoie la liste à la vue à travers le modèle du MVC
         model.addAttribute("produits", mesProduits);
         System.out.println(mesProduits);

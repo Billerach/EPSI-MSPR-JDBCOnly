@@ -44,11 +44,18 @@ public class ClientDAOImpl implements ClientDAO {
     @Override
     public Client create(Client client) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        client.setEstClient(true);
-        client.setEstEmploye(false);
         parameterSource.addValue("nom", client.getNom());
         parameterSource.addValue("prenom", client.getPrenom());
+        parameterSource.addValue("numerovoie", client.getNumeroVoie());
+        parameterSource.addValue("type_voie", client.getTypeVoie());
+        parameterSource.addValue("libelle_voie", client.getLibelleVoie());
+        parameterSource.addValue("commune", client.getCommune());
+        parameterSource.addValue("code_postal", client.getCodePostal());
+        parameterSource.addValue("email", client.getEmail());
+        parameterSource.addValue("telephone", client.getTelephone());
+        client.setEstClient(true);
         parameterSource.addValue("est_client", client.isEstClient());
+        client.setEstEmploye(false);
         parameterSource.addValue("est_employe", client.isEstEmploye());
 
         // Exécutez la requête avec les valeurs définies dans parameterSource

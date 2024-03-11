@@ -12,7 +12,7 @@ public class Client {
     private String typeVoie;
     private String libelleVoie;
     private String commune;
-    private String codePostal;
+    private int codePostal;
     private String email;
     private String telephone;
     private boolean estClient;
@@ -25,6 +25,78 @@ public class Client {
         this.id_personne = id_personne;
         this.prenom = prenom;
         this.nom = nom;
+    }
+
+    public Client(int id_personne, String nom, String prenom, String numeroVoie) {
+        this.id_personne = id_personne;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroVoie = numeroVoie;
+    }
+
+    public Client(int id_personne, String nom, String prenom, String numeroVoie, String typeVoie) {
+        this.id_personne = id_personne;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroVoie = numeroVoie;
+        this.typeVoie = typeVoie;
+    }
+
+    public Client(int id_personne, String nom, String prenom, String numeroVoie, String typeVoie, String libelleVoie) {
+        this.id_personne = id_personne;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroVoie = numeroVoie;
+        this.typeVoie = typeVoie;
+        this.libelleVoie = libelleVoie;
+    }
+
+    public Client(int id_personne, String nom, String prenom, String numeroVoie, String typeVoie, String libelleVoie, String commune) {
+        this.id_personne = id_personne;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroVoie = numeroVoie;
+        this.typeVoie = typeVoie;
+        this.libelleVoie = libelleVoie;
+        this.commune = commune;
+    }
+
+    public Client(int id_personne, String nom, String prenom, String numeroVoie, String typeVoie, String libelleVoie, String commune, int codePostal) {
+        this.id_personne = id_personne;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroVoie = numeroVoie;
+        this.typeVoie = typeVoie;
+        this.libelleVoie = libelleVoie;
+        this.commune = commune;
+        this.codePostal = codePostal;
+    }
+
+    public Client(int id_personne, String nom, String prenom, String numeroVoie, String typeVoie, String libelleVoie, String commune, int codePostal, String email) {
+        this.id_personne = id_personne;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroVoie = numeroVoie;
+        this.typeVoie = typeVoie;
+        this.libelleVoie = libelleVoie;
+        this.commune = commune;
+        this.codePostal = codePostal;
+        this.email = email;
+    }
+
+
+
+    public Client(int id_personne, String nom, String prenom, String numeroVoie, String typeVoie, String libelleVoie, String commune, int codePostal, String email, String telephone) {
+        this.id_personne = id_personne;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroVoie = numeroVoie;
+        this.typeVoie = typeVoie;
+        this.libelleVoie = libelleVoie;
+        this.commune = commune;
+        this.codePostal = codePostal;
+        this.email = email;
+        this.telephone = telephone;
     }
 
     public int getId_personne() {
@@ -83,11 +155,11 @@ public class Client {
         this.commune = commune;
     }
 
-    public String getCodePostal() {
+    public int getCodePostal() {
         return codePostal;
     }
 
-    public void setCodePostal(String codePostal) {
+    public void setCodePostal(int codePostal) {
         this.codePostal = codePostal;
     }
 
