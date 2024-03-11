@@ -62,9 +62,18 @@ public class ClientController {
     }
 
     @GetMapping("/{id_personne}/suppression")
-    public String Client(@PathVariable int id_personne) {
-        //TODO il faut faire toutes les vérifications nécessaires ici
-        service.deleteById(id_personne);
-        return "redirect:/clients";
+    public String Client(@PathVariable int id_personne, Model model) {
+        Client clientAArchiver = service.findById(id_personne);
+        model.addAttribute("client", clientAArchiver);
+
+//        if (clientAArchiver.isEstClient()){
+//            service.archiveById(clientAArchiver);
+//            System.out.println("trkfhrk:hc: !!");
+//        }
+//        else {
+//            System.out.println("SURPRISE MOTHERFUCKER !!");
+//        }
+//        return "redirect:/clients";
+        return "view-client-test";
     }
 }

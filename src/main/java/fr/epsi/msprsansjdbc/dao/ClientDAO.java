@@ -17,6 +17,6 @@ public interface ClientDAO {
     Client update(Client client);
 
     //D -> Crud
-    void deleteById(int id_personne);
+    void archiveById(Client client);
 
 }

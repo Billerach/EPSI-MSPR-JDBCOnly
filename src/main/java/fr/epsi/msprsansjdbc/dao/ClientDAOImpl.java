@@ -20,9 +20,8 @@ public class ClientDAOImpl implements ClientDAO {
 
 
     private static final String FIND_ALL_QUERY = "SELECT * FROM personnes WHERE EST_CLIENT = TRUE";
-    private static final String FIND_BY_ID_QUERY = "SELECT ID_PERSONNE, NOM, PRENOM FROM personnes WHERE ID_PERSONNE = :id_personne";
-    private static final String INSERT_QUERY = "INSERT INTO personnes (NOM, PRENOM) VALUES (:nom, :prenom)";
-    private static final String DELETE_BY_ID_QUERY = "DELETE FROM personnes WHERE ID_PERSONNE = :id_personne";
+    private static final String FIND_BY_ID_QUERY = "SELECT * FROM personnes WHERE ID_PERSONNE = :id_personne";
+    private static final String ARCHIVAGE_CLIENT = "UPDATE personnes SET est_archive = true WHERE ID_PERSONNE = :id_personne";
     private static final String UPDATE_QUERY = "UPDATE personnes SET NOM = :nom, PRENOM = :prenom WHERE ID_PERSONNE = :id_personne";
 
     private static final Logger logger = LoggerFactory.getLogger(ClientDAOImpl.class);
@@ -46,7 +45,7 @@ public class ClientDAOImpl implements ClientDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("nom", client.getNom());
         parameterSource.addValue("prenom", client.getPrenom());
-        parameterSource.addValue("numerovoie", client.getNumeroVoie());
+        parameterSource.addValue("numero_voie", client.getNumeroVoie());
         parameterSource.addValue("type_voie", client.getTypeVoie());
         parameterSource.addValue("libelle_voie", client.getLibelleVoie());
         parameterSource.addValue("commune", client.getCommune());
@@ -57,6 +56,8 @@ public class ClientDAOImpl implements ClientDAO {
         parameterSource.addValue("est_client", client.isEstClient());
         client.setEstEmploye(false);
         parameterSource.addValue("est_employe", client.isEstEmploye());
+        client.setEstArchive(false);
+        parameterSource.addValue("est_archive", client.isEstArchive());
 
         // Exécutez la requête avec les valeurs définies dans parameterSource
         Number newId = simpleJdbcInsert.executeAndReturnKey(parameterSource);
@@ -85,10 +86,20 @@ public class ClientDAOImpl implements ClientDAO {
         return client;
     }
 
-    @Override
-    public void deleteById(int id_personne) {
+    public void archiveById(Client client) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id_personne", id_personne);
-        jdbcTemplate.update(DELETE_BY_ID_QUERY, parameterSource);
+        parameterSource.addValue("nom",null);
+        parameterSource.addValue("prenom", null);
+        parameterSource.addValue("numero_voie", null);
+        parameterSource.addValue("type_voie", null);
+        parameterSource.addValue("libelle_voie", null);
+        parameterSource.addValue("commune", null);
+        parameterSource.addValue("code_postal", null);
+        parameterSource.addValue("email", null);
+        parameterSource.addValue("telephone", null);
+        parameterSource.addValue("est_client", false);
+        parameterSource.addValue("est_employe", false);
+        parameterSource.addValue("est_archive", true);
+        jdbcTemplate.update(ARCHIVAGE_CLIENT, parameterSource);
     }
 }
