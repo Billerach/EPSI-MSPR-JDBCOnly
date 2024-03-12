@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS historique_produits;
 DROP TABLE IF EXISTS contenu_commande;
 DROP TABLE IF EXISTS commandes;
 DROP TABLE IF EXISTS personnes;
@@ -48,12 +47,10 @@ CREATE TABLE IF NOT EXISTS contenu_commande (
                                                 `id_contenu_commande` int NOT NULL AUTO_INCREMENT,
                                                 `id_commande` int NOT NULL,
                                                 `id_produit` int NOT NULL,
-                                                `id_personne` int NOT NULL,
                                                 `quantite` int DEFAULT NULL,
                                                 PRIMARY KEY (`id_contenu_commande`),
                                                 FOREIGN KEY (`id_commande`) REFERENCES commandes(`id_commande`),
-                                                FOREIGN KEY (`id_produit`) REFERENCES produits(`id_produit`),
-                                                FOREIGN KEY (`id_personne`) REFERENCES personnes(`id_personne`)
+                                                FOREIGN KEY (`id_produit`) REFERENCES produits(`id_produit`)
 );
 
 -- Ajout de données de test pour la table des produits
@@ -115,7 +112,7 @@ INSERT INTO personnes (
     telephone,
     est_client,
     est_employe,
-   est_archive
+    est_archive
 )
 VALUES
     (null, null, 'Dupont', 'Alice', '123', 'rue', 'de la République', 'Paris', '75001', 'alice@email.com', '01.23.45.67.89', TRUE, FALSE, FALSE),
@@ -146,48 +143,26 @@ ON DUPLICATE KEY UPDATE
                      montant_total = VALUES(montant_total);
 
 -- Ajout de données de test pour la table du contenu des commandes
-INSERT INTO contenu_commande (id_contenu_commande, id_commande, id_produit, id_personne, quantite)
+INSERT INTO contenu_commande (id_contenu_commande, id_commande, id_produit, quantite)
 VALUES
-    (1, 1, 1, 1, 2),
-    (2, 1, 2, 2, 1),
-    (3, 2, 3, 3, 3),
-    (4, 4, 7, 1, 1),
-    (5, 4, 2, 2, 2),
-    (6, 5, 6, 3, 1),
-    (7, 5, 10, 3, 2),
-    (8, 6, 2, 1, 1),
-    (9, 6, 9, 2, 3),
-    (10, 7, 25, 1, 2),
-    (11, 7, 17, 2, 1),
-    (12, 8, 8, 3, 3),
-    (13, 9, 4, 1, 1),
-    (14, 9, 15, 2, 2),
-    (15, 9, 6, 3, 1),
-    (16, 9, 10, 3, 2)
+    (1, 1, 1, 2),
+    (2, 1, 2, 1),
+    (3, 2, 3, 3),
+    (4, 4, 7, 1),
+    (5, 4, 2, 2),
+    (6, 5, 6, 1),
+    (7, 5, 10, 2),
+    (8, 6, 2, 1),
+    (9, 6, 9, 3),
+    (10, 7, 25, 2),
+    (11, 7, 17, 1),
+    (12, 8, 8, 3),
+    (13, 9, 4, 1),
+    (14, 9, 15, 2),
+    (15, 9, 6, 1),
+    (16, 9, 10, 2)
 
 ON DUPLICATE KEY UPDATE
                      id_commande = VALUES(id_commande),
                      id_produit = VALUES(id_produit),
                      quantite = VALUES(quantite);
-
-# -- Ajout de données de test pour la table de l'historique des commandes
-# INSERT INTO historique_commandes (id, id_client, date_commande, montant_total)
-# VALUES
-#   (1, 1, '2023-12-15', 120.00),
-#   (2, 2, '2023-12-16', 90.75),
-#   (3, 3, '2023-12-17', 180.25)
-# ON DUPLICATE KEY UPDATE
-#   id_client = VALUES(id_client),
-#   date_commande = VALUES(date_commande),
-#   montant_total = VALUES(montant_total);
-#
-# -- Ajout de données de test pour la table de l'historique des produits
-# INSERT INTO historique_produits (id, id_commande, id_produit, quantite)
-# VALUES
-#   (1, 1, 1, 1),
-#   (2, 1, 3, 2),
-#   (3, 2, 2, 1)
-# ON DUPLICATE KEY UPDATE
-#   id_commande = VALUES(id_commande),
-#   id_produit = VALUES(id_produit),
-#   quantite = VALUES(quantite);
