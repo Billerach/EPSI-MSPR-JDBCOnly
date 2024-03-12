@@ -29,5 +29,5 @@ public class ClientService {
 
     public Client findById(int id_personne) { return dao.findById(id_personne); }
 
-    public void update(Client Client) { dao.update(Client); }
+    public void update(Client client) { dao.update(client); }
 }

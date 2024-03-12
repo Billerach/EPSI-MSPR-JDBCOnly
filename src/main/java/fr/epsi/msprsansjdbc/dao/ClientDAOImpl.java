@@ -22,20 +22,30 @@ public class ClientDAOImpl implements ClientDAO {
     private static final String FIND_ALL_QUERY = "SELECT * FROM personnes WHERE EST_CLIENT = TRUE";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM personnes WHERE ID_PERSONNE = :id_personne";
     private static final String ARCHIVAGE_CLIENT = "UPDATE personnes SET " +
-    "nom = null," +
-    "prenom = null," +
-    "numero_voie = null," +
-    "type_voie = null," +
-    "libelle_voie = null," +
-    "commune = null," +
-    "code_postal = null," +
-    "email = null," +
-    "telephone = null," +
-    "est_client = null," +
-    "est_employe = null," +
-    "est_archive = true " +
-    "WHERE ID_PERSONNE = :id_personne";
-    private static final String UPDATE_QUERY = "UPDATE personnes SET NOM = :nom, PRENOM = :prenom WHERE ID_PERSONNE = :id_personne";
+            "nom = null," +
+            "prenom = null," +
+            "numero_voie = null," +
+            "type_voie = null," +
+            "libelle_voie = null," +
+            "commune = null," +
+            "code_postal = null," +
+            "email = null," +
+            "telephone = null," +
+            "est_client = null," +
+            "est_employe = null," +
+            "est_archive = true " +
+            "WHERE ID_PERSONNE = :id_personne";
+    private static final String UPDATE_QUERY = "UPDATE personnes SET " +
+            "nom = :nom," +
+            "prenom = :prenom," +
+            "numero_voie = :numero_voie," +
+            "type_voie = :type_voie," +
+            "libelle_voie = :libelle_voie," +
+            "commune = :commune," +
+            "code_postal = :code_postal," +
+            "email = :email," +
+            "telephone = :telephone " +
+            "WHERE id_personne = :id_personne";
 
     private static final Logger logger = LoggerFactory.getLogger(ClientDAOImpl.class);
 
@@ -90,19 +100,24 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public Client update(Client client) {
+    public void update(Client client) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id_personne", client.getId_personne());
+        parameterSource.addValue("id_personne",client.getId_personne());
         parameterSource.addValue("nom", client.getNom());
         parameterSource.addValue("prenom", client.getPrenom());
+        parameterSource.addValue("numero_voie", client.getNumeroVoie());
+        parameterSource.addValue("type_voie", client.getTypeVoie());
+        parameterSource.addValue("libelle_voie", client.getLibelleVoie());
+        parameterSource.addValue("commune", client.getCommune());
+        parameterSource.addValue("code_postal", client.getCodePostal());
+        parameterSource.addValue("email", client.getEmail());
+        parameterSource.addValue("telephone", client.getTelephone());
         jdbcTemplate.update(UPDATE_QUERY, parameterSource);
-        return client;
     }
 
     public void archiveById(Client client) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id_personne",client.getId_personne());
         jdbcTemplate.update(ARCHIVAGE_CLIENT, parameterSource);
-
     }
 }
