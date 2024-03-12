@@ -66,14 +66,13 @@ public class ClientController {
         Client clientAArchiver = service.findById(id_personne);
         model.addAttribute("client", clientAArchiver);
 
-//        if (clientAArchiver.isEstClient()){
-//            service.archiveById(clientAArchiver);
-//            System.out.println("trkfhrk:hc: !!");
-//        }
-//        else {
-//            System.out.println("SURPRISE MOTHERFUCKER !!");
-//        }
-//        return "redirect:/clients";
-        return "view-client-test";
+        if (clientAArchiver.isEstClient()){
+            service.archiveById(clientAArchiver);
+            System.out.println("Fonction archiveById appelée");
+        }
+        else {
+            System.out.println("Erreur : la personne désignée n'est pas un client.");
+        }
+        return "redirect:/clients";
     }
 }

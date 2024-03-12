@@ -21,7 +21,20 @@ public class ClientDAOImpl implements ClientDAO {
 
     private static final String FIND_ALL_QUERY = "SELECT * FROM personnes WHERE EST_CLIENT = TRUE";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM personnes WHERE ID_PERSONNE = :id_personne";
-    private static final String ARCHIVAGE_CLIENT = "UPDATE personnes SET est_archive = true WHERE ID_PERSONNE = :id_personne";
+    private static final String ARCHIVAGE_CLIENT = "UPDATE personnes SET " +
+    "nom = null," +
+    "prenom = null," +
+    "numero_voie = null," +
+    "type_voie = null," +
+    "libelle_voie = null," +
+    "commune = null," +
+    "code_postal = null," +
+    "email = null," +
+    "telephone = null," +
+    "est_client = null," +
+    "est_employe = null," +
+    "est_archive = true " +
+    "WHERE ID_PERSONNE = :id_personne";
     private static final String UPDATE_QUERY = "UPDATE personnes SET NOM = :nom, PRENOM = :prenom WHERE ID_PERSONNE = :id_personne";
 
     private static final Logger logger = LoggerFactory.getLogger(ClientDAOImpl.class);
@@ -88,18 +101,8 @@ public class ClientDAOImpl implements ClientDAO {
 
     public void archiveById(Client client) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("nom",null);
-        parameterSource.addValue("prenom", null);
-        parameterSource.addValue("numero_voie", null);
-        parameterSource.addValue("type_voie", null);
-        parameterSource.addValue("libelle_voie", null);
-        parameterSource.addValue("commune", null);
-        parameterSource.addValue("code_postal", null);
-        parameterSource.addValue("email", null);
-        parameterSource.addValue("telephone", null);
-        parameterSource.addValue("est_client", false);
-        parameterSource.addValue("est_employe", false);
-        parameterSource.addValue("est_archive", true);
+        parameterSource.addValue("id_personne",client.getId_personne());
         jdbcTemplate.update(ARCHIVAGE_CLIENT, parameterSource);
+
     }
 }
