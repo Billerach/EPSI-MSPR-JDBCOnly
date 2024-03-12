@@ -39,23 +39,17 @@ public class ClientController {
     }
     @PostMapping("/creer")
     public String creerClient(@ModelAttribute Client client) {
-        //À la validation du formulaire sur l'action "/clients/creer" c'est cette méthode qui est activée !
-        //Elle permet grâce, là encore, à l'injection de récupérer l'objet inutilisé dans le formulaire "view-client-form-creation"
-        //Il ne reste plus qu'à essayer de sauvegarder cet objet en s'appuyant sur le service Client
         service.create(client);
         return "redirect:/clients";
     }
 
     @GetMapping("/{id_personne}/edition")
     public String modifierClient(@PathVariable int id_personne, Model model) {
-        //Ici, on récupère l'id dans l'URL et on l'injecte dans la variable id de type "int"
-        //On envoie ensuite à la vue l'objet client dont l'id est passé à modifier depuis le formulaire
         model.addAttribute("client", service.findById(id_personne));
         return "view-client-form-edition";
     }
     @PostMapping("/{id_personne}/edition")
     public String modifierClient(@PathVariable int id_personne, @ModelAttribute Client client) {
-        //Comme sur la validation du formulaire de création, ici, on fait à peu près la même chose
         client.setId_personne(id_personne);
         service.update(client);
         return "redirect:/clients";
