@@ -47,10 +47,12 @@ public class CommandeController {
     }
 
     @PostMapping("/creer")
-    public String creerCommande(@ModelAttribute Commande commande) {
+    public String creerCommande(@RequestParam("personne") int idPersonne, @ModelAttribute Commande commande) {
+        commande.setId_personne(idPersonne);
         service.create(commande);
         return "redirect:/commandes";
     }
+
 
     @GetMapping("/{id_commande}/edition")
     public String modifierCommande(@PathVariable int id_commande, Model model) {
