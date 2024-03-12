@@ -2,8 +2,10 @@ package fr.epsi.msprsansjdbc.controller;
 
 import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
+import fr.epsi.msprsansjdbc.entities.Produit;
 import fr.epsi.msprsansjdbc.service.ClientService;
 import fr.epsi.msprsansjdbc.service.CommandeService;
+import fr.epsi.msprsansjdbc.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +16,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/commandes")
 public class CommandeController {
+
     private final CommandeService service;
     private final ClientService clientService;
+    private final ProduitService produitService;
 
     @Autowired
-    public CommandeController(CommandeService service, ClientService clientService) {
+    public CommandeController(CommandeService service, ClientService clientService, ProduitService produitService) {
         this.service = service;
         this.clientService = clientService;
+        this.produitService = produitService;
     }
 
     @GetMapping()
@@ -35,6 +40,9 @@ public class CommandeController {
         List<Client> clients = clientService.findAllClients();
         model.addAttribute("clients", clients);
         model.addAttribute("commande", new Commande());
+        List<Produit> produits = produitService.findAllActifs();
+        model.addAttribute("produits", produits);
+
         return "view-commande-form-creation";
     }
 
