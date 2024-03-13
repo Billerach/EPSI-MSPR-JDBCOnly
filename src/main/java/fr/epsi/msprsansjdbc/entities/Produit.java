@@ -1,8 +1,10 @@
 package fr.epsi.msprsansjdbc.entities;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Produit {

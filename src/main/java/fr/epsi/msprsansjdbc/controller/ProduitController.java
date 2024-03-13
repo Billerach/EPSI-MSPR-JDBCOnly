@@ -3,10 +3,15 @@ package fr.epsi.msprsansjdbc.controller;
 import fr.epsi.msprsansjdbc.entities.Produit;
 import fr.epsi.msprsansjdbc.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -24,12 +29,9 @@ public class ProduitController {
 
     @GetMapping()
     public String afficherListeProduits(Model model) {
-
-
-        //On charge la liste des PRODUITS pour affichage dans la vue
+        // Récupérer la liste des produits actifs depuis la base de données
         List<Produit> mesProduits = service.findAllActifs();
-
-        //On envoie la liste à la vue à travers le modèle du MVC
+        // On envoie à la vue la liste des produits
         model.addAttribute("produits", mesProduits);
         System.out.println(mesProduits);
         return "view-produit-list";
@@ -37,7 +39,6 @@ public class ProduitController {
 
     @GetMapping("/creer")
     public String creerProduit(Model model) {
-        //On envoie à la vue un nouvel objet Produit vide à remplir depuis le formulaire
         model.addAttribute("produit", new Produit());
         return "view-produit-form-creation";
     }
@@ -70,9 +71,6 @@ public class ProduitController {
     @GetMapping("/suppression")
     public String supprimerProduit(@RequestParam("id_produit") int id_produit) {
         Produit produit = service.findById(id_produit);
-
-//        // Déplacer les données vers la table d'historique
-//        service.deplacerVersHistorique(produit);
 
         // Passer le produit en inactif
         produit.setActif(false);

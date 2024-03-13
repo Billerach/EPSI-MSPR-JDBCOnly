@@ -89,7 +89,8 @@ form h1 {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	margin: 15px 0;
+	margin: 10px 0;
+	flex-direction: column;
 }
 
 .flex-outer>li>label {

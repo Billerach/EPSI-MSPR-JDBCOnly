@@ -85,6 +85,5 @@ public class ProduitDAOImpl implements ProduitDAO {
         parameterSource.addValue("id_produit", id_produit);
         jdbcTemplate.update(DESACTIVATE_BY_ID_QUERY, parameterSource);
     }
-
 }
 

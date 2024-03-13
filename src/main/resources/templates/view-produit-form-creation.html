@@ -6,7 +6,7 @@
         <link rel="stylesheet" data-th-href="@{/css/layout.css}"/>
         <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
         <link rel="stylesheet" data-th-href="@{/css/demo-form.css}"/>
-
+        <link rel="stylesheet" data-th-href="@{/css/demo-table.css}"/>
         <title>Démo : Création d'un produit</title>
     </head>
     <body>
@@ -23,27 +23,33 @@
 
         <main>
             <h1>Création d'un nouveau produit</h1>
-            <form data-th-action="@{/produits/creer}" data-th-object="${produit}" method="post">
+            <form action="/produits/creer" method="post">
                 <ul class="flex-outer">
                     <li>
-                        <label for="nom">Nom : </label>
-                        <input type="text" id="nom" required data-th-field="*{nom}"/>
+                        <label for="nom"><strong>Nom</strong></label>
+                        <input type="text" id="nom" name="nom" required/>
                     </li>
                     <li>
-                        <label for="departement">Département : </label>
-                        <input type="text" id="departement" required data-th-field="*{departement}"/>
+                        <label for="departement"><strong>Département</strong></label>
+                        <select id="departement" name="departement" required>
+                            <option value="">Sélectionnez un département</option>
+                        </select>
                     </li>
                     <li>
-                        <label for="lait">Lait : </label>
-                        <input type="text" id="lait" required data-th-field="*{lait}"/>
+                        <label for="lait"><strong>Lait</strong></label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="laitVache" name="lait" value="Vache"/><label for="laitVache">Vache</label>
+                            <input type="checkbox" id="laitChevre" name="lait" value="Chèvre"/><label for="laitChevre">Chèvre</label>
+                            <input type="checkbox" id="laitBrebis" name="lait" value="Brebis"/><label for="laitBrebis">Brebis</label>
+                        </div>
                     </li>
                     <li>
-                        <label for="prix">Prix : </label>
-                        <input type="number" id="prix" required data-th-field="*{prix}" step="0.01"/>
+                        <label for="prix"><strong>Prix au kilo</strong></label>
+                        <input type="number" id="prix" name="prix" required step="0.01" min="0"/>
                     </li>
                     <li>
-                        <label for="dateFin">Date de fin : </label>
-                        <input type="date" id="dateFin" required data-th-field="*{date_fin}"/>
+                        <label for="date_de_fin"><strong>Date de fin</strong></label>
+                        <input type="date" id="date_de_fin" name="date_de_fin" required/>
                     </li>
                     <li>
                         <button type="submit">Enregistrer</button>
@@ -57,5 +63,30 @@
                 <a href="https://www.flaticon.com/fr/icones-gratuites/fromage" title="fromage icônes"></a>
             </small>
         </footer>
+
+        <!-- Script JavaScript pour récupérer la liste des départements -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const selectDepartement = document.getElementById("departement");
+
+                // Appel à l'API pour récupérer la liste des départements
+                fetch("https://geo.api.gouv.fr/departements")
+                    .then(response => response.json())
+                    .then(data => {
+                        // Parcourir les données et ajouter chaque département à la liste déroulante
+                        data.forEach(departement => {
+                            const option = document.createElement("option");
+                            option.text = `${departement.code} - ${departement.nom}`;
+                            option.value = `${departement.code} - ${departement.nom}`;
+                            selectDepartement.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Erreur lors de la récupération des départements :", error);
+                    });
+            });
+        </script>
     </body>
 </html>
+
+
