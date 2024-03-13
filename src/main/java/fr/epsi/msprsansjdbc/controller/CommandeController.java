@@ -49,9 +49,31 @@ public class CommandeController {
     @PostMapping("/creer")
     public String creerCommande(@RequestParam("personne") int idPersonne, @ModelAttribute Commande commande) {
         commande.setId_personne(idPersonne);
+        commande.setClient(clientService.findById(idPersonne));
         service.create(commande);
         return "redirect:/commandes";
     }
+//depuis la vue
+
+//     <label for="produit">Produit:</label>
+//                            <select id="produit" class="product-select" name="produit" onchange="updatePrice()">
+//                                <option th:each="produit : ${produits}" th:value="${produit.id_produit}" th:data-prix="${produit.prix}" th:text="${produit.nom}"></option>
+//                            </select>
+//
+//                            <label for="quantite">Quantité:</label>
+//                            <input id ="quantite" type="number" class="quantity" name="quantite" oninput="updatePrice()" required/>
+//
+//                            <label for="prixUnitaire">Prix Unitaire:</label>
+//                            <input type="number" class="prixUnitaire" id="prixUnitaire" name="prixUnitaire" readonly/>
+//
+//                            <label for="prixTotal">Prix Total:</label>
+//                            <input id="prixTotal" type="number" class="prixTotal" name="prixTotal" readonly/>
+//
+//                            <button type="button" onclick="removeProductRow(this.parentNode)">Supprimer</button>
+//                            <button type="button" onclick="addProductRow()">Ajouter un produit</button>
+
+//**********
+
 
 
     @GetMapping("/{id_commande}/edition")

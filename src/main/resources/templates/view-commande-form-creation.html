@@ -75,7 +75,7 @@
                 <ul class="flex-outer">
                     <li>
                         <label for="id_personne">Client:</label>
-                        <select class="client-select" name="personne">
+                        <select id="id_personne" class="client-select" name="personne">
                             <option th:each="client : ${clients}" th:value="${client.id_personne}" th:text="${client.prenom + ' ' + client.nom}"></option>
                         </select>
                     </li>
@@ -83,18 +83,18 @@
                     <div id="products-container">
                         <div class="product-row" id="first-product-row">
                             <label for="produit">Produit:</label>
-                            <select class="product-select" name="produit" onchange="updatePrice()">
+                            <select id="produit" class="product-select" name="produit" onchange="updatePrice()">
                                 <option th:each="produit : ${produits}" th:value="${produit.id_produit}" th:data-prix="${produit.prix}" th:text="${produit.nom}"></option>
                             </select>
 
                             <label for="quantite">Quantité:</label>
-                            <input type="number" class="quantity" name="quantite" oninput="updatePrice()" required/>
+                            <input id ="quantite" type="number" class="quantity" name="quantite" oninput="updatePrice()" required/>
 
                             <label for="prixUnitaire">Prix Unitaire:</label>
-                            <input type="number" class="prixUnitaire" name="prixUnitaire" readonly/>
+                            <input type="number" class="prixUnitaire" id="prixUnitaire" name="prixUnitaire" readonly/>
 
                             <label for="prixTotal">Prix Total:</label>
-                            <input type="number" class="prixTotal" name="prixTotal" readonly/>
+                            <input id="prixTotal" type="number" class="prixTotal" name="prixTotal" readonly/>
 
                             <button type="button" onclick="removeProductRow(this.parentNode)">Supprimer</button>
                             <button type="button" onclick="addProductRow()">Ajouter un produit</button>
