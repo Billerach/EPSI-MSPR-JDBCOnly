@@ -2,6 +2,7 @@ package fr.epsi.msprsansjdbc.dao;
 
 import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
+import fr.epsi.msprsansjdbc.entities.ContenuCommande;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -77,11 +79,12 @@ public class CommandeDAOImpl implements CommandeDAO {
 
     @Override
     public Commande create(Commande commande) {
-        // Création du paramètre source pour l'insertion
-        MapSqlParameterSource parameterSource = new MapSqlParameterSource()
-                .addValue("id_personne", commande.getId_personne())
-                .addValue("date_commande", commande.getDate_commande())
-                .addValue("montant_total", commande.getMontant_total());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id_personne", commande.getId_personne());
+        parameterSource.addValue("date_commande", commande.getDate_commande());
+        parameterSource.addValue("montant_total", commande.getMontant_total());
+        parameterSource.addValue("client", commande.getMontant_total());
+        parameterSource.addValue("contenu", commande.getMontant_total());
 
         // Exécution de la requête d'insertion
         Number newId = simpleJdbcInsert.executeAndReturnKey(parameterSource);
