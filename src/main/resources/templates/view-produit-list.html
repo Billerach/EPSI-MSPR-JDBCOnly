@@ -43,7 +43,7 @@
                             <td data-th-text="${item.lait}"></td>
                             <td data-th-text="${item.prix}"></td>
                             <td>
-                                <a th:href="@{/produits/edition(id_produit=${item.id_produit})}" th:text="Modifier"></a>
+                                <a th:href="@{'/produits/edition?id_produit=' + ${item.id_produit}}" th:text="Modifier" class="modifier-produit"></a>
                                 <a th:href="@{/produits/suppression(id_produit=${item.id_produit})}" th:text="Supprimer"></a>
                             </td>
                         </tr>
