@@ -118,6 +118,10 @@ VALUES
     (null, null, 'Dupont', 'Alice', '123', 'rue', 'de la République', 'Paris', '75001', 'alice@email.com', '01.23.45.67.89', TRUE, FALSE, FALSE),
     (null,null, 'Martin', 'Bob', '456', 'avenue', 'des Fleurs', 'Lyon', '69002', 'bob@email.com', '09.87.65.43.21', TRUE, FALSE, FALSE),
     (null, null, 'Leroux', 'Claire', '789', 'rue', 'de la Liberté', 'Marseille', '13003', 'claire@email.com', '01.23.45.67.89', TRUE, FALSE, FALSE),
+    (null, null, 'Durand', 'Marie', '10', 'rue', 'de la Liberté', 'Paris', '75002', 'marie@email.com', '01.23.45.67.89', TRUE, FALSE, FALSE),
+    (null, null, 'Leclerc', 'Jean', '20', 'avenue', 'Victor Hugo', 'Lyon', '69003', 'jean@email.com', '06.54.32.10.98', TRUE, FALSE, FALSE),
+    (null, null, 'Dupuis', 'Pierre', '30', 'boulevard', 'Pasteur', 'Marseille', '13004', 'pierre@email.com', '02.11.22.33.44', TRUE, FALSE, FALSE),
+
     ('timothee', 'motdepasseTimothee', 'Thibault', 'Timothée', '46', 'avenue', 'Millies Lacroix', 'DZAOUDZI', '97610', 'TimotheeThibault@gustr.com', '02.83.06.29.55', FALSE, TRUE, FALSE),
     ('cheney', 'motdepasseCheney', 'Bernard', 'Cheney', '31', 'rue', 'du Général Ailleret', 'LE TAMPON', '97430', 'CheneyBernard@rhyta.com', '02.58.34.19.11', FALSE, TRUE, FALSE),
     ('damiane', 'motdepasseDamiane', 'Thivierge', 'Damiane', '30', 'place', 'de la Gare', 'COLMAR', '68000', 'DamianeThivierge@jourrapide.com', '03.72.27.10.08', FALSE, TRUE, FALSE),
@@ -136,7 +140,8 @@ VALUES
     (6, 3, '2024-02-24', 200.00),
     (7, 1, '2024-03-15', 120.00),
     (8, 2, '2024-03-16', 90.75),
-    (9, 3, '2024-03-17', 180.25)
+    (9, 3, '2024-03-17', 180.25),
+    (10, 1, '2024-03-18', 460.00)
 ON DUPLICATE KEY UPDATE
                      id_personne = VALUES(id_personne),
                      date_commande = VALUES(date_commande),
@@ -160,7 +165,9 @@ VALUES
     (13, 9, 4, 1),
     (14, 9, 15, 2),
     (15, 9, 6, 1),
-    (16, 9, 10, 2)
+    (16, 9, 10, 2),
+    (17, 9, 12, 3),
+    (18, 10, 7, 10)
 
 ON DUPLICATE KEY UPDATE
                      id_commande = VALUES(id_commande),

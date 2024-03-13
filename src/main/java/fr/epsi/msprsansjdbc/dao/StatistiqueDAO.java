@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class StatistiqueDAO {
@@ -22,7 +24,7 @@ public class StatistiqueDAO {
                 "FROM produits " +
                 "LEFT JOIN contenu_commande ON produits.id_produit = contenu_commande.id_produit " +
                 "GROUP BY produits.nom " +
-                "ORDER BY COUNT(contenu_commande.id_contenu_commande) DESC LIMIT 5";
+                "ORDER BY COUNT(contenu_commande.id_contenu_commande) DESC LIMIT 10";
 
         return jdbcTemplate.query(sqlQuery, (rs, rowNum) -> {
             Statistique statistique = new Statistique();
@@ -37,7 +39,7 @@ public class StatistiqueDAO {
                 "FROM produits " +
                 "LEFT JOIN contenu_commande ON produits.id_produit = contenu_commande.id_produit " +
                 "GROUP BY produits.nom " +
-                "ORDER BY COUNT(contenu_commande.id_contenu_commande) ASC LIMIT 5";
+                "ORDER BY COUNT(contenu_commande.id_contenu_commande) ASC LIMIT 10";
 
         return jdbcTemplate.query(sqlQuery, (rs, rowNum) -> {
             Statistique statistique = new Statistique();

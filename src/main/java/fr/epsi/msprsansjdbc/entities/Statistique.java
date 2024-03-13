@@ -10,7 +10,8 @@ public class Statistique {
     private Integer annee;
     private BigDecimal chiffreAffaire;
 
-    // Les constructeurs, getters et setters nécessaires
+
+    // Constructeurs, getters et setters
 
     public Statistique() {
         // Constructeur par défaut
