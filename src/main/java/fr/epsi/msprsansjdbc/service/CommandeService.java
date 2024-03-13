@@ -1,7 +1,6 @@
 package fr.epsi.msprsansjdbc.service;
 
 import fr.epsi.msprsansjdbc.dao.CommandeDAO;
-import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +17,7 @@ public class CommandeService {
         this.dao = dao;
     }
 
-    public List<Commande> getAllCommandesWithPersonne() {
-        return dao.getAllCommandesWithPersonne();}
+    public List<Commande> getAllCommandes() {return dao.getAllCommandes();}
 
     public List<Commande> findAll() {
         return dao.findAll();
