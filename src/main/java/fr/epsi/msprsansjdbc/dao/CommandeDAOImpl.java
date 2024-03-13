@@ -1,5 +1,6 @@
 package fr.epsi.msprsansjdbc.dao;
 
+import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +18,20 @@ import java.util.List;
 public class CommandeDAOImpl implements CommandeDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(CommandeDAOImpl.class);
+
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert simpleJdbcInsert;
+
+    private final String FIND_ALL_QUERY = "SELECT c.id_commande," +
+            "c.id_personne," +
+            "c.date_commande," +
+            "c.montant_total," +
+            "p.nom AS nom_client," +
+            "p.prenom AS prenom_client " +
+            "FROM commandes c " +
+            "JOIN personnes p ON c.id_personne = p.id_personne";
+
+
 
     @Autowired
     public CommandeDAOImpl(NamedParameterJdbcTemplate jdbcTemplate, DataSource dataSource) {
@@ -29,17 +42,34 @@ public class CommandeDAOImpl implements CommandeDAO {
     }
 
     @Override
-    public List<Commande> getAllCommandesWithPersonne() {
-        return jdbcTemplate.query("SELECT * FROM commandes", new BeanPropertyRowMapper<>(Commande.class));
+    public List<Commande> getAllCommandes() {
+        logger.info("Récupération des commandes avec nom et prenom du client depuis la bdd");
+
+        return jdbcTemplate.query(FIND_ALL_QUERY, (rs, rowNum) -> {
+            Commande commande = new Commande();
+            commande.setId_commande(rs.getInt("id_commande"));
+            commande.setId_personne(rs.getInt("id_personne"));
+            commande.setDate_commande(rs.getDate("date_commande"));
+            commande.setMontant_total(rs.getFloat("montant_total"));
+
+            // Création d'un objet Client et assignation des valeurs
+            Client client = new Client();
+            client.setNom(rs.getString("nom_client"));
+            client.setPrenom(rs.getString("prenom_client"));
+
+            // Assignation du client à la commande
+            commande.setClient(client);
+
+            return commande;
+        });
     }
+
 
     @Override
     public List<Commande> findAll() {
-        String sql = "SELECT Commandes.id_commande, produits.nom AS nom_produit, personnes.nom AS nom_client, " +
-                "personnes.prenom AS prenom_client, Contenu_commande.quantite, Commandes.montant_total " +
-                "FROM Commandes JOIN Contenu_commande ON Commandes.id_commande = Contenu_commande.id_commande " +
-                "JOIN produits ON Contenu_commande.id_produit = produits.id_produit " +
-                "JOIN personnes ON Commandes.id_personne = personnes.id_personne";
+        String sql = "SELECT id_commande, commandes.id_personne, date_commande, montant_total, personnes.nom, personnes.prenom from commandes\n" +
+                "join personnes\n" +
+                "on commandes.id_personne = personnes.id_personne\n";
 
         logger.info("Récupération de toutes les commandes depuis la base de données.");
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Commande.class));

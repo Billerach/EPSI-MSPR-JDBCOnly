@@ -8,6 +8,7 @@ public class Commande {
     private int id_personne;
     private Date date_commande;
     private float montant_total;
+    private Client client;
     private ContenuCommande contenuCommande;
 
     public Commande() {
@@ -33,6 +34,14 @@ public class Commande {
         this.id_personne = id_personne;
         this.date_commande = date_commande;
         this.montant_total = montant_total;
+    }
+
+    public Commande(int id_commande, int id_personne, Date date_commande, float montant_total, Client client) {
+        this.id_commande = id_commande;
+        this.id_personne = id_personne;
+        this.date_commande = date_commande;
+        this.montant_total = montant_total;
+        this.client = client;
     }
 
     public int getId_commande() {
@@ -65,6 +74,14 @@ public class Commande {
 
     public void setMontant_total(float montant_total) {
         this.montant_total = montant_total;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public ContenuCommande getContenuCommande() {

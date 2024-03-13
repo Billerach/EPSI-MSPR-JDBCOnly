@@ -29,9 +29,9 @@ public class CommandeController {
     }
 
     @GetMapping()
-    public String afficherListeCommande(Model model) {
-        List<Commande> commandesDetailsList = service.getAllCommandesWithPersonne();
-        model.addAttribute("commandes", commandesDetailsList);
+    public String afficherListeCommande(Model commande, Model client) {
+        List<Commande> commandesDetailsList = service.getAllCommandes();
+        commande.addAttribute("commandes", commandesDetailsList);
         return "view-commande-list";
     }
 
