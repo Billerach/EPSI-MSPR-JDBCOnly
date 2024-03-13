@@ -8,6 +8,29 @@
         <link rel="stylesheet" data-th-href="@{/css/demo-form.css}"/>
 
         <title>Démo : Édition d'un produit</title>
+
+        <!-- Script JavaScript pour récupérer la liste des départements -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $(".modifier-produit").click(function () {
+                    // Récupérer les informations du produit à partir des données de la ligne du tableau
+                    var tr = $(this).closest("tr");
+                    var nomProduit = tr.find("td:eq(1)").text();
+                    var departementProduit = tr.find("td:eq(2)").text();
+                    var laitProduit = tr.find("td:eq(3)").text();
+                    var prixProduit = tr.find("td:eq(4)").text();
+                    var dateFinProduit = tr.find("td:eq(5)").text();
+
+                    // Pré-remplir les champs du formulaire avec les informations du produit
+                    $("#nom").val(nomProduit);
+                    $("#departement").val(departementProduit);
+                    $("#lait").val(laitProduit);
+                    $("#prix").val(prixProduit);
+                    $("#date_de_fin").val(dateFinProduit);
+                });
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -16,34 +39,39 @@
             </h1>
             <nav>
                 <ul>
-                    <li><a href="/produits/edition">Produits</a></li>
+                    <li><a href="/produits">Produits</a></li>
                 </ul>
             </nav>
         </header>
-        <main>
-            <h1>Édition d'un produit</h1>
-            <form th:action="@{/produits/edition}" th:object="${produit}" method="post">                        <label for="id_produit">ID du produit : </label>
 
-                <input type="hidden" id="id_produit" data-th-field="*{id_produit}" readonly/>                    </li>
+        <main>
+            <h1>Modifier produit</h1>
+            <form action="/produits/edition" method="post">
+
+                <input type="hidden" name="id_produit" th:value="${produit.id_produit}" />
+                <ul class="flex-outer">
                     <li>
-                        <label for="nom">Nom : </label>
-                        <input type="text" id="nom" required data-th-field="*{nom}"/>
+                        <label for="nom"><strong>Nom</strong></label>
+                        <input type="text" id="nom" name="nom" required readonly th:value="${produit.nom}" />
+                    </li>
+
+                    <li>
+                        <label for="departement"><strong>Département</strong></label>
+                        <input type="text" id="departement" name="departement" required readonly th:value="${produit.departement}">
+                    </li>
+
+                    <li>
+                        <label for="lait"><strong>Lait</strong></label>
+                        <input type="text" id="lait" name="lait" required readonly th:value="${produit.lait}">
+                    </li>
+
+                    <li>
+                        <label for="prix"><strong>Prix au kilo</strong></label>
+                        <input type="number" id="prix" name="prix" required step="0.01" min="0"/>
                     </li>
                     <li>
-                        <label for="departement">Département : </label>
-                        <input type="text" id="departement" required data-th-field="*{departement}"/>
-                    </li>
-                    <li>
-                        <label for="lait">Lait : </label>
-                        <input type="text" id="lait" required data-th-field="*{lait}"/>
-                    </li>
-                    <li>
-                        <label for="prix">Prix : </label>
-                        <input type="number" id="prix" required data-th-field="*{prix}" step="0.01"/>
-                    </li>
-                    <li>
-                        <label for="dateFin">Date de fin : </label>
-                        <input type="date" id="dateFin" required data-th-field="*{date_fin}"/>
+                        <label for="date_de_fin"><strong>Date de fin</strong></label>
+                        <input type="date" id="date_de_fin" name="date_de_fin" required/>
                     </li>
                     <li>
                         <button type="submit">Enregistrer</button>
@@ -51,6 +79,7 @@
                 </ul>
             </form>
         </main>
+
         <footer>
             <p>&copy; EPSI POEC - Tous droits réservés</p>
             <small>
