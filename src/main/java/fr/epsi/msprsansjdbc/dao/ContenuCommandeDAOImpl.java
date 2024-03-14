@@ -9,11 +9,13 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
 
-public class ContenuCommandeDAOImpl implements ContenuCommandeDAO{
+@Repository
+class ContenuCommandeDAOImpl implements ContenuCommandeDAO{
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert simpleJdbcInsert;
@@ -37,18 +39,15 @@ public class ContenuCommandeDAOImpl implements ContenuCommandeDAO{
 
     public ContenuCommande create(ContenuCommande contenuCommande) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id_commande", contenuCommande.getNom());
-        parameterSource.addValue("produit", contenuCommande.getPrenom());
-        parameterSource.addValue("quantite", contenuCommande.getNumeroVoie());
+        parameterSource.addValue("id_commande", contenuCommande.getId_commande());
+        parameterSource.addValue("produit", contenuCommande.getId_produit());
+        parameterSource.addValue("quantite", contenuCommande.getQuantite());
 
         // Exécutez la requête avec les valeurs définies dans parameterSource
         Number newId = simpleJdbcInsert.executeAndReturnKey(parameterSource);
 
         // Mettez à jour l'ID du contenu_commande avec la nouvelle valeur générée
-        contenuCommande.setId_personne(newId.intValue());
-
+        contenuCommande.setId_commande(newId.intValue());
         return contenuCommande;
     }
-
-
 }
