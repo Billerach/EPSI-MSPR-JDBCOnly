@@ -1,6 +1,7 @@
 package fr.epsi.msprsansjdbc.service;
 
 import fr.epsi.msprsansjdbc.dao.ClientDAO;
+import fr.epsi.msprsansjdbc.dao.ContenuCommandeDAO;
 import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.ContenuCommande;
 import org.springframework.beans.factory.annotation.Autowired;
