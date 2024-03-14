@@ -7,34 +7,44 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// Service pour gérer les opérations liées aux commandes
 @Service
 public class CommandeService {
 
-    private final CommandeDAO dao;
+    private final CommandeDAO dao; // Référence vers le DAO pour interagir avec la base de données
 
+    // Injection de dépendance du DAO via le constructeur
     @Autowired
     public CommandeService(CommandeDAO dao) {
         this.dao = dao;
     }
 
-    public List<Commande> getAllCommandes() {return dao.getAllCommandes();}
+    // Méthode pour récupérer toutes les commandes
+    public List<Commande> getAllCommandes() {
+        return dao.getAllCommandes();
+    }
 
+    // Méthode pour trouver toutes les commandes
     public List<Commande> findAll() {
         return dao.findAll();
     }
 
+    // Méthode pour obtenir le nom du produit associé à une commande par son ID
     public String getNomProduit(int id_commande) {
         return dao.getNomProduit(id_commande);
     }
 
+    // Méthode pour créer une nouvelle commande
     public Commande create(Commande commande) {
         return dao.create(commande);
     }
 
-    public Object findById(int id_commande) {
+    // Méthode pour trouver une commande par son ID
+    public Commande findById(int id_commande) {
         return dao.findById(id_commande);
     }
 
+    // Méthode pour mettre à jour une commande
     public void update(Commande commande) {
         dao.update(commande);
     }

@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* Style général de la table */
 table {
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
@@ -9,20 +10,24 @@ table {
 	overflow: hidden;
 }
 
+/* Style des cellules de la table */
 table td,
 table th {
 	border: 1px solid #ddd;
 	padding: 10px;
 }
 
+/* Style des lignes paires de la table */
 table tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
 
+/* Style lors du survol des lignes de la table */
 table tr:hover {
 	background-color: #ddd;
 }
 
+/* Style des en-têtes de la table */
 table th {
 	padding-top: 12px;
 	padding-bottom: 12px;
@@ -32,6 +37,7 @@ table th {
 	border-radius: 5px;
 }
 
+/* Style des liens d'action */
 a.action:link,
 a.action:visited,
 table a:link,
@@ -48,6 +54,7 @@ table a:visited,
 	margin-bottom: 10px;
 }
 
+/* Style lors du survol des liens d'action */
 a.action:hover,
 a.action:active,
 table a:hover,
@@ -55,6 +62,8 @@ table a:active,
 .stat-link:hover {
 	background-color: #6e2824;
 }
+
+/* Style spécifique pour les liens d'action dans une section */
 section a.action {
 	margin-right: 10px;
 }

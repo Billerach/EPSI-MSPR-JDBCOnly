@@ -2,8 +2,10 @@ package fr.epsi.msprsansjdbc.entities;
 
 import java.math.BigDecimal;
 
+// Définition de la classe Statistique
 public class Statistique {
 
+    // Attributs de la classe Statistique
     private String nomProduit;
     private Integer nombreVentes;
     private String mois;
@@ -11,10 +13,9 @@ public class Statistique {
     private BigDecimal chiffreAffaire;
 
 
-    // Constructeurs, getters et setters
-
+    // Constructeurs
     public Statistique() {
-        // Constructeur par défaut
+        // Initialise les attributs à leurs valeurs par défaut
     }
 
     public Statistique(String nomProduit, Integer nombreVentes) {
@@ -33,7 +34,6 @@ public class Statistique {
     }
 
     // Getters et setters
-
     public String getNomProduit() {
         return nomProduit;
     }

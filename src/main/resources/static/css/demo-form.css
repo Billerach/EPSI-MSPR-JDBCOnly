@@ -25,6 +25,7 @@ form h1 {
 	margin: 15px 0;
 }
 
+/* Style commun pour les labels */
 .flex-outer .product-row>label,
 .flex-outer>li>label {
 	flex: 1 0 100%;
@@ -32,11 +33,7 @@ form h1 {
 	margin-bottom: 10px;
 }
 
-.flex-outer .product-row>label+*,
-.flex-outer>li>label+* {
-	flex: 1 0 100%;
-}
-
+/* Style des boutons */
 .flex-outer .product-row button,
 .flex-outer li button {
 	margin-top: 20px;
@@ -51,19 +48,13 @@ form h1 {
 	width: 100%;
 }
 
+/* Effet de survol pour les boutons */
 .flex-outer .product-row button:hover,
 .flex-outer li button:hover {
 	background-color: #ac413d;
 }
 
-.flex-outer .product-row select,
-.flex-outer>li select {
-	flex: 1 0 100%;
-	padding: 10px;
-	border-radius: 8px;
-}
-
-/* Style des champs de saisie */
+/* Style des champs de sélection et de saisie */
 .flex-outer .product-row>input,
 .flex-outer .product-row>select,
 .flex-outer>li>input,
@@ -77,7 +68,7 @@ form h1 {
 	transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Effet de survol pour les champs de saisie */
+/* Effet de survol pour les champs de sélection et de saisie */
 .flex-outer .product-row>input:hover,
 .flex-outer .product-row>select:hover,
 .flex-outer>li>input:hover,
@@ -113,8 +104,3 @@ select[readonly]:hover::after {
 	border-radius: 5px;
 	font-size: 12px;
 }
-
-
-
-
-

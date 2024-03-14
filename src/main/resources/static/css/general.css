@@ -1,5 +1,6 @@
-/* General Styles (general.css) */
+/* Styles généraux */
 
+/* Style de l'en-tête */
 header {
 	display: flex;
 	justify-content: space-between;
@@ -12,6 +13,7 @@ header {
 	border-radius: 0 0 10px 10px;
 }
 
+/* Style du titre de navigation */
 #nav-title {
 	font-size: 1.1em;
 }
@@ -31,6 +33,7 @@ header {
 	background-color: #ca934f;
 }
 
+/* Style de la barre de navigation */
 nav ul {
 	list-style: none;
 	display: flex;
@@ -51,11 +54,11 @@ nav a:hover {
 	color: #ac413d;
 }
 
+/* Style de la liste principale */
 main ul {
 	list-style: none;
 	display: flex;
 	flex-direction: column;
-	flex-wrap: nowrap;
 	justify-content: center;
 	padding: 20px 0;
 }
@@ -78,22 +81,28 @@ main a:hover {
 	background-color: #ca934f;
 }
 
+/* Style pour centrer le contenu principal */
 .center-main {
 	display: flex;
 	width: 100%;
 	height: 300px;
 	margin: auto;
+	justify-content: center;
+	align-items: center;
 }
 
+/* Style pour centrer une section */
 .center-section {
 	margin: auto;
 	text-align: center;
 }
 
+/* Style pour les images dans le titre de navigation */
 #nav-title a>img {
 	width: 25px;
 }
 
+/* Style de la bannière */
 #banniere {
 	width: 100%;
 	height: auto;
