@@ -11,28 +11,37 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.util.Scanner;
 
 @SpringBootApplication
-public class EpsiMsprApplication  implements CommandLineRunner {
-    private ClientController controller;
+public class EpsiMsprApplication implements CommandLineRunner {
+
+    private final ClientController controller;
+
+    // Injection des dépendances JdbcTemplate et NamedParameterJdbcTemplate
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
-    @Autowired
-    NamedParameterJdbcTemplate npjt;
+    private NamedParameterJdbcTemplate npjt;
 
-    Scanner sc = new Scanner(System.in);
+    // Scanner pour lire l'entrée de l'utilisateur
+    private final Scanner scanner = new Scanner(System.in);
 
+    // Constructeur pour l'injection de dépendance du contrôleur
     @Autowired
     public EpsiMsprApplication(ClientController controller) {
         this.controller = controller;
     }
 
-
+    // Point d'entrée de l'application
     public static void main(String[] args) {
+        // Lance l'application Spring Boot
         SpringApplication.run(EpsiMsprApplication.class, args);
     }
 
+    // Méthode exécutée après le démarrage de l'application
     @Override
     public void run(String... args) throws Exception {
-
+        // Affiche un message indiquant que l'application est démarrée
+        System.out.println("L'application est démarrée.");
     }
 }
+

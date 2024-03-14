@@ -1,12 +1,15 @@
 package fr.epsi.msprsansjdbc.entities;
 
+// Définition de la classe DBUser
+// Cette classe permet de définir les attributs de connexion pour l'application
 public class DBUser {
+    // Définition des attributs de la classe DBUser
     private int id;
     private String username;
     private String password;
     private String role;
 
-    // Getters and setters
+    // Getters et setters pour les attributs de la classe DBUser
     public int getId() {
         return id;
     }
@@ -39,7 +42,7 @@ public class DBUser {
         this.role = role;
     }
 
-    // Constructors
+    // Constructeurs de la classe DBUser
     public DBUser() {
     }
 

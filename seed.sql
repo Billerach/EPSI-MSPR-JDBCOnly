@@ -112,9 +112,7 @@ VALUES ('Santranges-sancerre', '18 - Cher', 'Chèvre', 10.50, '2024-02-22', TRUE
        ('Ardi-Gasna', '64 - Pyrénées-Atlantiques', 'Brebis', 14.50, '2024-03-02', TRUE);
 
 -- Ajout de données de test pour la table des utilisateurs
-INSERT INTO personnes (login,
-                       mot_de_passe,
-                       nom, prenom,
+INSERT INTO personnes (nom, prenom,
                        numero_voie,
                        type_voie,
                        libelle_voie,
@@ -125,38 +123,38 @@ INSERT INTO personnes (login,
                        est_client,
                        est_employe,
                        est_archive)
-VALUES (null, null, 'Dupont', 'Alice', '123', 'rue', 'de la République', 'Paris', '75001', 'alice@email.com',
+VALUES ('Dupont', 'Alice', '123', 'rue', 'de la République', 'Paris', '75001', 'alice@email.com',
         '01.23.45.67.89', TRUE, FALSE, FALSE),
-       (null, null, 'Martin', 'Bob', '456', 'avenue', 'des Fleurs', 'Lyon', '69002', 'bob@email.com', '09.87.65.43.21',
+       ('Martin', 'Bob', '456', 'avenue', 'des Fleurs', 'Lyon', '69002', 'bob@email.com', '09.87.65.43.21',
         TRUE, FALSE, FALSE),
-       (null, null, 'Leroux', 'Claire', '789', 'rue', 'de la Liberté', 'Marseille', '13003', 'claire@email.com',
+       ('Leroux', 'Claire', '789', 'rue', 'de la Liberté', 'Marseille', '13003', 'claire@email.com',
         '01.23.45.67.89', TRUE, FALSE, FALSE),
-       (null, null, 'Durand', 'Marie', '10', 'rue', 'de la Liberté', 'Paris', '75002', 'marie@email.com',
+       ('Durand', 'Marie', '10', 'rue', 'de la Liberté', 'Paris', '75002', 'marie@email.com',
         '01.23.45.67.89', TRUE, FALSE, FALSE),
-       (null, null, 'Leclerc', 'Jean', '20', 'avenue', 'Victor Hugo', 'Lyon', '69003', 'jean@email.com',
+       ('Leclerc', 'Jean', '20', 'avenue', 'Victor Hugo', 'Lyon', '69003', 'jean@email.com',
         '06.54.32.10.98', TRUE, FALSE, FALSE),
-       (null, null, 'Dupuis', 'Pierre', '30', 'boulevard', 'Pasteur', 'Marseille', '13004', 'pierre@email.com',
+       ('Dupuis', 'Pierre', '30', 'boulevard', 'Pasteur', 'Marseille', '13004', 'pierre@email.com',
         '02.11.22.33.44', TRUE, FALSE, FALSE),
 
 #   EMPLOYES
-       ('TimThi', 'motdepasseTimothee', 'Thibault', 'Timothée', '46', 'avenue', 'Millies Lacroix', 'DZAOUDZI', '97610',
+       ('Thibault', 'Timothée', '46', 'avenue', 'Millies Lacroix', 'DZAOUDZI', '97610',
         'TimotheeThibault@gustr.com', '02.83.06.29.55', FALSE, TRUE, FALSE),
-       ('CheBer', 'motdepasseCheney', 'Bernard', 'Cheney', '31', 'rue', 'du Général Ailleret', 'LE TAMPON', '97430',
+       ('Bernard', 'Cheney', '31', 'rue', 'du Général Ailleret', 'LE TAMPON', '97430',
         'CheneyBernard@rhyta.com', '02.58.34.19.11', FALSE, TRUE, FALSE),
-       ('MicFav', 'motdepasseMichele', 'Favreau', 'Michèle', '14', 'quai', 'Saint-Nicolas', 'TOULOUSE', '31500',
+       ('Favreau', 'Michèle', '14', 'quai', 'Saint-Nicolas', 'TOULOUSE', '31500',
         'MicheleFavreau@rhyta.com', '05.79.45.52.03', FALSE, TRUE, FALSE),
-       ('ManBru', 'motdepasseManville', 'Brunelle', 'Manville', '27', 'cours', 'Jean Jaures', 'BORDEAUX', '33100',
+       ('Brunelle', 'Manville', '27', 'cours', 'Jean Jaures', 'BORDEAUX', '33100',
         'ManvilleBrunelle@einrot.com', '05.27.50.25.11', FALSE, TRUE, FALSE),
-       ('AmeBri', 'motdepasseAmelie', 'Brisebois', 'Amélie', '76', 'rue', 'Bonnet', 'YERRES', '91330',
+       ('Brisebois', 'Amélie', '76', 'rue', 'Bonnet', 'YERRES', '91330',
         'AmelieBrisebois@gustr.com', '01.54.31.99.22', FALSE, TRUE, FALSE),
 
 #     ADMIN
-       ('DamThi', 'secret', 'Thivierge', 'Damien', '30', 'place', 'de la Gare', 'COLMAR', '68000',
+       ('Thivierge', 'Damien', '30', 'place', 'de la Gare', 'COLMAR', '68000',
         'DamianeThivierge@jourrapide.com', '03.72.27.10.08', FALSE, TRUE, FALSE);
 
 -- Ajout de données de test pour la table des utilisateurs (utilisation de bcrypt pour encoder les mdp : admin et user)
 INSERT INTO dbuser (username, password, role)
-VALUES ('DBadmin', '$2y$10$tKX3Mrpnr.NIZgwOmGZvVuW8FwPHPCkI4dvVkSHj5epkmUUo8HtVG', 'ADMIN'),
+VALUES ('AdminDamThi', '$2y$10$tKX3Mrpnr.NIZgwOmGZvVuW8FwPHPCkI4dvVkSHj5epkmUUo8HtVG', 'ADMIN'),
        ('DBuser', '$2y$10$nX5t/1sGTOqERBZ92A.uBeeSxQAirIRY.Zb0LIEmjSONbQAl3B0Zm', 'USER');
 
 -- Ajout de données de test pour la table des commandes

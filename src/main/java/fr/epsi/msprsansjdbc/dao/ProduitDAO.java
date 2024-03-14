@@ -4,6 +4,7 @@ import fr.epsi.msprsansjdbc.entities.Produit;
 
 import java.util.List;
 
+// Interface définissant les méthodes pour accéder et manipuler les données des produits
 public interface ProduitDAO {
 
     // Récupère tous les produits actifs
@@ -18,6 +19,6 @@ public interface ProduitDAO {
     // Met à jour les informations d'un produit
     Produit update(Produit produit);
 
-    // Supprime un produit par son ID
+    // Désactive un produit par son ID (par exemple, le marque comme inactif)
     void desactiverById(int id_produit);
 }

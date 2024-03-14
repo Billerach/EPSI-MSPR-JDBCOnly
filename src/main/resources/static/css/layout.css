@@ -1,63 +1,72 @@
-/* Layout Styles (layout.css) */
+/* Styles de la mise en page */
 
+/* Style général du corps */
 body {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	min-height: 100vh;
-	font-family: Arial, Helvetica, sans-serif;
-	margin: 0;
-	background-color: white;
+	display: flex; /* Utilisation de Flexbox pour le positionnement */
+	flex-direction: column; /* La disposition des éléments est en colonne */
+	justify-content: space-between; /* Répartition de l'espace entre les éléments */
+	min-height: 100vh; /* Hauteur minimale de l'écran visible */
+	font-family: Arial, Helvetica, sans-serif; /* Police de caractères par défaut */
+	margin: 0; /* Supprime les marges par défaut */
+	background-color: white; /* Couleur de fond du corps */
 }
 
+/* Style de l'en-tête */
 header {
-	padding: 15px;
-	background-color: #6e2824;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	padding: 15px; /* Espacement interne */
+	background-color: #6e2824; /* Couleur de fond */
+	border-bottom-left-radius: 10px; /* Coins arrondis en bas à gauche */
+	border-bottom-right-radius: 10px; /* Coins arrondis en bas à droite */
 }
 
+/* Style du titre principal */
 h1 {
-	font-size: 2em;
-	color: #6e2824;
-	font-family: Arial, Helvetica, sans-serif;
-	margin-bottom: 10px;
-	text-align: center;
+	font-size: 2em; /* Taille de police */
+	color: #6e2824; /* Couleur du texte */
+	font-family: Arial, Helvetica, sans-serif; /* Police de caractères */
+	margin-bottom: 10px; /* Marge en bas */
+	text-align: center; /* Alignement centré */
 }
 
+/* Style du pied de page */
 footer {
-	display: flex;
-	margin-top: auto;
-	width: 100%;
-	background-color: #5b3302;
-	text-align: center;
-	color: #dde2e7;
-	height: auto;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	justify-content: center;
+	display: flex; /* Utilisation de Flexbox pour le positionnement */
+	margin-top: auto; /* Marge supérieure automatique pour pousser vers le bas */
+	width: 100%; /* Largeur de 100% */
+	background-color: #5b3302; /* Couleur de fond */
+	text-align: center; /* Alignement centré du texte */
+	color: #dde2e7; /* Couleur du texte */
+	height: auto; /* Hauteur automatique */
+	border-top-left-radius: 10px; /* Coins arrondis en haut à gauche */
+	border-top-right-radius: 10px; /* Coins arrondis en haut à droite */
+	justify-content: center; /* Centrage vertical */
 }
 
+/* Style des liens dans le pied de page */
 footer a {
-	color: #dde2e7;
-	text-decoration: none;
+	color: #dde2e7; /* Couleur du texte des liens */
+	text-decoration: none; /* Suppression du soulignement des liens */
 }
 
+/* Style des éléments de la barre de navigation */
 nav li {
-	font-size: 1.6em;
-	color: #e9c9a2;
+	font-size: 1.6em; /* Taille de police */
+	color: #e9c9a2; /* Couleur du texte */
 }
 
+/* Style du titre de navigation */
 #nav-title a {
-	color: #555;
-	border: 1px solid #555;
-	border-radius: 5px;
-	padding: 8px 15px;
-	transition: background-color 0.3s ease, color 0.3s ease;
+	color: #555; /* Couleur du texte */
+	border: 1px solid #555; /* Bordure de 1 pixel solide avec une couleur grise */
+	border-radius: 5px; /* Coins arrondis */
+	padding: 8px 15px; /* Espacement intérieur */
+	transition: background-color 0.3s ease, color 0.3s ease; /* Transition en douceur lors du survol */
 }
 
+/* Effet de survol pour le titre de navigation */
 #nav-title a:hover {
-	color: #ac413d;
-	background-color: #ca934f;
+	color: #ac413d; /* Changement de couleur du texte au survol */
+	background-color: #ca934f; /* Changement de couleur de fond au survol */
 }
+
 

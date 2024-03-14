@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/produits")
+@Controller // Indique à Spring que cette classe est un contrôleur et doit être gérée par le conteneur Spring
+@RequestMapping("/produits") // Toutes les méthodes de cette classe répondent aux requêtes avec le préfixe "/produits"
 public class ProduitController {
 
     // Service responsable de la logique métier liée aux produits.
@@ -22,55 +22,51 @@ public class ProduitController {
         this.service = service;
     }
 
+    // Méthode pour afficher la liste des produits actifs
     @GetMapping()
     public String afficherListeProduits(Model model) {
-        // Récupérer la liste des produits actifs depuis la base de données
-        List<Produit> mesProduits = service.findAllActifs();
-        // On envoie à la vue la liste des produits
-        model.addAttribute("produits", mesProduits);
-        System.out.println(mesProduits);
-        return "view-produit-list";
+        List<Produit> mesProduits = service.findAllActifs(); // Récupérer la liste des produits actifs depuis le service
+        model.addAttribute("produits", mesProduits); // Envoyer la liste des produits à la vue
+        System.out.println(mesProduits); // Afficher la liste des produits dans la console (à des fins de débogage)
+        return "view-produit-list"; // Retourner le nom de la vue à afficher
     }
 
+    // Méthode pour afficher le formulaire de création d'un produit
     @GetMapping("/creer")
     public String creerProduit(Model model) {
-        model.addAttribute("produit", new Produit());
-        return "view-produit-form-creation";
+        model.addAttribute("produit", new Produit()); // Envoyer un objet produit vide à la vue pour le remplissage du formulaire
+        return "view-produit-form-creation"; // Retourner le nom de la vue du formulaire de création
     }
 
+    // Méthode pour traiter la soumission du formulaire de création d'un produit
     @PostMapping("/creer")
     public String creerProduit(@ModelAttribute Produit produit) {
-        service.create(produit);
-        return "redirect:/produits";
+        service.create(produit); // Créer un nouveau produit en utilisant le service
+        return "redirect:/produits"; // Rediriger vers la liste des produits après la création
     }
 
+    // Méthode pour afficher le formulaire de modification d'un produit
     @GetMapping("/edition")
     public String afficherFormulaireEdition(@RequestParam("id_produit") int id_produit, Model model) {
-        // Récupérer le produit à éditer depuis la base de données
-        Produit produit = service.findById(id_produit);
-        // Ajouter le produit au modèle pour le pré-remplissage du formulaire
-        model.addAttribute("produit", produit);
-
-        return "view-produit-form-edition";
+        Produit produit = service.findById(id_produit); // Récupérer le produit à éditer depuis le service
+        model.addAttribute("produit", produit); // Envoyer le produit à la vue pour le pré-remplissage du formulaire
+        return "view-produit-form-edition"; // Retourner le nom de la vue du formulaire de modification
     }
 
+    // Méthode pour traiter la soumission du formulaire de modification d'un produit
     @PostMapping("/edition")
     public String modifierProduit(@RequestParam("id_produit") int id_produit, @ModelAttribute Produit produit) {
-        // Comme sur la validation du formulaire de création ici, on fait à peu près la même chose
-        produit.setId_produit(id_produit);
-        service.update(produit);
-        return "redirect:/produits";
+        produit.setId_produit(id_produit); // Définir l'identifiant du produit
+        service.update(produit); // Mettre à jour les informations du produit en utilisant le service
+        return "redirect:/produits"; // Rediriger vers la liste des produits après la modification
     }
 
-    // Exemple de code pour déplacer les données vers la table d'historique avant la suppression
+    // Méthode pour supprimer un produit (passer en inactif)
     @GetMapping("/suppression")
     public String supprimerProduit(@RequestParam("id_produit") int id_produit) {
-        Produit produit = service.findById(id_produit);
-
-        // Passer le produit en inactif
-        produit.setActif(false);
-        service.deleteById(id_produit);
-
-        return "redirect:/produits";
+        Produit produit = service.findById(id_produit); // Récupérer le produit à supprimer depuis le service
+        produit.setActif(false); // Marquer le produit comme inactif
+        service.deleteById(id_produit); // Supprimer le produit de la base de données
+        return "redirect:/produits"; // Rediriger vers la liste des produits après la suppression
     }
 }

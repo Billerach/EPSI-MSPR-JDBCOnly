@@ -6,32 +6,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
+// Service pour gérer les opérations liées aux statistiques
 @Service
 public class StatistiqueService {
-    private final StatistiqueDAO statistiqueDAO;
 
-        @Autowired
-        public StatistiqueService(StatistiqueDAO statistiqueDAO) {
-            this.statistiqueDAO = statistiqueDAO;
-        }
+    private final StatistiqueDAO statistiqueDAO; // Référence vers le DAO pour interagir avec la base de données
 
-        public List<Statistique> getProduitLesPlusVendu() {
-            return statistiqueDAO.getProduitLesPlusVendu();
-        }
+    // Injection de dépendance du DAO via le constructeur
+    @Autowired
+    public StatistiqueService(StatistiqueDAO statistiqueDAO) {
+        this.statistiqueDAO = statistiqueDAO;
+    }
 
-        public List<Statistique> getProduitLesMoinsVendu() {
-            return statistiqueDAO.getProduitLesMoinsVendu();
-        }
+    // Méthode pour récupérer les produits les plus vendus
+    public List<Statistique> getProduitLesPlusVendu() {
+        return statistiqueDAO.getProduitLesPlusVendu();
+    }
 
-        public List<Statistique> getChiffreAffaireParMois() {
-            return statistiqueDAO.getChiffreAffaireParMois();
-        }
+    // Méthode pour récupérer les produits les moins vendus
+    public List<Statistique> getProduitLesMoinsVendu() {
+        return statistiqueDAO.getProduitLesMoinsVendu();
+    }
 
-        public List<Statistique> getChiffreAffaireParAnnee() {
-            return statistiqueDAO.getChiffreAffaireParAnnee();
-        }
+    // Méthode pour récupérer le chiffre d'affaires par mois
+    public List<Statistique> getChiffreAffaireParMois() {
+        return statistiqueDAO.getChiffreAffaireParMois();
+    }
+
+    // Méthode pour récupérer le chiffre d'affaires par année
+    public List<Statistique> getChiffreAffaireParAnnee() {
+        return statistiqueDAO.getChiffreAffaireParAnnee();
+    }
 }
 
 

@@ -4,7 +4,9 @@ import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 
+// Définition de la classe Client
 public class Client {
+    // Définition des attributs de la classe Client
     private int id_personne;
     private String nom;
     private String prenom;
@@ -19,6 +21,7 @@ public class Client {
     private boolean estEmploye;
     private boolean estArchive;
 
+    // Constructeurs de la classe Client avec les différents attributs
     public Client() {
     }
 
@@ -100,6 +103,7 @@ public class Client {
         this.telephone = telephone;
     }
 
+    // Getters et Setters des attributs de la classe Client
     public int getId_personne() {
         return id_personne;
     }
@@ -196,10 +200,13 @@ public class Client {
         this.estEmploye = estEmploye;
     }
 
-    public boolean isEstArchive() { return estArchive; }
+    public boolean isEstArchive() {
+        return estArchive; }
 
-    public void setEstArchive(boolean estArchive) { this.estArchive = estArchive; }
+    public void setEstArchive(boolean estArchive) {
+        this.estArchive = estArchive; }
 
+    // Méthode toString pour afficher les informations de la classe Client
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Client{");
@@ -210,6 +217,7 @@ public class Client {
         return sb.toString();
     }
 
+    // Méthode equals pour comparer deux objets de la classe Client
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -217,9 +225,9 @@ public class Client {
         return id_personne == that.id_personne;
     }
 
+    // Méthode hashCode pour retourner le code de hachage d'un objet de la classe Client
     @Override
     public int hashCode() {
         return Objects.hash(id_personne);
     }
-
 }
