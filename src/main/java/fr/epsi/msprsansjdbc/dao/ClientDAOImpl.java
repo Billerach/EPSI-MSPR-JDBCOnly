@@ -57,13 +57,13 @@ public class ClientDAOImpl implements ClientDAO {
         .usingGeneratedKeyColumns("ID_PERSONNE");
     }
 
-    @Override
+//    @Override
     public List<Client> findAllClients() {
         logger.info("Récupération de tous les clients depuis la base de données.");
         return jdbcTemplate.query(FIND_ALL_QUERY, new BeanPropertyRowMapper<>(Client.class));
     }
 
-    @Override
+//    @Override
     public Client create(Client client) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("nom", client.getNom());
