@@ -66,7 +66,7 @@ public class CommandeController {
         //Puis tu créé l'Objet Commande avec les données récupérées
         service.create(commande);
 
-        //Là, en base, la table de jointure sert à lier les commandes aux produits
+        //Là, en base, la table de jointure contenu_commande sert à lier les commandes aux produits
         //Donc, pour chaque fromage différent, tu créé un objet de type ContenuCommande
         //qui va contenir son propre id, l'id de la commande, l'id du produit et la quantité
         // Pour pas que tout se retrouve ici, on a créé un autre ctrler pour les Objets ContenuCommande
