@@ -3,6 +3,7 @@ package fr.epsi.msprsansjdbc.controller;
 import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
 import fr.epsi.msprsansjdbc.entities.Produit;
+import fr.epsi.msprsansjdbc.entities.ContenuCommande;
 import fr.epsi.msprsansjdbc.service.ClientService;
 import fr.epsi.msprsansjdbc.service.CommandeService;
 import fr.epsi.msprsansjdbc.service.ProduitService;
@@ -11,6 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -46,35 +51,30 @@ public class CommandeController {
         return "view-commande-form-creation";
     }
 
-    @PostMapping("/creer")
-    public String creerCommande(@RequestParam("personne") int idPersonne, @ModelAttribute Commande commande) {
-        commande.setId_personne(idPersonne);
-        commande.setClient(clientService.findById(idPersonne));
+    @Autowired
+    private ContenuCommandeController contenuCommandeController;
+
+    @PostMapping("/creer")//Méthode qui récupère les données du formulaire
+    public String creerCommande(@RequestParam("personne") int idPersonne,
+                                @ModelAttribute Commande commande) { //Là tu dis que ce que tu veux créer, c'est un Objet de type Commande
+        commande.setId_personne(idPersonne); //Puis tu prends l'id du client et tu le mets à id_personne
+        commande.setClient(clientService.findById(idPersonne));//Pareil pour l'Objet Client lui-même
+        //Pareil pour la date
+        LocalDate localDate = LocalDate.now();
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        commande.setDate_commande(date);
+        //Puis tu créé l'Objet Commande avec les données récupérées
         service.create(commande);
+
+        //Là, en base, la table de jointure sert à lier les commandes aux produits
+        //Donc, pour chaque fromage différent, tu créé un objet de type ContenuCommande
+        //qui va contenir son propre id, l'id de la commande, l'id du produit et la quantité
+        // Pour pas que tout se retrouve ici, on a créé un autre ctrler pour les Objets ContenuCommande
+        // Appel de la méthode creerContenuCommande du ContenuCommandeController
+        contenuCommandeController.creerContenuCommande(commande);
+
         return "redirect:/commandes";
     }
-//depuis la vue
-
-//     <label for="produit">Produit:</label>
-//                            <select id="produit" class="product-select" name="produit" onchange="updatePrice()">
-//                                <option th:each="produit : ${produits}" th:value="${produit.id_produit}" th:data-prix="${produit.prix}" th:text="${produit.nom}"></option>
-//                            </select>
-//
-//                            <label for="quantite">Quantité:</label>
-//                            <input id ="quantite" type="number" class="quantity" name="quantite" oninput="updatePrice()" required/>
-//
-//                            <label for="prixUnitaire">Prix Unitaire:</label>
-//                            <input type="number" class="prixUnitaire" id="prixUnitaire" name="prixUnitaire" readonly/>
-//
-//                            <label for="prixTotal">Prix Total:</label>
-//                            <input id="prixTotal" type="number" class="prixTotal" name="prixTotal" readonly/>
-//
-//                            <button type="button" onclick="removeProductRow(this.parentNode)">Supprimer</button>
-//                            <button type="button" onclick="addProductRow()">Ajouter un produit</button>
-
-//**********
-
-
 
     @GetMapping("/{id_commande}/edition")
     public String modifierCommande(@PathVariable int id_commande, Model model) {
