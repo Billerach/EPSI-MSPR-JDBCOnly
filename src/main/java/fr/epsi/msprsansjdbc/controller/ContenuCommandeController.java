@@ -21,4 +21,8 @@ public class ContenuCommandeController {
 //            contenuCommandeService.create(contenuCommande);
 //        }
     }
+
+    public void setContenuCommandeService(ContenuCommandeService contenuCommandeService) {
+        this.contenuCommandeService = contenuCommandeService;
+    }
 }

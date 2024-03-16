@@ -93,17 +93,8 @@ public class CommandeController {
         for (Map.Entry<Integer, Integer> entry : quantites.entrySet()) {
             int produitId = entry.getKey();
             int quantite = entry.getValue();
-
-            ContenuCommande contenuCommande = new ContenuCommande();
-            contenuCommande.setCommande(commande);
-            contenuCommande.setProduit(produit);
-            contenuCommande.setQuantite(quantite);
-
-            // Enregistrer le ContenuCommande en base de données ou effectuer toute autre opération nécessaire
-             contenuCommandeService.save(contenuCommande);
+            contenuCommandeController.creerContenuCommande(commande.getId_commande(), produitId, quantite);
         }
-
-
         return "redirect:/commandes";
     }
 
