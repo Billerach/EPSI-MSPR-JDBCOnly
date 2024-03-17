@@ -128,7 +128,7 @@ public class CommandeController {
             model.addAttribute("commande", commande);
 
             // Récupérer les données du client associé à la commande
-            Client client = commande.getClient();
+            Client client = clientService.findById(commande.getId_personne());
             if (client != null) {
                 // Ajouter les détails du client à l'objet Model
                 model.addAttribute("client", client);
@@ -136,21 +136,34 @@ public class CommandeController {
                 logger.error("Le client associé à la commande n'est pas trouvé");
             }
 
-            // Récupérer les données du produit associé à la commande
-            //TODO : créer une méthode pour récupérer les contenus de la commande
-//            List<ContenuCommande> contenusCommandes = commande.getContenuCommande();
-//            if (contenuCommande != null) {
-//                int produitId = contenuCommande.getId_produit();
-//                Produit produit = produitService.findById(produitId);
-//                if (produit != null) {
-//                    // Ajouter les détails du produit à l'objet Model
-//                    model.addAttribute("produit", produit);
-//                } else {
-//                    logger.error("Ce produit n'est pas associé à cette commande(Pas de contenuCommande pour ce produit)");
-//                }
-//            } else {
-//                logger.error("Aucun contenuCommande n'est associé à cette commande");
-//            }
+            // Récupérer les données du produit associé à la commande :
+
+            //Tout d'abord, je créé la liste des Objets contenuCommande associés à la commande
+            List<ContenuCommande> contenusCommandes = contenuCommandeController.getContenuCommandeList(id_commande);
+            //puis on s'assure que la requete a bien renvoyé des résultats
+            if (contenusCommandes != null) {
+                //On créé d'abord une liste vide pour les produits
+                List<Produit> produits = new ArrayList<>();
+
+                //On itère sur la liste des contenusCommandes,
+                //les instructions suivantes sont répétées pour chaque Objet contenuCommande
+                for (ContenuCommande contenuCommande : contenusCommandes) {
+                    int produitId = contenuCommande.getId_produit();//Récupération de l'id du produit
+                    Produit produit = produitService.findById(produitId);//Puis de l'Objet Produit lui-même
+                    //On s'assure que l'id récupéré correspond bien à un produit en base
+                    if (produit != null) {
+                        produits.add(produit);//Si oui, on l'ajoute à la liste des produits
+                    } else {
+                        logger.error(
+                            "Ce produit n'est pas associé à cette commande" +
+                            "(Pas de contenuCommande pour ce produit rattaché à cette commande)"
+                        );
+                    }
+                }
+                model.addAttribute("produits", produits);
+            } else {
+                logger.error("Aucun contenuCommande n'est associé à cette commande");
+            }
 
             // Retourner la vue pour afficher les détails de la commande
             return "view-commande-form-show";

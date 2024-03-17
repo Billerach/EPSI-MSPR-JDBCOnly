@@ -32,9 +32,12 @@ class ContenuCommandeDAOImpl implements ContenuCommandeDAO{
                 .usingGeneratedKeyColumns("id_contenu_commande");
     }
 
-    public List<ContenuCommande> tousLesProduitsDeUneCommande() {
+    public List<ContenuCommande> getContenuCommandeList(int id_commande) {
         logger.info("Récupération de tous les produits de la commande en cours depuis la bdd");
-        return jdbcTemplate.query(FIND_ALL_QUERY, new BeanPropertyRowMapper<>(ContenuCommande.class));
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("id_commande", id_commande);
+        return jdbcTemplate.query(FIND_ALL_QUERY, parameters, new BeanPropertyRowMapper<>(ContenuCommande.class));
     }
 
     public ContenuCommande create(ContenuCommande contenuCommande) {

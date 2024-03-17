@@ -21,4 +21,8 @@ public class ContenuCommandeService {
         public ContenuCommande create(ContenuCommande contenuCommande) {
             return dao.create(contenuCommande);
         }
+
+        public List<ContenuCommande> getContenuCommandeList(int id_commande) {
+            return dao.getContenuCommandeList(id_commande);
+        }
 }
