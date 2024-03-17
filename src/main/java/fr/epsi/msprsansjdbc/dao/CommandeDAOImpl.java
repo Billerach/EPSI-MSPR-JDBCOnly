@@ -116,41 +116,9 @@ public class CommandeDAOImpl implements CommandeDAO {
     }
 
     @Override
-    public void deleteById(int id_commande) {
-        // Implémentez la suppression en fonction de vos besoins.
-    }
-
-    @Override
-    public String getNomProduit(int id_commande) {
-        String sql = "SELECT produits.nom FROM crm_sansjpa.produits " +
-                "JOIN crm_sansjpa.contenu_commande ON crm_sansjpa.contenu_commande.id_produit = crm_sansjpa.produits.id_produit " +
-                "WHERE crm_sansjpa.contenu_commande.id_commande = :id_commande";
-
+    public void deleteCommmande(int id_commande) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource("id_commande", id_commande);
-        return jdbcTemplate.queryForObject(sql, parameterSource, String.class);
-    }
-
-    @Override
-    public String getClient(int id_personne) {
-        String sql = "SELECT nom FROM personnes WHERE est_client = true AND id_personne = :id_personne";
-
-        MapSqlParameterSource parameterSource = new MapSqlParameterSource("id_personne", id_personne);
-        return jdbcTemplate.queryForObject(sql, parameterSource, String.class);
-    }
-
-    @Override
-    public int getQuantite(int id_commande) {
-        String sql = "SELECT quantite FROM crm_sansjpa.contenu_commande WHERE id_commande = :id_commande";
-
-        MapSqlParameterSource parameterSource = new MapSqlParameterSource("id_commande", id_commande);
-        return jdbcTemplate.queryForObject(sql, parameterSource, Integer.class);
-    }
-
-    @Override
-    public float getTotal(int id_commande) {
-        String sql = "SELECT montant_total FROM commandes WHERE id_commande = :id_commande";
-
-        MapSqlParameterSource parameterSource = new MapSqlParameterSource("id_commande", id_commande);
-        return jdbcTemplate.queryForObject(sql, parameterSource, Float.class);
+        jdbcTemplate.update("DELETE FROM contenu_commande WHERE id_commande = :id_commande", parameterSource);
+        jdbcTemplate.update("DELETE FROM commandes WHERE id_commande = :id_commande", parameterSource);
     }
 }

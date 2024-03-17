@@ -24,27 +24,26 @@
 <main>
     <h1>Détails d'une commande</h1>
     <section>
-        <table>
-            <thead>
-            <tr>
-                <th>Client</th>
-                <th>Date</th>
-                <th>Montant Total</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-<!--            <tr data-th-each="commande : ${commandes}">-->
-<!--                <td data-th-text="${commande.client.nom} + ' ' + ${commande.client.prenom}"></td>-->
-<!--                <td data-th-text="${#dates.format(commande.date_commande, 'dd-MM-yyyy')}"></td>-->
-<!--                <td data-th-text="${commande.montant_total}"></td>-->
-<!--                <td>-->
-<!--                    <a data-th-href="@{/commandes/{id_commande}/show(id=${commande.id_commande})}">Détails</a>-->
-<!--                    <a data-th-href="@{/commandes/{id_commande}/suppression(id=${commande.id_commande})}">Supprimer</a>-->
-<!--                </td>-->
-<!--            </tr>-->
-            </tbody>
-        </table>
+        <h2>Commande n° [[${id_commande.id_commande}]]</h2>
+        <div>
+<!--            <strong>Client :</strong> [[${commande.client.nom}]]-->
+        </div>
+<!--        <div>-->
+<!--            <strong>Date de création :</strong> ${commande.date_commande}-->
+<!--        </div>-->
+<!--        <div th:if="${id_commande.contenuCommande != null}">-->
+<!--            <strong>Contenu de la commande :</strong>-->
+<!--            <ul>-->
+<!--                <th:block th:each="contenu : ${id_commande.contenuCommande}">-->
+<!--                    <li>-->
+<!--                        Produit ID: ${contenu.id_produit} - Quantité: ${contenu.quantite}-->
+<!--                    </li>-->
+<!--                </th:block>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <strong>Prix total de la commande :</strong> ${commande.prix_total}-->
+<!--        </div>-->
     </section>
 </main>
 

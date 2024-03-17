@@ -2,6 +2,7 @@ package fr.epsi.msprsansjdbc.controller;
 
 import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
+import fr.epsi.msprsansjdbc.entities.ContenuCommande;
 import fr.epsi.msprsansjdbc.entities.Produit;
 import fr.epsi.msprsansjdbc.service.ClientService;
 import fr.epsi.msprsansjdbc.service.CommandeService;
@@ -118,7 +119,52 @@ public class CommandeController {
 
     @GetMapping("/{id_commande}/show")
     public String detailsCommande(@PathVariable int id_commande, Model model) {
-        model.addAttribute("id_commande", service.findById(id_commande));
-        return "view-commande-form-show";
+        // Récupérer les détails de la commande à partir de son identifiant
+        Commande commande = service.findById(id_commande);
+
+        // Vérifier si la commande existe
+        if (commande != null) {
+            // Ajouter les détails de la commande à l'objet Model
+            model.addAttribute("commande", commande);
+
+            // Récupérer les données du client associé à la commande
+            Client client = commande.getClient();
+            if (client != null) {
+                // Ajouter les détails du client à l'objet Model
+                model.addAttribute("client", client);
+            } else {
+                logger.error("Le client associé à la commande n'est pas trouvé");
+            }
+
+            // Récupérer les données du produit associé à la commande
+            //TODO : créer une méthode pour récupérer les contenus de la commande
+//            List<ContenuCommande> contenusCommandes = commande.getContenuCommande();
+//            if (contenuCommande != null) {
+//                int produitId = contenuCommande.getId_produit();
+//                Produit produit = produitService.findById(produitId);
+//                if (produit != null) {
+//                    // Ajouter les détails du produit à l'objet Model
+//                    model.addAttribute("produit", produit);
+//                } else {
+//                    logger.error("Ce produit n'est pas associé à cette commande(Pas de contenuCommande pour ce produit)");
+//                }
+//            } else {
+//                logger.error("Aucun contenuCommande n'est associé à cette commande");
+//            }
+
+            // Retourner la vue pour afficher les détails de la commande
+            return "view-commande-form-show";
+        } else {
+            logger.error("La commande avec l'identifiant {} n'est pas trouvée", id_commande);
+            return "redirect:/commandes"; // Rediriger vers la page des commandes
+        }
+    }
+
+
+    // Méthode pour traiter la suppression d'une commande
+    @GetMapping("/suppression")
+    public String supprimerCommande(@RequestParam("id") int id_commande) {
+        service.deleteCommmande(id_commande);
+        return "redirect:/commandes";
     }
 }
