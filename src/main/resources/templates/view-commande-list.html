@@ -39,7 +39,7 @@
                             <td data-th-text="${#dates.format(commande.date_commande, 'dd-MM-yyyy')}"></td>
                             <td data-th-text="${commande.montant_total}"></td>
                             <td>
-                                <a data-th-href="@{/commandes/{id_commande}/edition(id=${commande.id_commande})}">Modifier</a>
+                                <a data-th-href="@{/commandes/{id_commande}/show(id=${commande.id_commande})}">Détails</a>
                                 <a data-th-href="@{/commandes/{id_commande}/suppression(id=${commande.id_commande})}">Supprimer</a>
                             </td>
                         </tr>

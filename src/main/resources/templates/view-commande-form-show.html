@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" data-th-href="@{/img/fromage.png}" sizes="32x32"/>
+    <link rel="stylesheet" data-th-href="@{/css/layout.css}"/>
+    <link rel="stylesheet" data-th-href="@{/css/general.css}"/>
+    <link rel="stylesheet" data-th-href="@{/css/demo-form.css}"/>
+
+    <title>Démo : Détails d'une commande</title>
+</head>
+<body>
+<header>
+    <h1 id="nav-title">
+        <a href="/">ACME</a>
+    </h1>
+    <nav>
+        <ul>
+            <li><a href="/commandes">Commandes</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Détails d'une commande</h1>
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Montant Total</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+<!--            <tr data-th-each="commande : ${commandes}">-->
+<!--                <td data-th-text="${commande.client.nom} + ' ' + ${commande.client.prenom}"></td>-->
+<!--                <td data-th-text="${#dates.format(commande.date_commande, 'dd-MM-yyyy')}"></td>-->
+<!--                <td data-th-text="${commande.montant_total}"></td>-->
+<!--                <td>-->
+<!--                    <a data-th-href="@{/commandes/{id_commande}/show(id=${commande.id_commande})}">Détails</a>-->
+<!--                    <a data-th-href="@{/commandes/{id_commande}/suppression(id=${commande.id_commande})}">Supprimer</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; EPSI POEC - Tous droits réservés - Anaïs BERNARD / Pascal BILLERACH / Baptiste MUZARD</p>
+    <small>
+        <a href="https://www.flaticon.com/fr/icones-gratuites/fromage" title="fromage icônes"></a>
+    </small>
+</footer>
+</body>
+</html>

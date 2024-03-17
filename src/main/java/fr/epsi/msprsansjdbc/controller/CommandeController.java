@@ -1,10 +1,8 @@
 package fr.epsi.msprsansjdbc.controller;
 
-import fr.epsi.msprsansjdbc.dao.ClientDAOImpl;
 import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
 import fr.epsi.msprsansjdbc.entities.Produit;
-import fr.epsi.msprsansjdbc.entities.ContenuCommande;
 import fr.epsi.msprsansjdbc.service.ClientService;
 import fr.epsi.msprsansjdbc.service.CommandeService;
 import fr.epsi.msprsansjdbc.service.ProduitService;
@@ -118,16 +116,9 @@ public class CommandeController {
         return "redirect:/commandes";
     }
 
-    @GetMapping("/{id_commande}/edition")
-    public String modifierCommande(@PathVariable int id_commande, Model model) {
-        model.addAttribute("commande", service.findById(id_commande));
-        return "view-commande-form-edition";
-    }
-
-    @PostMapping("/{id_commande}/edition")
-    public String modifierCommande(@PathVariable int id_commande, @ModelAttribute Commande commande) {
-        commande.setId_commande(id_commande);
-        service.update(commande);
-        return "redirect:/commandes";
+    @GetMapping("/{id_commande}/show")
+    public String detailsCommande(@PathVariable int id_commande, Model model) {
+        model.addAttribute("id_commande", service.findById(id_commande));
+        return "view-commande-form-show";
     }
 }
