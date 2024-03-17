@@ -24,27 +24,8 @@
 <main>
     <h1>Détails d'une commande</h1>
     <section>
-        <table>
-            <thead>
-            <tr>
-                <th>Client</th>
-                <th>Date</th>
-                <th>Montant Total</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-<!--            <tr data-th-each="commande : ${commandes}">-->
-<!--                <td data-th-text="${commande.client.nom} + ' ' + ${commande.client.prenom}"></td>-->
-<!--                <td data-th-text="${#dates.format(commande.date_commande, 'dd-MM-yyyy')}"></td>-->
-<!--                <td data-th-text="${commande.montant_total}"></td>-->
-<!--                <td>-->
-<!--                    <a data-th-href="@{/commandes/{id_commande}/show(id=${commande.id_commande})}">Détails</a>-->
-<!--                    <a data-th-href="@{/commandes/{id_commande}/suppression(id=${commande.id_commande})}">Supprimer</a>-->
-<!--                </td>-->
-<!--            </tr>-->
-            </tbody>
-        </table>
+        <h2>Commande n° ${}</h2>
+            <strong>Client :</strong>
     </section>
 </main>
 

@@ -2,6 +2,7 @@ package fr.epsi.msprsansjdbc.controller;
 
 import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
+import fr.epsi.msprsansjdbc.entities.ContenuCommande;
 import fr.epsi.msprsansjdbc.entities.Produit;
 import fr.epsi.msprsansjdbc.service.ClientService;
 import fr.epsi.msprsansjdbc.service.CommandeService;
@@ -118,7 +119,65 @@ public class CommandeController {
 
     @GetMapping("/{id_commande}/show")
     public String detailsCommande(@PathVariable int id_commande, Model model) {
-        model.addAttribute("id_commande", service.findById(id_commande));
-        return "view-commande-form-show";
+        // Récupérer les détails de la commande à partir de son identifiant
+        Commande commande = service.findById(id_commande);
+
+        // Vérifier si la commande existe
+        if (commande != null) {
+            // Ajouter les détails de la commande à l'objet Model
+            model.addAttribute("commande", commande);
+
+            // Récupérer les données du client associé à la commande
+            Client client = clientService.findById(commande.getId_personne());
+            if (client != null) {
+                // Ajouter les détails du client à l'objet Model
+                model.addAttribute("client", client);
+            } else {
+                logger.error("Le client associé à la commande n'est pas trouvé");
+            }
+
+            // Récupérer les données du produit associé à la commande :
+
+            //Tout d'abord, je créé la liste des Objets contenuCommande associés à la commande
+            List<ContenuCommande> contenusCommandes = contenuCommandeController.getContenuCommandeList(id_commande);
+            //puis on s'assure que la requete a bien renvoyé des résultats
+            if (contenusCommandes != null) {
+                //On créé d'abord une liste vide pour les produits
+                List<Produit> produits = new ArrayList<>();
+
+                //On itère sur la liste des contenusCommandes,
+                //les instructions suivantes sont répétées pour chaque Objet contenuCommande
+                for (ContenuCommande contenuCommande : contenusCommandes) {
+                    int produitId = contenuCommande.getId_produit();//Récupération de l'id du produit
+                    Produit produit = produitService.findById(produitId);//Puis de l'Objet Produit lui-même
+                    //On s'assure que l'id récupéré correspond bien à un produit en base
+                    if (produit != null) {
+                        produits.add(produit);//Si oui, on l'ajoute à la liste des produits
+                    } else {
+                        logger.error(
+                            "Ce produit n'est pas associé à cette commande" +
+                            "(Pas de contenuCommande pour ce produit rattaché à cette commande)"
+                        );
+                    }
+                }
+                model.addAttribute("produits", produits);
+            } else {
+                logger.error("Aucun contenuCommande n'est associé à cette commande");
+            }
+
+            // Retourner la vue pour afficher les détails de la commande
+            return "view-commande-form-show";
+        } else {
+            logger.error("La commande avec l'identifiant {} n'est pas trouvée", id_commande);
+            return "redirect:/commandes"; // Rediriger vers la page des commandes
+        }
+    }
+
+
+    // Méthode pour traiter la suppression d'une commande
+    @GetMapping("/suppression")
+    public String supprimerCommande(@RequestParam("id") int id_commande) {
+        service.deleteCommmande(id_commande);
+        return "redirect:/commandes";
     }
 }

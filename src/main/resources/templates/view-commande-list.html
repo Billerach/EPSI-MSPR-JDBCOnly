@@ -40,7 +40,7 @@
                             <td data-th-text="${commande.montant_total}"></td>
                             <td>
                                 <a data-th-href="@{/commandes/{id}/show(id=${commande.id_commande})}">Détails</a>
-                                <a data-th-href="@{/commandes/{id}/suppression(id=${commande.id_commande})}">Supprimer</a>
+                                <a data-th-href="@{/commandes/suppression(id=${commande.id_commande})}">Supprimer</a>
                             </td>
                         </tr>
                     </tbody>

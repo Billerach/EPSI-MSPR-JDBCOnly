@@ -24,16 +24,6 @@ public class CommandeService {
         return dao.getAllCommandes();
     }
 
-    // Méthode pour trouver toutes les commandes
-    public List<Commande> findAll() {
-        return dao.findAll();
-    }
-
-    // Méthode pour obtenir le nom du produit associé à une commande par son ID
-    public String getNomProduit(int id_commande) {
-        return dao.getNomProduit(id_commande);
-    }
-
     // Méthode pour créer une nouvelle commande
     public Commande create(Commande commande) {
         return dao.create(commande);
@@ -47,5 +37,10 @@ public class CommandeService {
     // Méthode pour mettre à jour une commande
     public void update(Commande commande) {
         dao.update(commande);
+    }
+
+    // Méthode pour supprimmer une commande
+    public void deleteCommmande(int id_commande) {
+        dao.deleteCommmande(id_commande);
     }
 }

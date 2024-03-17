@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ContenuCommandeDAO {
     ContenuCommande create(ContenuCommande contenuCommande);
+    List<ContenuCommande> getContenuCommandeList(int id_commande);
 }

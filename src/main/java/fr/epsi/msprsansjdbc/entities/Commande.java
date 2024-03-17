@@ -9,7 +9,6 @@ public class Commande {
     private Date date_commande;
     private float montant_total;
     private Client client;
-    private ContenuCommande contenuCommande;
 
     public Commande() {
     }
@@ -84,11 +83,4 @@ public class Commande {
         this.client = client;
     }
 
-    public ContenuCommande getContenuCommande() {
-        return contenuCommande;
-    }
-
-    public void setContenuCommande(ContenuCommande contenuCommande) {
-        this.contenuCommande = contenuCommande;
-    }
 }
