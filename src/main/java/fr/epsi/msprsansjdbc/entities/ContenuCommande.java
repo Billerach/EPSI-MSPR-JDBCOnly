@@ -7,7 +7,7 @@ public class ContenuCommande {
     private int id_produit;
     private int quantite;
 
-    public ContenuCommande(int id_contenu_commande, int id_commande, int id_produit, int quantite) {
+    public ContenuCommande(int id_commande, int id_produit, int quantite) {
         this.id_contenu_commande = id_contenu_commande;
         this.id_commande = id_commande;
         this.id_produit = id_produit;

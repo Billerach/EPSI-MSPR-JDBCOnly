@@ -28,7 +28,7 @@ class ContenuCommandeDAOImpl implements ContenuCommandeDAO{
     public ContenuCommandeDAOImpl(NamedParameterJdbcTemplate jdbcTemplate, DataSource dataSource) {
         this.jdbcTemplate = jdbcTemplate;
         this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
-                .withTableName("content_commande")
+                .withTableName("contenu_commande")
                 .usingGeneratedKeyColumns("id_contenu_commande");
     }
 
@@ -38,16 +38,19 @@ class ContenuCommandeDAOImpl implements ContenuCommandeDAO{
     }
 
     public ContenuCommande create(ContenuCommande contenuCommande) {
+        // Création d'un objet MapSqlParameterSource pour définir les valeurs des paramètres de la requête
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        // Définition des valeurs des paramètres de la requête avec les valeurs de l'objet ContentCommande
         parameterSource.addValue("id_commande", contenuCommande.getId_commande());
-        parameterSource.addValue("produit", contenuCommande.getId_produit());
+        parameterSource.addValue("id_produit", contenuCommande.getId_produit());
         parameterSource.addValue("quantite", contenuCommande.getQuantite());
 
-        // Exécutez la requête avec les valeurs définies dans parameterSource
+        // Exécution de la requête d'insertion et récupération de la clé générée
         Number newId = simpleJdbcInsert.executeAndReturnKey(parameterSource);
 
-        // Mettez à jour l'ID du contenu_commande avec la nouvelle valeur générée
-        contenuCommande.setId_commande(newId.intValue());
+        // Mise à jour de l'ID du client avec la nouvelle valeur générée
+        contenuCommande.setId_contenu_commande(newId.intValue());
+
         return contenuCommande;
     }
 }

@@ -87,8 +87,11 @@
                                 <option th:each="produit : ${produits}" th:value="${produit.id_produit}" th:data-prix="${produit.prix}" th:text="${produit.nom}"></option>
                             </select>
 
-                            <label for="quantite">Quantité:</label>
-                            <input id ="quantite" type="number" class="quantity" name="quantite" oninput="updatePrice()" required/>
+<!--                            <label for="quantite">Quantité:</label>-->
+<!--                            <input id ="quantite" type="number" class="quantity" name="quantite" oninput="updatePrice()" required/>-->
+                            <label for="quantite_${produit.id_produit}">Quantité:</label>
+                            <input id="quantite_${produit.id_produit}" type="number" class="quantity" name="quantite_${produit.id_produit}" oninput="updatePrice()" required/>
+
 
                             <label for="prixUnitaire">Prix Unitaire:</label>
                             <input type="number" class="prixUnitaire" id="prixUnitaire" name="prixUnitaire" readonly/>

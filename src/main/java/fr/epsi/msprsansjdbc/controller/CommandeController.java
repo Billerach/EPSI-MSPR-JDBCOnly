@@ -1,5 +1,6 @@
 package fr.epsi.msprsansjdbc.controller;
 
+import fr.epsi.msprsansjdbc.dao.ClientDAOImpl;
 import fr.epsi.msprsansjdbc.entities.Client;
 import fr.epsi.msprsansjdbc.entities.Commande;
 import fr.epsi.msprsansjdbc.entities.Produit;
@@ -8,6 +9,8 @@ import fr.epsi.msprsansjdbc.service.ClientService;
 import fr.epsi.msprsansjdbc.service.CommandeService;
 import fr.epsi.msprsansjdbc.service.ProduitService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,7 @@ import java.util.*;
 @RequestMapping("/commandes")
 public class CommandeController {
 
+    private static final Logger logger = LoggerFactory.getLogger(CommandeController.class);
     private final CommandeService service;
     private final ClientService clientService;
     private final ProduitService produitService;
@@ -33,8 +37,9 @@ public class CommandeController {
     }
 
     @GetMapping()
-    public String afficherListeCommande(Model commande, Model client) {
+    public String afficherListeCommande(Model commande) {
         List<Commande> commandesDetailsList = service.getAllCommandes();
+        commandesDetailsList.sort(Comparator.comparingInt(Commande::getId_commande));
         commande.addAttribute("commandes", commandesDetailsList);
         return "view-commande-list";
     }
@@ -56,7 +61,7 @@ public class CommandeController {
     @PostMapping("/creer")//Méthode qui récupère les données du formulaire
     public String creerCommande(@RequestParam("personne") int idPersonne,
                                 @ModelAttribute Commande commande, //Là tu dis que ce que tu veux créer, c'est un Objet de type Commande
-                                HttpServletRequest request) { //Là tu récupère la requete. Elle contient la liste des Produits
+                                HttpServletRequest request) { //Là tu récupère la requete. Elle contient la liste des Produits et les quantités
         //Puis tu prends l'id du client et tu le mets à id_personne
         commande.setId_personne(idPersonne);
 
@@ -68,11 +73,25 @@ public class CommandeController {
         Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         commande.setDate_commande(date);
 
+        //Récupération du montant total de la commande
+        float montantTotal;
+        String montantTotalParam = request.getParameter("prixTotal");
+        if (montantTotalParam != null && !montantTotalParam.isEmpty()) {
+            try {
+                montantTotal = Float.parseFloat(montantTotalParam);
+                commande.setMontant_total(montantTotal);
+            } catch (NumberFormatException e) {
+                logger.error("Le montant total de la commande n'est pas un nombre valide : {}", montantTotalParam, e);
+                throw new IllegalArgumentException("Le montant total de la commande n'est pas un nombre valide");
+            }
+        }
+
         //Puis tu créé l'Objet Commande avec les données récupérées
         service.create(commande);
 
         // Tu isoles la liste des produits contenu dans la requête
         String[] produitsIds = request.getParameterValues("produit");
+        String[] produitsQuantites = request.getParameterValues("quantite_${produit.id_produit}");
 
         //Là, en base, la table de jointure contenu_commande sert à lier les commandes
         //aux produits. Donc, pour chaque fromage différent, tu créé un objet de type
@@ -81,20 +100,21 @@ public class CommandeController {
         // on a créé un autre controller pour les Objets ContenuCommande. Il contient
         // la méthode creerContenuCommande que l'on appelle pour chaque produit.
 
-        //Création d'une Map pour stocker les quantités
-        Map<Integer, Integer> quantites = new HashMap<>();
-        //Pour chaque produit, on récupère la quantité et on l'associe à son produit
-        for (String produitId : produitsIds) {
-            int quantite = Integer.parseInt(request.getParameter("quantite_" + produitId));
-            quantites.put(Integer.parseInt(produitId), quantite);
-        }
 
-        // Appeler la méthode creerContenuCommande pour chaque couple produit/quantité
-        for (Map.Entry<Integer, Integer> entry : quantites.entrySet()) {
-            int produitId = entry.getKey();
-            int quantite = entry.getValue();
-            contenuCommandeController.creerContenuCommande(commande.getId_commande(), produitId, quantite);
-        }
+        // On s'assure que les deux tableaux ont la même longueur
+        if (produitsIds.length == produitsQuantites.length) {
+            //A chaque index des 2 tableaux, on récupère l'id du produit et la quantité
+            for (int i = 0; i < produitsIds.length; i++) {
+                int produitId = Integer.parseInt(produitsIds[i]);
+                int quantite = Integer.parseInt(produitsQuantites[i]);
+                //Et on les injecte dans un Objet ContenuCommande
+                contenuCommandeController.creerContenuCommande(commande.getId_commande(), produitId, quantite);
+                }
+            }
+        else{
+            throw new IllegalArgumentException("Les tableaux produitsIds et produitsQuantites n'ont pas la même longueur");
+            }
+
         return "redirect:/commandes";
     }
 
