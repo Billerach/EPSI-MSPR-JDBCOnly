@@ -11,14 +11,14 @@ import java.util.List;
 public class ContenuCommandeController {
 
     @Autowired
-    private ContenuCommandeService contenuCommandeService;
+    private ContenuCommandeService service;
 
     public void creerContenuCommande(int commande, int produit, int quantite) {
         ContenuCommande contenuCommande = new ContenuCommande(commande,produit,quantite);
-        contenuCommandeService.create(contenuCommande);
+        service.create(contenuCommande);
     }
 
     public List<ContenuCommande> getContenuCommandeList(int id_commande) {
-        return contenuCommandeService.getContenuCommandeList(id_commande);
+        return service.getContenuCommandeList(id_commande);
     }
 }

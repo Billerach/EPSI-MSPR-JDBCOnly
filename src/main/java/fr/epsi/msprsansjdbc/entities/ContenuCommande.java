@@ -7,6 +7,8 @@ public class ContenuCommande {
     private int id_produit;
     private int quantite;
 
+    private Produit produit;
+
     public ContenuCommande() {
     }
 
@@ -23,6 +25,14 @@ public class ContenuCommande {
         this.quantite = quantite;
     }
 
+    public ContenuCommande(int id_contenu_commande, int id_commande, int id_produit, int quantite, Produit produit) {
+        this.id_contenu_commande = id_contenu_commande;
+        this.id_commande = id_commande;
+        this.id_produit = id_produit;
+        this.quantite = quantite;
+        this.produit = produit;
+    }
+
     public int getId_contenu_commande() { return id_contenu_commande; }
     public void setId_contenu_commande(int id_contenu_commande) {
         this.id_contenu_commande = id_contenu_commande;
@@ -36,13 +46,15 @@ public class ContenuCommande {
     public int getQuantite() {
         return quantite;
     }
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
+
+    public void setQuantite(int quantite) { this.quantite = quantite; }
+
     public int getId_commande() {
         return id_commande;
     }
     public void setId_commande(int id_commande) {
         this.id_commande = id_commande;
     }
+    public Produit getProduit() { return produit; }
+    public void setProduit(Produit produit) { this.produit = produit; }
 }
