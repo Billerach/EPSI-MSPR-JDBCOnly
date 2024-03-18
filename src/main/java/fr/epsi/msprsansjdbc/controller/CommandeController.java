@@ -74,7 +74,7 @@ public class CommandeController {
 
         //Récupération du montant total de la commande
         float montantTotal;
-        String montantTotalParam = request.getParameter("prixTotal");
+        String montantTotalParam = request.getParameter("prixTotalGlobal");
         if (montantTotalParam != null && !montantTotalParam.isEmpty()) {
             try {
                 montantTotal = Float.parseFloat(montantTotalParam);

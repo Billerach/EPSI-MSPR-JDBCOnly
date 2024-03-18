@@ -158,15 +158,10 @@ VALUES ('AdminDamThi', '$2y$10$tKX3Mrpnr.NIZgwOmGZvVuW8FwPHPCkI4dvVkSHj5epkmUUo8
 -- Ajout de données de test pour la table des commandes
 INSERT INTO commandes (id_commande, id_personne, date_commande, montant_total)
 VALUES (1, 1, '2024-01-10', 120.00),
-       (2, 2, '2024-01-15', 90.75),
-       (3, 3, '2024-02-20', 180.25),
-       (4, 1, '2024-02-22', 150.00),
-       (5, 2, '2024-02-23', 75.50),
-       (6, 3, '2024-02-24', 200.00),
-       (7, 1, '2024-03-15', 120.00),
-       (8, 2, '2024-03-16', 90.75),
-       (9, 3, '2024-03-17', 180.25),
-       (10, 1, '2024-03-18', 460.00)
+       (2, 2, '2024-01-15', 33.75),
+       (4, 1, '2024-02-22', 41.00),
+       (5, 2, '2024-02-23', 35.50),
+       (6, 3, '2024-02-24', 55.50)
 ON DUPLICATE KEY UPDATE id_personne   = VALUES(id_personne),
                         date_commande = VALUES(date_commande),
                         montant_total = VALUES(montant_total);
@@ -181,16 +176,7 @@ VALUES (1, 1, 1, 2),
        (6, 5, 6, 1),
        (7, 5, 10, 2),
        (8, 6, 2, 1),
-       (9, 6, 9, 3),
-       (10, 7, 25, 2),
-       (11, 7, 17, 1),
-       (12, 8, 8, 3),
-       (13, 9, 4, 1),
-       (14, 9, 15, 2),
-       (15, 9, 6, 1),
-       (16, 9, 10, 2),
-       (17, 9, 12, 3),
-       (18, 10, 7, 10)
+       (9, 6, 9, 3)
 
 ON DUPLICATE KEY UPDATE id_commande = VALUES(id_commande),
                         id_produit  = VALUES(id_produit),
