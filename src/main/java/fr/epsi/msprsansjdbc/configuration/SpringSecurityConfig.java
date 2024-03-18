@@ -29,7 +29,7 @@ public class SpringSecurityConfig {
             auth.requestMatchers("/admin").hasRole("ADMIN"); // Autorise l'accès à /admin seulement aux utilisateurs ayant le rôle ADMIN
             auth.requestMatchers("/user").hasRole("USER"); // Autorise l'accès à /user seulement aux utilisateurs ayant le rôle USER
             auth.anyRequest().authenticated(); // Toutes les autres requêtes nécessitent une authentification
-        }).formLogin(Customizer.withDefaults()).build(); // Utilise un formulaire de connexion par défaut
+        }).csrf().disable().formLogin(Customizer.withDefaults()).build(); // Utilise un formulaire de connexion par défaut
     }
 
     // Définit les utilisateurs en mémoire (pour la démo ou les tests)
