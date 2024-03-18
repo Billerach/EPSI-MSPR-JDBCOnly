@@ -40,6 +40,13 @@ public class CommandeController {
         List<Commande> commandesDetailsList = service.getAllCommandes();
         commandesDetailsList.sort(Comparator.comparingInt(Commande::getId_commande));
         commande.addAttribute("commandes", commandesDetailsList);
+        for (Commande commandeEnCour : commandesDetailsList) {
+            Client client = commandeEnCour.getClient();
+            if (client.getNom() == null || client.getPrenom() == null) {
+                client.setNom("Client ");
+                client.setPrenom("archivé");
+            }
+        }
         return "view-commande-list";
     }
 
@@ -130,9 +137,33 @@ public class CommandeController {
             // Récupérer les données du client associé à la commande
             Client client = clientService.findById(commande.getId_personne());
             if (client != null) {
+
+                if (client.isEstArchive() == true) {
+                    client.setNom("Client archivé");
+                    client.setPrenom("");
+                    client.setNumeroVoie("");
+                    client.setTypeVoie("");
+                    client.setLibelleVoie("");
+                    client.setCommune("");
+                    client.setCodePostal(44000);
+                    client.setEmail("");
+                    client.setTelephone("");
+                }
+
                 // Ajouter les détails du client à l'objet Model
                 model.addAttribute("client", client);
             } else {
+                if (client.isEstArchive() == true) {
+                client.setNom("Client archivé");
+                client.setPrenom("");
+                client.setNumeroVoie("");
+                client.setTypeVoie("");
+                client.setLibelleVoie("");
+                client.setCommune("");
+                client.setCodePostal(44000);
+                client.setEmail("");
+                client.setTelephone("");
+                }
                 logger.error("Le client associé à la commande n'est pas trouvé");
             }
 
