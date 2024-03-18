@@ -157,8 +157,8 @@ VALUES ('AdminDamThi', '$2y$10$tKX3Mrpnr.NIZgwOmGZvVuW8FwPHPCkI4dvVkSHj5epkmUUo8
 
 -- Ajout de données de test pour la table des commandes
 INSERT INTO commandes (id_commande, id_personne, date_commande, montant_total)
-VALUES (1, 1, '2024-01-10', 120.00),
-       (2, 2, '2024-01-15', 33.75),
+VALUES (1, 1, '2024-01-10', 33.75),
+       (2, 2, '2024-01-15', 42.75),
        (4, 1, '2024-02-22', 41.00),
        (5, 2, '2024-02-23', 35.50),
        (6, 3, '2024-02-24', 55.50)
