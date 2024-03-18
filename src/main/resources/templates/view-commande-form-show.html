@@ -22,11 +22,42 @@
 </header>
 
 <main>
-    <h1>Détails d'une commande</h1>
-    <section>
-        <h2>Commande n° ${}</h2>
-            <strong>Client :</strong>
-    </section>
+    <main>
+        <h1>Détails d'une commande</h1>
+        <section class="show_commande">
+            <h2>Commande du <span th:text="${#dates.format(commande.date_commande, 'dd-MM-yyyy')}"></span></h2>
+            <div class="show_commande_client">
+                <strong>Client :</strong><br />
+                    Nom : <span th:text="${client.nom}"></span><br />
+                    Prénom : <span th:text="${client.prenom}"></span><br />
+                    Adresse : <span th:text="${client.numeroVoie + ', ' + client.typeVoie + ' ' + client.libelleVoie}"></span><br />
+                    Code postal : <span th:text="${client.codePostal}"></span><br />
+                    Commune : <span th:text="${client.commune}"></span><br />
+                    Email : <span th:text="${client.email}"></span><br />
+                    Téléphone : <span th:text="${client.telephone}"></span><br />
+            </div>
+            <div class="show_commande_client">
+                <h3>Produits commandés</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Quantité</th>
+                            <th>Prix unitaire</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="contenuCommande : ${contenusCommandes}">
+                            <td th:text="${contenuCommande.id_produit}"></td>
+                            <td th:text="${contenuCommande.quantite}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
 </main>
 
 <footer>

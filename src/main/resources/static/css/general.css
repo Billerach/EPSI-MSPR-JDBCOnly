@@ -111,3 +111,10 @@ main a:hover {
 	margin-bottom: 10px;
 }
 
+/* Style propre au texte de la show d'une commande */
+.show_commande {
+	margin: 0 auto;
+	width : 80%;
+	border:1px solid gray;
+	padding : 20px;
+}
