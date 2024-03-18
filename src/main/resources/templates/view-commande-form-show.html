@@ -44,16 +44,21 @@
                             <th>Produit</th>
                             <th>Quantité</th>
                             <th>Prix unitaire</th>
-                            <th>Total</th>
+                            <th>Sous-total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="contenuCommande : ${contenusCommandes}">
-                            <td th:text="${contenuCommande.id_produit}"></td>
-                            <td th:text="${contenuCommande.quantite}"></td>
+                        <tr th:each="produit : ${produits}">
+                            <td th:text="${produit.Produit.nom}"></td>
+                            <td th:text="${produit.quantite}"></td>
+                            <td th:text="${produit.Produit.prix}"></td>
+                            <td th:text="${produit.Produit.prix}*${produit.quantite}"></td>
                         </tr>
                     </tbody>
                 </table>
+                <p>
+                    <strong>Total : <span th:text="${commande.montant_total}"></span> €</strong>
+                </p>
             </div>
         </section>
     </main>

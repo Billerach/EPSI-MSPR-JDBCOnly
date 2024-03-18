@@ -142,25 +142,21 @@ public class CommandeController {
             List<ContenuCommande> contenusCommandes = contenuCommandeController.getContenuCommandeList(id_commande);
             //puis on s'assure que la requete a bien renvoyé des résultats
             if (contenusCommandes != null) {
-                //On créé d'abord une liste vide pour les produits
-                List<Produit> produits = new ArrayList<>();
-
-                //On itère sur la liste des contenusCommandes,
+                //On créé des Objets Produits que l'on ajoute à chaque contenuCommande pour faciliter la manipulation de l'ensemble
+                //Pour ça, on itère sur la liste des contenusCommandes,
                 //les instructions suivantes sont répétées pour chaque Objet contenuCommande
                 for (ContenuCommande contenuCommande : contenusCommandes) {
                     int produitId = contenuCommande.getId_produit();//Récupération de l'id du produit
-                    Produit produit = produitService.findById(produitId);//Puis de l'Objet Produit lui-même
-                    //On s'assure que l'id récupéré correspond bien à un produit en base
+                    Produit produit = produitService.findById(produitId);//Puis des données du Produit lui-même
                     if (produit != null) {
-                        produits.add(produit);//Si oui, on l'ajoute à la liste des produits
+                        contenuCommande.setProduit(produit);//On ajoute cet Objet Produit comme attribut de l'Objet contenuCommande
                     } else {
-                        logger.error(
-                            "Ce produit n'est pas associé à cette commande" +
-                            "(Pas de contenuCommande pour ce produit rattaché à cette commande)"
-                        );
+                        logger.error("L'identifiant du produit associé à ce contenuCommande est invalide");
                     }
+                    //On s'assure que l'id récupéré correspond bien à un produit en base
                 }
-                model.addAttribute("produits", produits);
+                //On ajoute la liste des contenusCommandes à l'objet Model
+                model.addAttribute("produits", contenusCommandes);
             } else {
                 logger.error("Aucun contenuCommande n'est associé à cette commande");
             }
